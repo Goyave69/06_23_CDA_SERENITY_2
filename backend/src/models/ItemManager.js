@@ -6,17 +6,15 @@ class ItemManager extends AbstractManager {
   }
 
   insert(item) {
-    return this.connection.query(
-      `insert into ${this.table} (title) values (?)`,
-      [item.title]
-    );
-  }
-
-  update(item) {
-    return this.connection.query(
-      `update ${this.table} set title = ? where id = ?`,
-      [item.title, item.id]
-    );
+    return this.connection
+      .query(`insert into ${this.table} (title) values (?)`, [item.title])
+      .then(([rows]) => {
+        return { status: 201, message: { id: rows.insertId, ...item } };
+      })
+      .catch((err) => {
+        console.error(err);
+        return { status: 500, message: "Error" };
+      });
   }
 }
 
