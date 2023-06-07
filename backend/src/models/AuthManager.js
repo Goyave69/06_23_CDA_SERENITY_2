@@ -1,5 +1,11 @@
-const { passwordVerification } = require("../services/PasswordHelper");
+const fs = require("fs");
+const path = require("path");
+const jwt = require("jsonwebtoken");
 const AbstractManager = require("./AbstractManager");
+const { passwordVerification } = require("../services/PasswordHelper");
+
+const privateKeyPath = path.join(__dirname, "../../../jwtRS256.key");
+const privateKey = fs.readFileSync(privateKeyPath);
 
 class AuthManager extends AbstractManager {
   constructor() {
@@ -16,7 +22,10 @@ class AuthManager extends AbstractManager {
         if (!(await passwordVerification(password, rows[0].password))) {
           return { status: 401, message: "Email ou mot de passe invalide" };
         }
-        return { status: 200, message: "Password et email valid" };
+        const token = jwt.sign({ userId: rows[0].id }, privateKey, {
+          algorithm: "RS256",
+        });
+        return { status: 200, message: { token } };
       });
   }
 }
