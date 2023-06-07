@@ -4,6 +4,7 @@ const path = require("path");
 const cors = require("cors");
 // const router = require("./router");
 const usersRouter = require("./routes/users");
+const patientFormRouter = require("./routes/patientForm");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
 
 // API routes
 app.use("/users", usersRouter);
+app.use("/patient-form", patientFormRouter);
 
 // app.use(router);
 
