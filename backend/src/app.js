@@ -4,6 +4,7 @@ const path = require("path");
 const cors = require("cors");
 // const router = require("./router");
 const usersRouter = require("./routes/users");
+const authRouter = require("./routes/auth");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
 
 // API routes
 app.use("/users", usersRouter);
+app.use("/login", authRouter);
 
 // app.use(router);
 
