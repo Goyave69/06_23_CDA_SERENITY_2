@@ -31,21 +31,29 @@ class UserManager extends AbstractManager {
 
     const keys = Object.keys(data);
     for (const key in keys) {
-      if (id != null) {
-        // ESLint est embétant. Changer pour Condition avec Entity ???
+      if (keys[key] !== "roles") {
         sqlQuery += `${keys[key]} = ?, `;
       }
     }
 
     sqlQuery = sqlQuery.slice(0, sqlQuery.length - 2);
 
+    let sqlData = [];
+
+    if (data.roles) {
+      sqlQuery += `, roles = ?`;
+      const { roles, ...newData } = data;
+      sqlData = [...Object.values(newData), JSON.stringify(roles), id];
+    } else {
+      sqlData = [...Object.values(data), id];
+    }
+
     sqlQuery += ` WHERE id = ?`;
 
     const bodyResponse = { id, ...data };
-    const { roles, ...newData } = data;
 
     return this.connection
-      .query(sqlQuery, [...Object.values(newData), JSON.stringify(roles), id])
+      .query(sqlQuery, sqlData)
       .then(async ([rows]) => {
         return rows.affectedRows === 0
           ? { status: 404, message: {} }
