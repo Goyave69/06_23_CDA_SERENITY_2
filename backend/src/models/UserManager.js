@@ -19,11 +19,23 @@ class UserManager extends AbstractManager {
         ]
       )
       .then(([rows]) => {
-        return { status: 201, message: { id: rows.insertId, ...user } };
+        return {
+          status: 201,
+          message: {
+            id: rows.insertId,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+            roles: user.roles,
+          },
+        };
       })
       .catch((err) => {
         console.error(err);
-        return { status: 500, message: "Error" };
+        return {
+          status: 500,
+          message: err.errno === 1062 ? "Cet email existe déja" : "Error",
+        };
       });
   }
 
