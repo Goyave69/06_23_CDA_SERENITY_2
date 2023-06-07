@@ -1,11 +1,12 @@
 const AbstractManager = require("./AbstractManager");
+const { passwordHasher } = require("../services/PasswordHelper");
 
 class UserManager extends AbstractManager {
   constructor() {
     super({ table: "user" });
   }
 
-  insert(user) {
+  async insert(user) {
     return this.connection
       .query(
         `insert into ${this.table} (firstname, lastname, email, password, roles) VALUES (?, ?, ?, ?, ?)`,
@@ -13,7 +14,7 @@ class UserManager extends AbstractManager {
           user.firstname,
           user.lastname,
           user.email,
-          user.password,
+          await passwordHasher(user.password),
           JSON.stringify(user.roles),
         ]
       )

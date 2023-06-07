@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `serenity`.`user` (
   `firstname` VARCHAR(70) NOT NULL,
   `lastname` VARCHAR(70) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(32) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
   `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `roles` JSON NOT NULL,
   PRIMARY KEY (`id`),
@@ -32,10 +32,10 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `serenity`.`cabinet`
+-- Table `serenity`.`clinic`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `serenity`.`cabinet` (
-  `id_cabinet` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `serenity`.`clinic` (
+  `id_clinic` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `address` VARCHAR(255) NOT NULL,
   `city` VARCHAR(255) NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `serenity`.`cabinet` (
   `email` VARCHAR(45) NOT NULL,
   `handicap_acces` TINYINT NOT NULL DEFAULT 0,
   `free_parking` TINYINT NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id_cabinet`))
+  PRIMARY KEY (`id_clinic`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
@@ -59,16 +59,16 @@ CREATE TABLE IF NOT EXISTS `serenity`.`intervention` (
   `duration` TIME NULL DEFAULT NULL,
   `location_body` INT NOT NULL,
   `user_id` INT NOT NULL,
-  `cabinet_id_cabinet` INT NOT NULL,
-  PRIMARY KEY (`id_intervention`, `user_id`, `cabinet_id_cabinet`),
+  `clinic_id_clinic` INT NOT NULL,
+  PRIMARY KEY (`id_intervention`, `user_id`, `clinic_id_clinic`),
   INDEX `fk_intervention_user1_idx` (`user_id` ASC) VISIBLE,
-  INDEX `fk_intervention_cabinet1_idx` (`cabinet_id_cabinet` ASC) VISIBLE,
+  INDEX `fk_intervention_clinic1_idx` (`clinic_id_clinic` ASC) VISIBLE,
   CONSTRAINT `fk_intervention_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `serenity`.`user` (`id`),
-  CONSTRAINT `fk_intervention_cabinet1`
-    FOREIGN KEY (`cabinet_id_cabinet`)
-    REFERENCES `serenity`.`cabinet` (`id_cabinet`)
+  CONSTRAINT `fk_intervention_clinic1`
+    FOREIGN KEY (`clinic_id_clinic`)
+    REFERENCES `serenity`.`clinic` (`id_clinic`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -114,19 +114,19 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `serenity`.`cabinet_has_specialist`
+-- Table `serenity`.`clinic_has_specialist`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `serenity`.`cabinet_has_specialist` (
-  `cabinet_id_cabinet` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `serenity`.`clinic_has_specialist` (
+  `clinic_id_clinic` INT NOT NULL,
   `specialist_id_specialist` INT NOT NULL,
-  PRIMARY KEY (`cabinet_id_cabinet`, `specialist_id_specialist`),
-  INDEX `fk_cabinet_has_specialist_specialist1_idx` (`specialist_id_specialist` ASC) VISIBLE,
-  INDEX `fk_cabinet_has_specialist_cabinet1_idx` (`cabinet_id_cabinet` ASC) VISIBLE,
-  INDEX `fk_cabinet_has_specialist_cabinet1` (`cabinet_id_cabinet` ASC) VISIBLE,
-  CONSTRAINT `fk_cabinet_has_specialist_cabinet1`
-    FOREIGN KEY (`cabinet_id_cabinet`)
-    REFERENCES `serenity`.`cabinet` (`id_cabinet`),
-  CONSTRAINT `fk_cabinet_has_specialist_specialist1`
+  PRIMARY KEY (`clinic_id_clinic`, `specialist_id_specialist`),
+  INDEX `fk_clinic_has_specialist_specialist1_idx` (`specialist_id_specialist` ASC) VISIBLE,
+  INDEX `fk_clinic_has_specialist_clinic1_idx` (`clinic_id_clinic` ASC) VISIBLE,
+  INDEX `fk_clinic_has_specialist_clinic1` (`clinic_id_clinic` ASC) VISIBLE,
+  CONSTRAINT `fk_clinic_has_specialist_clinic1`
+    FOREIGN KEY (`clinic_id_clinic`)
+    REFERENCES `serenity`.`clinic` (`id_clinic`),
+  CONSTRAINT `fk_clinic_has_specialist_specialist1`
     FOREIGN KEY (`specialist_id_specialist`)
     REFERENCES `serenity`.`specialist` (`id_specialist`))
 ENGINE = InnoDB
@@ -134,19 +134,19 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `serenity`.`cabinet_hours`
+-- Table `serenity`.`clinic_hours`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `serenity`.`cabinet_hours` (
-  `idcabinet_hours` INT NOT NULL AUTO_INCREMENT,
-  `cabinet_id_cabinet` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `serenity`.`clinic_hours` (
+  `idclinic_hours` INT NOT NULL AUTO_INCREMENT,
+  `clinic_id_clinic` INT NOT NULL,
   `open_hours` TIME NOT NULL,
   `close_hours` TIME NOT NULL,
   `day` INT NOT NULL,
-  PRIMARY KEY (`idcabinet_hours`, `cabinet_id_cabinet`),
-  INDEX `fk_cabinet_hours_cabinet1_idx` (`cabinet_id_cabinet` ASC) VISIBLE,
-  CONSTRAINT `fk_cabinet_hours_cabinet1`
-    FOREIGN KEY (`cabinet_id_cabinet`)
-    REFERENCES `serenity`.`cabinet` (`id_cabinet`))
+  PRIMARY KEY (`idclinic_hours`, `clinic_id_clinic`),
+  INDEX `fk_clinic_hours_clinic1_idx` (`clinic_id_clinic` ASC) VISIBLE,
+  CONSTRAINT `fk_clinic_hours_clinic1`
+    FOREIGN KEY (`clinic_id_clinic`)
+    REFERENCES `serenity`.`clinic` (`id_clinic`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
