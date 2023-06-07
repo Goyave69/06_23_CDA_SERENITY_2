@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `serenity`.`user` (
   `firstname` VARCHAR(70) NOT NULL,
   `lastname` VARCHAR(70) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(32) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
   `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `roles` JSON NOT NULL,
   PRIMARY KEY (`id`),
