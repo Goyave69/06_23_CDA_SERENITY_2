@@ -9,6 +9,7 @@ const patientFormRouter = require("./routes/patientForm");
 const clinicsRouter = require("./routes/clinics");
 const interventionsRouter = require("./routes/interventions");
 const specialistsRouter = require("./routes/specialists");
+const specialitiesRouter = require("./routes/specialities");
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use("/patient-form", patientFormRouter);
 app.use("/clinics", clinicsRouter);
 app.use("/interventions", interventionsRouter);
 app.use("/specialists", specialistsRouter);
+app.use("/specialities", specialitiesRouter);
 
 // app.use(router);
 

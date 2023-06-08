@@ -123,7 +123,6 @@ CREATE TABLE IF NOT EXISTS `serenity`.`clinic_has_specialist` (
   PRIMARY KEY (`clinic_id`, `specialist_id`),
   INDEX `fk_clinic_has_specialist_specialist1_idx` (`specialist_id` ASC) VISIBLE,
   INDEX `fk_clinic_has_specialist_clinic1_idx` (`clinic_id` ASC) VISIBLE,
-  INDEX `fk_clinic_has_specialist_clinic1` (`clinic_id` ASC) VISIBLE,
   CONSTRAINT `fk_clinic_has_specialist_clinic1`
     FOREIGN KEY (`clinic_id`)
     REFERENCES `serenity`.`clinic` (`id`),
@@ -215,9 +214,9 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `serenity`.`specialty`
+-- Table `serenity`.`speciality`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `serenity`.`specialty` (
+CREATE TABLE IF NOT EXISTS `serenity`.`speciality` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
@@ -226,20 +225,20 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `serenity`.`specialist_has_specialty`
+-- Table `serenity`.`specialist_has_speciality`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `serenity`.`specialist_has_specialty` (
+CREATE TABLE IF NOT EXISTS `serenity`.`specialist_has_speciality` (
   `specialist_id` INT NOT NULL,
-  `specialty_id` INT NOT NULL,
-  PRIMARY KEY (`specialist_id`, `specialty_id`),
-  INDEX `fk_specialist_has_specialty_specialty1_idx` (`specialty_id` ASC) VISIBLE,
-  INDEX `fk_specialist_has_specialty_specialist1_idx` (`specialist_id` ASC) VISIBLE,
-  CONSTRAINT `fk_specialist_has_specialty_specialist1`
+  `speciality_id` INT NOT NULL,
+  PRIMARY KEY (`specialist_id`, `speciality_id`),
+  INDEX `fk_specialist_has_speciality_speciality1_idx` (`speciality_id` ASC) VISIBLE,
+  INDEX `fk_specialist_has_speciality_specialist1_idx` (`specialist_id` ASC) VISIBLE,
+  CONSTRAINT `fk_specialist_has_speciality_specialist1`
     FOREIGN KEY (`specialist_id`)
     REFERENCES `serenity`.`specialist` (`id`),
-  CONSTRAINT `fk_specialist_has_specialty_specialty1`
-    FOREIGN KEY (`specialty_id`)
-    REFERENCES `serenity`.`specialty` (`id`))
+  CONSTRAINT `fk_specialist_has_speciality_speciality1`
+    FOREIGN KEY (`speciality_id`)
+    REFERENCES `serenity`.`speciality` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
