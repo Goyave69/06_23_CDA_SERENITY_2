@@ -14,4 +14,10 @@ router.put("/:id", updateClinicController);
 router.post("/", createClinicController);
 router.delete("/:id", deleteClinicController);
 
+// Clinic Hours
+
+const creaeteClinicHoursController = require("../controllers/clinicHoursController/CreateClinicHours");
+
+router.post("/hours/:id", creaeteClinicHoursController);
+
 module.exports = router;

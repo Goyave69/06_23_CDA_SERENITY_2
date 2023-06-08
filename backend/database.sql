@@ -63,11 +63,11 @@ CREATE TABLE IF NOT EXISTS `serenity`.`intervention` (
   `clinic_id` INT NOT NULL,
   PRIMARY KEY (`id`, `user_id`, `clinic_id`),
   INDEX `fk_intervention_user1_idx` (`user_id` ASC) VISIBLE,
-  INDEX `fk_intervention_cabinet1_idx` (`clinic_id` ASC) VISIBLE,
+  INDEX `fk_intervention_clinic1_idx` (`clinic_id` ASC) VISIBLE,
   CONSTRAINT `fk_intervention_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `serenity`.`user` (`id`),
-  CONSTRAINT `fk_intervention_cabinet1`
+  CONSTRAINT `fk_intervention_clinic1`
     FOREIGN KEY (`clinic_id`)
     REFERENCES `serenity`.`clinic` (`id`)
     ON DELETE NO ACTION
@@ -121,12 +121,12 @@ CREATE TABLE IF NOT EXISTS `serenity`.`clinic_has_specialist` (
   `clinic_id` INT NOT NULL,
   `specialist_id` INT NOT NULL,
   PRIMARY KEY (`clinic_id`, `specialist_id`),
-  INDEX `fk_cabinet_has_specialist_specialist1_idx` (`specialist_id` ASC) VISIBLE,
-  INDEX `fk_cabinet_has_specialist_cabinet1_idx` (`clinic_id` ASC) VISIBLE,
-  CONSTRAINT `fk_cabinet_has_specialist_cabinet1`
+  INDEX `fk_clinic_has_specialist_specialist1_idx` (`specialist_id` ASC) VISIBLE,
+  INDEX `fk_clinic_has_specialist_clinic1_idx` (`clinic_id` ASC) VISIBLE,
+  CONSTRAINT `fk_clinic_has_specialist_clinic1`
     FOREIGN KEY (`clinic_id`)
     REFERENCES `serenity`.`clinic` (`id`),
-  CONSTRAINT `fk_cabinet_has_specialist_specialist1`
+  CONSTRAINT `fk_clinic_has_specialist_specialist1`
     FOREIGN KEY (`specialist_id`)
     REFERENCES `serenity`.`specialist` (`id`))
 ENGINE = InnoDB
@@ -143,8 +143,8 @@ CREATE TABLE IF NOT EXISTS `serenity`.`clinic_hours` (
   `close_hours` TIME NOT NULL,
   `day` INT NOT NULL,
   PRIMARY KEY (`id`, `clinic_id`),
-  INDEX `fk_cabinet_hours_cabinet1_idx` (`clinic_id` ASC) VISIBLE,
-  CONSTRAINT `fk_cabinet_hours_cabinet1`
+  INDEX `fk_clinic_hours_clinic1_idx` (`clinic_id` ASC) VISIBLE,
+  CONSTRAINT `fk_clinic_hours_clinic1`
     FOREIGN KEY (`clinic_id`)
     REFERENCES `serenity`.`clinic` (`id`))
 ENGINE = InnoDB
