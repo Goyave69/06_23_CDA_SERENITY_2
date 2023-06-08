@@ -1,17 +1,15 @@
 const AbstractManager = require("./AbstractManager");
 
-class SpecialistManager extends AbstractManager {
+class SpecialityManager extends AbstractManager {
   constructor() {
-    super({ table: "specialist" });
+    super({ table: "speciality" });
   }
 
-  async insert(specialist) {
+  async insert(speciality) {
     return this.connection
-      .query(`insert into ${this.table} (user_id) VALUES (?)`, [
-        specialist.user_id,
-      ])
+      .query(`insert into ${this.table} (name) VALUES (?)`, [speciality.name])
       .then(([rows]) => {
-        return { status: 201, message: { id: rows.insertId, ...specialist } };
+        return { status: 201, message: { id: rows.insertId, ...speciality } };
       })
       .catch((err) => {
         console.error(err);
@@ -59,4 +57,4 @@ class SpecialistManager extends AbstractManager {
   }
 }
 
-module.exports = SpecialistManager;
+module.exports = SpecialityManager;
