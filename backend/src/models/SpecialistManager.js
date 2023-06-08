@@ -1,5 +1,4 @@
 const AbstractManager = require("./AbstractManager");
-const { passwordHasher } = require("../services/PasswordHelper");
 
 class SpecialistManager extends AbstractManager {
   constructor() {
@@ -8,15 +7,11 @@ class SpecialistManager extends AbstractManager {
 
   async insert(specialist) {
     return this.connection
-      .query(
-        `insert into ${this.table} (user_id) VALUES (?)`,
-        [
-          specialist.user_id
-        ]
-      )
+      .query(`insert into ${this.table} (user_id) VALUES (?)`, [
+        specialist.user_id,
+      ])
       .then(([rows]) => {
         return { status: 201, message: { id: rows.insertId, ...specialist } };
-
       })
       .catch((err) => {
         console.error(err);
