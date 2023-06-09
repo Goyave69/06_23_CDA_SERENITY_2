@@ -10,6 +10,7 @@ const clinicsRouter = require("./routes/clinics");
 const interventionsRouter = require("./routes/interventions");
 const specialistsRouter = require("./routes/specialists");
 const specialitiesRouter = require("./routes/specialities");
+const checkListRouter = require("./routes/checkList");
 const stepsInfosRouter = require("./routes/stepsInfos");
 
 const app = express();
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
 
 // API routes
+app.use("/check-list", checkListRouter);
 app.use("/users", usersRouter);
 app.use("/login", authRouter);
 app.use("/patient-form", patientFormRouter);
