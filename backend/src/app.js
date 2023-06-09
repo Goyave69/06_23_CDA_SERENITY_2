@@ -11,6 +11,7 @@ const interventionsRouter = require("./routes/interventions");
 const specialistsRouter = require("./routes/specialists");
 const specialitiesRouter = require("./routes/specialities");
 const checkListRouter = require("./routes/checkList");
+const stepsInfosRouter = require("./routes/stepsInfos");
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use("/clinics", clinicsRouter);
 app.use("/interventions", interventionsRouter);
 app.use("/specialists", specialistsRouter);
 app.use("/specialities", specialitiesRouter);
+app.use("/steps-infos", stepsInfosRouter);
 
 // app.use(router);
 
