@@ -8,6 +8,7 @@ const authRouter = require("./routes/auth");
 const patientFormRouter = require("./routes/patientForm");
 const clinicsRouter = require("./routes/clinics");
 const interventionsRouter = require("./routes/interventions");
+const appointmentRouter = require("./routes/appointment");
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use("/login", authRouter);
 app.use("/patient-form", patientFormRouter);
 app.use("/clinics", clinicsRouter);
 app.use("/interventions", interventionsRouter);
+app.use("/appointments", appointmentRouter);
 
 // app.use(router);
 
