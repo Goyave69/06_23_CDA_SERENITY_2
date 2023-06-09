@@ -56,7 +56,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 CREATE TABLE IF NOT EXISTS `serenity`.`intervention` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
-  `anaesthesia` INT NOT NULL,
+  `anesthesia` INT NOT NULL,
   `duration` TIME NULL DEFAULT NULL,
   `location_body` INT NOT NULL,
   `user_id` INT NOT NULL,
@@ -260,21 +260,21 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- Table `serenity`.`read_steps_info`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `serenity`.`read_steps_info` (
-  `intervention_id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `is_checked` TINYINT NULL DEFAULT 0,
   `steps_info_id` INT NOT NULL,
-  `is_checked` TINYINT NOT NULL DEFAULT 0,
-  `id` INT NOT NULL,
-  PRIMARY KEY (`intervention_id`, `steps_info_id`, `id`),
-  INDEX `fk_intervention_has_steps_info_steps_info1_idx` (`steps_info_id` ASC) VISIBLE,
-  INDEX `fk_intervention_has_steps_info_intervention1_idx` (`intervention_id` ASC) VISIBLE,
-  CONSTRAINT `fk_intervention_has_steps_info_intervention1`
-    FOREIGN KEY (`intervention_id`)
-    REFERENCES `serenity`.`intervention` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_intervention_has_steps_info_steps_info1`
+  `intervention_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `steps_info_id`, `intervention_id`),
+  INDEX `fk_read_steps_info_steps_info1_idx` (`steps_info_id` ASC) VISIBLE,
+  INDEX `fk_read_steps_info_intervention1_idx` (`intervention_id` ASC) VISIBLE,
+  CONSTRAINT `fk_read_steps_info_steps_info1`
     FOREIGN KEY (`steps_info_id`)
     REFERENCES `serenity`.`steps_info` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_read_steps_info_intervention1`
+    FOREIGN KEY (`intervention_id`)
+    REFERENCES `serenity`.`intervention` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
