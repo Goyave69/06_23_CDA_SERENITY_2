@@ -6,6 +6,35 @@ class UserManager extends AbstractManager {
     super({ table: "user" });
   }
 
+  find(id) {
+    return this.connection
+      .query(
+        `select firstname, lastname, email, roles from  ${this.table} where id = ?`,
+        [id]
+      )
+      .then(([rows]) => {
+        return rows.length === 0
+          ? { status: 404, message: {} }
+          : { status: 200, message: rows[0] };
+      })
+      .catch((err) => {
+        console.error(err);
+        return { status: 500, message: "Error" };
+      });
+  }
+
+  findAll() {
+    return this.connection
+      .query(`select firstname, lastname, email, roles from  ${this.table}`)
+      .then(([rows]) => {
+        return { status: 200, message: rows };
+      })
+      .catch((err) => {
+        console.error(err);
+        return { status: 500, message: "Error" };
+      });
+  }
+
   async insert(user) {
     return this.connection
       .query(

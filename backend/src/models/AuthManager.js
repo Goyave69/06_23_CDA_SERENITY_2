@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const AbstractManager = require("./AbstractManager");
 const { passwordVerification } = require("../services/PasswordHelper");
 
-const privateKeyPath = path.join(__dirname, "../../../jwtRS256.key");
+const privateKeyPath = path.join(__dirname, "../../jwtRS256.key");
 const privateKey = fs.readFileSync(privateKeyPath);
 
 class AuthManager extends AbstractManager {
