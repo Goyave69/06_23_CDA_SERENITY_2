@@ -22,7 +22,7 @@ class AuthManager extends AbstractManager {
         if (!(await passwordVerification(password, rows[0].password))) {
           return { status: 401, message: "Email ou mot de passe invalide" };
         }
-        const token = jwt.sign({ userId: rows[0].id }, privateKey, {
+        const token = jwt.sign({ user: rows[0] }, privateKey, {
           algorithm: "RS256",
         });
         return { status: 200, message: { token } };
