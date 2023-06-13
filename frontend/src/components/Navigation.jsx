@@ -9,36 +9,29 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import { useNavigate } from "react-router-dom/dist";
+
+import { NavLink } from "react-router-dom/dist";
+import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
+import CardMedia from "@mui/material/CardMedia";
+
 import CurrentUserContext, {
   useCurrentUserContext,
 } from "../Context/UserContext";
+import UserInfo from "./UserInfo";
 
 const drawerWidth = 240;
 
 export default function Navigation() {
-  const { user, setUser } = useCurrentUserContext(CurrentUserContext);
-
-  const navigate = useNavigate();
-  const handleNavigate = (path) => {
-    navigate(path);
-  };
-  const handleDisconnection = () => {
-    console.warn(user);
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    setUser({});
-    handleNavigate("/login");
-  };
+  const { user } = useCurrentUserContext(CurrentUserContext);
 
   console.warn(user);
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", position: "fixed" }}>
       <CssBaseline />
 
       <Drawer
         sx={{
+          position: "fixed",
           width: drawerWidth,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
@@ -50,65 +43,47 @@ export default function Navigation() {
         anchor="left"
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
+          <CardMedia
+            title="logo"
+            image="src/assets/img/serenity.png"
+            sx={(theme) => ({
+              [theme.breakpoints.down("md")]: {},
+              [theme.breakpoints.up("md")]: {
+                width: "55px",
+                objectFit: "cover",
+                height: "50px",
+                borderRadius: 4,
+              },
+            })}
+          />
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={(theme) => ({
+              [theme.breakpoints.down("md")]: {},
+              [theme.breakpoints.up("md")]: {
+                height: "42px",
+                ml: 1,
+              },
+            })}
+          >
             Serenity
           </Typography>
         </Toolbar>
         <Divider />
         <List>
-          <ListItem
-            onClick={() => handleNavigate("/dashboard")}
-            key="Dashboard"
-            disablePadding
-          >
-            <ListItemButton>
-              <InboxIcon />
-              <ListItemText primary="Dashboard" />
-            </ListItemButton>
+          <ListItem key="Dashboard">
+            <NavLink to="/dashboard">
+              <ListItemButton>
+                <DashboardCustomizeIcon />
+                <ListItemText primary="Dashboard" sx={{ ml: 1 }} />
+              </ListItemButton>
+            </NavLink>
           </ListItem>
         </List>
       </Drawer>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-        variant="permanent"
-        anchor="bottom"
-      >
-        {!user.email ? (
-          <List>
-            <ListItem
-              onClick={() => handleNavigate("/login")}
-              key="login"
-              disablePadding
-            >
-              <ListItemButton>
-                <InboxIcon />
-                <ListItemText primary="login" />
-              </ListItemButton>
-            </ListItem>
-          </List>
-        ) : (
-          <ListItem
-            onClick={() => handleNavigate("/login")}
-            key="login"
-            disablePadding
-          >
-            <ListItemButton>
-              <ListItemText
-                onClick={handleDisconnection}
-                primary="Disconnect"
-              />
-            </ListItemButton>
-          </ListItem>
-        )}
-        {user.email ? `${user.lastname} ${user.firstname}` : null}
-      </Drawer>
+      <UserInfo />
     </Box>
   );
 }
