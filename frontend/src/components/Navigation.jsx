@@ -1,7 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
@@ -14,24 +13,15 @@ import { NavLink } from "react-router-dom/dist";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 import CardMedia from "@mui/material/CardMedia";
 
-import CurrentUserContext, {
-  useCurrentUserContext,
-} from "../Context/UserContext";
 import UserInfo from "./UserInfo";
 
 const drawerWidth = 240;
 
 export default function Navigation() {
-  const { user } = useCurrentUserContext(CurrentUserContext);
-
-  console.warn(user);
   return (
-    <Box sx={{ display: "flex", position: "fixed" }}>
-      <CssBaseline />
-
+    <Box>
       <Drawer
         sx={{
-          position: "fixed",
           width: drawerWidth,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
@@ -53,6 +43,7 @@ export default function Navigation() {
                 objectFit: "cover",
                 height: "50px",
                 borderRadius: 4,
+                m: 2,
               },
             })}
           />
@@ -81,6 +72,15 @@ export default function Navigation() {
               </ListItemButton>
             </NavLink>
           </ListItem>
+          {/* Ajouter la liste si dessous commentée en adaptant pour crée un lien sur la navigation */}
+          {/* <ListItem key="login">
+            <NavLink to="/login">
+              <ListItemButton>
+                <DashboardCustomizeIcon />
+                <ListItemText primary="login" sx={{ ml: 1 }} />
+              </ListItemButton> */}
+          {/* </NavLink> */}
+          {/* </ListItem> */}
         </List>
       </Drawer>
       <UserInfo />
