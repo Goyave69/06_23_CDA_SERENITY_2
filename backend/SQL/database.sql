@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `serenity`.`intervention` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
-INSERT INTO `serenity`.`intervention` (`id`, `name`, `anaesthesia`, `duration`, `location_body`, `user_id`, `clinic_id`) VALUES
+INSERT INTO `serenity`.`intervention` (`id`, `name`, `anesthesia`, `duration`, `location_body`, `user_id`, `clinic_id`) VALUES
 (1, 'Intervention 1', 1, NULL, 1, 1, 1);
 
 
@@ -255,8 +255,8 @@ CREATE TABLE IF NOT EXISTS `serenity`.`speciality` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
-INSERT INTO `serenity`.`specialty` (`id`, `name`) VALUES
-(1, 'Specialty 1');
+INSERT INTO `serenity`.`speciality` (`id`, `name`) VALUES
+(1, 'speciality 1');
 
 
 -- -----------------------------------------------------
@@ -278,7 +278,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
-INSERT INTO `serenity`.`specialist_has_specialty` (`specialist_id`, `specialty_id`) VALUES
+INSERT INTO `serenity`.`specialist_has_speciality` (`specialist_id`, `speciality_id`) VALUES
 (1, 1);
 
 
