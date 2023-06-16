@@ -8,21 +8,33 @@ import CurrentUserContext, {
 
 function Dashboard() {
   const { user } = useCurrentUserContext(CurrentUserContext);
-  const [appointments, setAppointements] = useState([]);
+  const [specialists, setSpecialists] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [interventions, setInterventions] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/appointments")
-      .then((results) => setAppointements(results.data));
+      .get("http://localhost:5000/specialists")
+      .then((results) => setSpecialists(results.data));
+    axios
+      .get("http://localhost:5000/users")
+      .then((results) => setUsers(results.data));
+    axios
+      .get("http://localhost:5000/interventions")
+      .then((results) => setInterventions(results.data));
   }, []);
 
   return (
     <Box ml={30}>
       <Box>
-        <Typography variant="h3" color="initial" sx={{ m: 3 }}>
-          {`Bonjour ${user.firstname ? user.firstname : null}`}
+        <Typography variant="h3" color="initial" sx={{ m: 5, ml: 6 }}>
+          {user.firstname ? `Bonjour ${user.firstname}` : null}
         </Typography>
-        <AdminDashboard appointments={appointments} />
+        <AdminDashboard
+          specialists={specialists}
+          users={users}
+          interventions={interventions}
+        />
       </Box>
     </Box>
   );
