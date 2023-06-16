@@ -1,7 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-  return <div>Dashboard</div>;
+  const navigate = useNavigate();
+  const logOut = () => {
+    localStorage.clear();
+
+    navigate("/login");
+  };
+  return (
+    <>
+      <div>Dashboard</div>
+      <button type="button" onClick={logOut}>
+        {" "}
+        Se déconnecter{" "}
+      </button>
+    </>
+  );
 }
 
 export default Dashboard;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Typography, TextField, Button, Box } from "@mui/material";
 import jwt_decode from "jwt-decode";
+import axios from "axios";
 import { useCurrentUserContext } from "../Context/UserContext";
 
 function LoginPage() {
@@ -10,36 +11,37 @@ function LoginPage() {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+  // handle error
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
 
-    const body = JSON.stringify({
+    // create data object with email and password
+    const data = {
       email,
       password,
-    });
-
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body,
     };
 
+    // make sure email and password are not empty
     if (email && password) {
-      fetch("http://localhost:5000/login", requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          const { user } = jwt_decode(result.token);
+      try {
+        // send data object to login endpoint
+        const response = await axios.post("http://localhost:5000/login", data);
 
-          setUser(user);
-          setToken(result.token);
-        })
-        .then(() => {
-          navigate("/dashboard");
-        })
-        .catch(() => {});
+        // decode token to get user data
+        const { user } = jwt_decode(response.data.token);
+
+        // set user state
+        setUser(user);
+        // set token state
+        setToken(response.data.token);
+
+        // redirect to dashboard
+        navigate("/dashboard");
+      } catch (error) {
+        // handle error
+        console.error(error);
+      }
     }
   };
 

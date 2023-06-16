@@ -11,7 +11,6 @@ export function CurrentUserContextProvider({ children }) {
   const [token, setToken] = useLocalStorage("token", "");
 
   const [currentUser, setCurrentUser] = useState([]);
-  const [profileUser, setProfileUser] = useLocalStorage("profileUser", {});
   const foo = useMemo(
     () => ({
       user,
@@ -20,8 +19,6 @@ export function CurrentUserContextProvider({ children }) {
       setToken,
       currentUser,
       setCurrentUser,
-      profileUser,
-      setProfileUser,
     }),
     []
   );
