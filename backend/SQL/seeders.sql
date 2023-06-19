@@ -11,7 +11,7 @@ INSERT INTO `serenity`.`clinic` (`name`, `address`, `city`, `zipcode`, `phone_nu
 ('123 Clinic', '321 Elm Road', 'Villageville', '98765', '456-789-0123', 'info@123clinic.com', 1, 0);
 
 -- Insertions pour la table `serenity`.`intervention`
-INSERT INTO `serenity`.`intervention` (`name`, `anaesthesia`, `duration`, `location_body`, `user_id`, `clinic_id`) VALUES
+INSERT INTO `serenity`.`intervention` (`name`, `anesthesia`, `duration`, `location_body`, `user_id`, `clinic_id`) VALUES
 ('Intervention 1', 1, NULL, 1, 1, 1),
 ('Intervention 2', 0, '02:30:00', 2, 2, 2),
 ('Intervention 3', 1, '01:15:00', 3, 3, 3);

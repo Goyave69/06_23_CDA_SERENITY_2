@@ -2,7 +2,7 @@ import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 
-function AdminUsers({ users }) {
+function AdminSpecialists({ specialists, users }) {
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
@@ -40,13 +40,17 @@ function AdminUsers({ users }) {
     },
   ];
 
-  const rows = users.map((user, index) => ({
-    id: index + 1,
-    lastName: user.lastname,
-    firstName: user.firstname,
-    email: user.email,
-    roles: user.roles,
-  }));
+  const rows = users
+    .filter((user) =>
+      specialists.some((specialist) => specialist.user_id === user.id)
+    )
+    .map((user, index) => ({
+      id: index + 1,
+      lastName: user.lastname,
+      firstName: user.firstname,
+      email: user.email,
+      roles: user.roles,
+    }));
 
   return (
     <Box sx={{ height: 400, width: "100%" }}>
@@ -62,4 +66,4 @@ function AdminUsers({ users }) {
   );
 }
 
-export default AdminUsers;
+export default AdminSpecialists;

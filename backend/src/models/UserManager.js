@@ -25,7 +25,7 @@ class UserManager extends AbstractManager {
 
   findAll() {
     return this.connection
-      .query(`select firstname, lastname, email, roles from  ${this.table}`)
+      .query(`select id,firstname, lastname, email, roles from  ${this.table}`)
       .then(([rows]) => {
         return { status: 200, message: rows };
       })
