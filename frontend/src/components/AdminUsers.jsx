@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { DataGrid, GridDeleteIcon } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import { IconButton, Tooltip } from "@mui/material";
 import axios from "axios";
-import { Edit } from "@mui/icons-material";
 
-function AdminUsers({ users, setUsers }) {
+function AdminUsers({ users }) {
   const handleDeleteUser = (userId) => {
     axios
       .delete(`http://localhost:5000/users/${userId}`)
@@ -104,7 +103,7 @@ function AdminUsers({ users, setUsers }) {
         columns={columns}
         pagination
         processRowUpdate={handleCellEditCommit}
-        onProcessRowUpdateError={(e) => console.log(e)}
+        onProcessRowUpdateError={(e) => console.warn(e)}
         pageSize={10}
       />
     </Box>

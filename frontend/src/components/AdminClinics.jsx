@@ -3,7 +3,6 @@ import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 
 function AdminClinics({ clinics }) {
-  console.log(clinics);
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
