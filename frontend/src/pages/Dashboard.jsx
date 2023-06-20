@@ -10,7 +10,7 @@ function Dashboard() {
   const { user } = useCurrentUserContext(CurrentUserContext);
   const [specialists, setSpecialists] = useState([]);
   const [users, setUsers] = useState([]);
-  const [interventions, setInterventions] = useState([]);
+  const [clinics, setClinics] = useState([]);
 
   useEffect(() => {
     axios
@@ -20,8 +20,8 @@ function Dashboard() {
       .get("http://localhost:5000/users")
       .then((results) => setUsers(results.data));
     axios
-      .get("http://localhost:5000/interventions")
-      .then((results) => setInterventions(results.data));
+      .get("http://localhost:5000/clinics")
+      .then((results) => setClinics(results.data));
   }, []);
 
   return (
@@ -33,7 +33,8 @@ function Dashboard() {
         <AdminDashboard
           specialists={specialists}
           users={users}
-          interventions={interventions}
+          clinics={clinics}
+          setUsers={setUsers}
         />
       </Box>
     </Box>

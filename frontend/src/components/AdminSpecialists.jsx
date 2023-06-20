@@ -53,12 +53,12 @@ function AdminSpecialists({ specialists, users }) {
     }));
 
   return (
-    <Box sx={{ height: 400, width: "100%" }}>
+    <Box sx={{ height: 631, maxWidth: "100%", mt: 2 }}>
       <DataGrid
         rows={rows}
         columns={columns}
         pagination
-        pageSize={5}
+        pageSize={10}
         checkboxSelection
         disableSelectionOnClick
       />

@@ -1,8 +1,38 @@
-import React from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import React, { useState } from "react";
+import { DataGrid, GridDeleteIcon } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
+import { IconButton, Tooltip } from "@mui/material";
+import axios from "axios";
+import { Edit } from "@mui/icons-material";
 
-function AdminUsers({ users }) {
+function AdminUsers({ users, setUsers }) {
+  const handleDeleteUser = (userId) => {
+    axios
+      .delete(`http://localhost:5000/users/${userId}`)
+      .then((res) => {
+        console.warn(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  const handleCellEditCommit = React.useCallback((e) => {
+    const { id, email, firstName, lastName, roles } = e;
+
+    try {
+      axios.put(`http://localhost:5000/users/${id}`, {
+        id,
+        email,
+        firstName,
+        lastName,
+        roles,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+    return e;
+  }, []);
+
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
@@ -38,10 +68,28 @@ function AdminUsers({ users }) {
       valueGetter: (params) =>
         `${params.row.firstName || ""} ${params.row.lastName || ""}`,
     },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 150,
+      sortable: false,
+      renderCell: (params) => (
+        <div>
+          <Tooltip title="Supprimer l'utilisateur" arrow>
+            <IconButton
+              color="error"
+              onClick={() => handleDeleteUser(params.row.id)}
+            >
+              <GridDeleteIcon />
+            </IconButton>
+          </Tooltip>
+        </div>
+      ),
+    },
   ];
 
-  const rows = users.map((user, index) => ({
-    id: index + 1,
+  const rows = users.map((user) => ({
+    id: user.id,
     lastName: user.lastname,
     firstName: user.firstname,
     email: user.email,
@@ -49,14 +97,15 @@ function AdminUsers({ users }) {
   }));
 
   return (
-    <Box sx={{ height: 400, width: "100%" }}>
+    <Box sx={{ height: 631, maxWidth: "100%", mt: 2 }}>
       <DataGrid
+        editMode="row"
         rows={rows}
         columns={columns}
         pagination
-        pageSize={5}
-        checkboxSelection
-        disableSelectionOnClick
+        processRowUpdate={handleCellEditCommit}
+        onProcessRowUpdateError={(e) => console.log(e)}
+        pageSize={10}
       />
     </Box>
   );

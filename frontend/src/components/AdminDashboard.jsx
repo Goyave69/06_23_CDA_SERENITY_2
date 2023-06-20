@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import AdminUsers from "./AdminUsers";
 import AdminSpecialists from "./AdminSpecialists";
+import AdminClinics from "./AdminClinics";
 
-function AdminDashboard({ specialists, users }) {
+function AdminDashboard({ specialists, users, clinics, setUsers }) {
   const [manageUsers, setManageUsers] = useState(false);
   const [manageSpecialists, setManageSpecialists] = useState(false);
+  const [manageClinics, setManageClinics] = useState(false);
   const boxStyle = {
     width: "30%",
     height: "150px",
@@ -21,17 +23,27 @@ function AdminDashboard({ specialists, users }) {
   };
   const handleMangeUsers = () => {
     setManageSpecialists(false);
+    setManageClinics(false);
     setManageUsers(true);
   };
   const handleMangeSpecialists = () => {
     setManageUsers(false);
+    setManageClinics(false);
     setManageSpecialists(true);
+  };
+  const handleMangeClinics = () => {
+    setManageUsers(false);
+    setManageSpecialists(false);
+    setManageClinics(true);
   };
 
   return (
     <>
       <Box display="flex" justifyContent="space-around">
-        <Box sx={boxStyle}>
+        <Box
+          sx={boxStyle}
+          border={manageSpecialists ? "2px solid #00B8AB" : null}
+        >
           <Typography
             variant="h4"
             color="black"
@@ -41,23 +53,32 @@ function AdminDashboard({ specialists, users }) {
           </Typography>
           <Typography variant="p">{specialists.length}</Typography>
         </Box>
-        <Box sx={boxStyle} onClick={handleMangeUsers}>
+        <Box
+          sx={boxStyle}
+          onClick={handleMangeUsers}
+          border={manageUsers ? "2px solid #00B8AB" : null}
+        >
           <Typography variant="h4" color="black">
             Users
           </Typography>
           <Typography variant="p">{users.length}</Typography>
         </Box>
-        <Box sx={boxStyle}>
+        <Box
+          sx={boxStyle}
+          onClick={handleMangeClinics}
+          border={manageClinics ? "2px solid #00B8AB" : null}
+        >
           <Typography variant="h4" color="black">
-            Interventions
+            Cabinets
           </Typography>
-          <Typography variant="p">{specialists.length}</Typography>
+          <Typography variant="p">{clinics.length}</Typography>
         </Box>
       </Box>
-      {manageUsers ? <AdminUsers users={users} /> : null}
+      {manageUsers ? <AdminUsers users={users} setUsers={setUsers} /> : null}
       {manageSpecialists ? (
         <AdminSpecialists specialists={specialists} users={users} />
       ) : null}
+      {manageClinics ? <AdminClinics clinics={clinics} /> : null}
     </>
   );
 }
