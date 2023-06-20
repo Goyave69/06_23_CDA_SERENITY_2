@@ -18,7 +18,7 @@ const Routes = [
         element: <LoginPage />,
       },
       {
-        path: "praticien-form",
+        path: "add-praticien",
         element: <PraticienForm />,
       },
     ],

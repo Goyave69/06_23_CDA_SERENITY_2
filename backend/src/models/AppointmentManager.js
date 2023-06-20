@@ -5,6 +5,24 @@ class AppointmentManager extends AbstractManager {
     super({ table: "appointment" });
   }
 
+  findAll() {
+    return this.connection
+      .query(
+        `SELECT i.*, a.date, u.firstname, u.lastname, u.email
+      FROM serenity.intervention i
+      JOIN serenity.appointment a ON i.id = a.intervention_id
+      JOIN serenity.user u ON a.user_id = u.id;
+      `
+      )
+      .then(([rows]) => {
+        return { status: 200, message: rows };
+      })
+      .catch((err) => {
+        console.error(err);
+        return { status: 500, message: "Error" };
+      });
+  }
+
   insert(appointment) {
     return this.connection
       .query(
