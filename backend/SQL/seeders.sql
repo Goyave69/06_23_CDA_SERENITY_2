@@ -11,7 +11,7 @@ INSERT INTO `serenity`.`clinic` (`name`, `address`, `city`, `zipcode`, `phone_nu
 ('123 Clinic', '321 Elm Road', 'Villageville', '98765', '456-789-0123', 'info@123clinic.com', 1, 0);
 
 -- Insertions pour la table `serenity`.`intervention`
-INSERT INTO `serenity`.`intervention` (`name`, `anaesthesia`, `duration`, `location_body`, `user_id`, `clinic_id`) VALUES
+INSERT INTO `serenity`.`intervention` (`name`, `anesthesia`, `duration`, `location_body`, `user_id`, `clinic_id`) VALUES
 ('Intervention 1', 1, NULL, 1, 1, 1),
 ('Intervention 2', 0, '02:30:00', 2, 2, 2),
 ('Intervention 3', 1, '01:15:00', 3, 3, 3);
@@ -58,14 +58,14 @@ INSERT INTO `serenity`.`specialist_has_intervention` (`specialist_id`, `interven
 (2, 2),
 (3, 3);
 
--- Insertions pour la table `serenity`.`specialty`
-INSERT INTO `serenity`.`specialty` (`name`) VALUES
-('Specialty 1'),
-('Specialty 2'),
-('Specialty 3');
+-- Insertions pour la table `serenity`.`speciality`
+INSERT INTO `serenity`.`speciality` (`name`) VALUES
+('Speciality 1'),
+('Speciality 2'),
+('Speciality 3');
 
--- Insertions pour la table `serenity`.`specialist_has_specialty`
-INSERT INTO `serenity`.`specialist_has_specialty` (`specialist_id`, `specialty_id`) VALUES
+-- Insertions pour la table `serenity`.`specialist_has_speciality`
+INSERT INTO `serenity`.`specialist_has_speciality` (`specialist_id`, `speciality_id`) VALUES
 (1, 1),
 (2, 2),
 (3, 3);
