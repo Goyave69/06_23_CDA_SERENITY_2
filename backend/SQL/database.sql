@@ -36,8 +36,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
-
-
 -- -----------------------------------------------------
 -- Table `serenity`.`clinic`
 -- -----------------------------------------------------
@@ -83,9 +81,6 @@ CREATE TABLE IF NOT EXISTS `serenity`.`intervention` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
-INSERT INTO `serenity`.`intervention` (`id`, `name`, `anaesthesia`, `duration`, `location_body`, `user_id`, `clinic_id`) VALUES
-(1, 'Intervention 1', 1, NULL, 1, 1, 1);
-
 
 
 -- -----------------------------------------------------
@@ -109,7 +104,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
-
 -- -----------------------------------------------------
 -- Table `serenity`.`specialist`
 -- -----------------------------------------------------
@@ -126,9 +120,6 @@ CREATE TABLE IF NOT EXISTS `serenity`.`specialist` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
-
-INSERT INTO `serenity`.`specialist` (`id`, `user_id`) VALUES
-(1, 1);
 
 
 -- -----------------------------------------------------
@@ -150,7 +141,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
-
 -- -----------------------------------------------------
 -- Table `serenity`.`clinic_hours`
 -- -----------------------------------------------------
@@ -167,7 +157,6 @@ CREATE TABLE IF NOT EXISTS `serenity`.`clinic_hours` (
     REFERENCES `serenity`.`clinic` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
-
 
 
 -- -----------------------------------------------------
@@ -187,7 +176,6 @@ CREATE TABLE IF NOT EXISTS `serenity`.`check_list` (
     REFERENCES `serenity`.`appointment` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
-
 
 
 -- -----------------------------------------------------
@@ -234,7 +222,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
-
 -- -----------------------------------------------------
 -- Table `serenity`.`speciality`
 -- -----------------------------------------------------
@@ -244,9 +231,6 @@ CREATE TABLE IF NOT EXISTS `serenity`.`speciality` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
-
-INSERT INTO `serenity`.`speciality` (`id`, `name`) VALUES
-(1, 'speciality 1');
 
 
 -- -----------------------------------------------------
@@ -268,9 +252,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
-INSERT INTO `serenity`.`specialist_has_specialty` (`specialist_id`, `specialty_id`) VALUES
-(1, 1);
-
 
 -- -----------------------------------------------------
 -- Table `serenity`.`steps_info`
@@ -283,6 +264,8 @@ CREATE TABLE IF NOT EXISTS `serenity`.`steps_info` (
   UNIQUE INDEX `id_theme_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
+
+
 
 
 -- -----------------------------------------------------
@@ -308,7 +291,6 @@ CREATE TABLE IF NOT EXISTS `serenity`.`read_steps_info` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
-
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

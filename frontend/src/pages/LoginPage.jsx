@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Typography, TextField, Button, Box } from "@mui/material";
 import jwt_decode from "jwt-decode";
-import axios from "axios";
+import ApiHelper from "../services/ApiHelper";
 import { useCurrentUserContext } from "../Context/UserContext";
 
 function LoginPage() {
@@ -11,37 +11,37 @@ function LoginPage() {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-  // handle error
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // create data object with email and password
-    const data = {
+    const data = JSON.stringify({
       email,
       password,
-    };
+    });
 
     // make sure email and password are not empty
     if (email && password) {
-      try {
-        // send data object to login endpoint
-        const response = await axios.post("http://localhost:5000/login", data);
+      // send data object to login endpoint
+      await ApiHelper("login", "POST", data)
+        .then((response) => response.json())
+        .then((result) => {
+          // decode token to get user data
+          const { user } = jwt_decode(result.token);
 
-        // decode token to get user data
-        const { user } = jwt_decode(response.data.token);
-
-        // set user state
-        setUser(user);
-        // set token state
-        setToken(response.data.token);
-
-        // redirect to dashboard
-        navigate("/dashboard");
-      } catch (error) {
-        // handle error
-        console.error(error);
-      }
+          // set user state
+          setUser(user);
+          // set token state
+          setToken(result.token);
+        })
+        .then(() => {
+          // redirect to dashboard
+          navigate("/dashboard");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   };
 
