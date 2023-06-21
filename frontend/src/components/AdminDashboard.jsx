@@ -4,7 +4,7 @@ import AdminUsers from "./AdminUsers";
 import AdminSpecialists from "./AdminSpecialists";
 import AdminClinics from "./AdminClinics";
 
-function AdminDashboard({ specialists, users, clinics, setUsers }) {
+function AdminDashboard({ specialists, users, clinics, setUsers, setClinics }) {
   const [manageUsers, setManageUsers] = useState(false);
   const [manageSpecialists, setManageSpecialists] = useState(false);
   const [manageClinics, setManageClinics] = useState(false);
@@ -78,7 +78,9 @@ function AdminDashboard({ specialists, users, clinics, setUsers }) {
       {manageSpecialists ? (
         <AdminSpecialists specialists={specialists} users={users} />
       ) : null}
-      {manageClinics ? <AdminClinics clinics={clinics} /> : null}
+      {manageClinics ? (
+        <AdminClinics clinics={clinics} setClinics={setClinics} />
+      ) : null}
     </>
   );
 }

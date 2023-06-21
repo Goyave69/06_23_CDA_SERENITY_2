@@ -1,8 +1,43 @@
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
+import axios from "axios";
 
-function AdminClinics({ clinics }) {
+function AdminClinics({ clinics, setClinics }) {
+  const handleCellEditCommit = React.useCallback((e) => {
+    const {
+      id,
+
+      name,
+      address,
+      free_parking,
+      handicap_access,
+      phone_number,
+      zipcode,
+    } = e;
+
+    try {
+      axios
+        .put(`http://localhost:5000/clinics/${id}`, {
+          id,
+
+          name,
+          address,
+          free_parking: free_parking === "oui" ? 1 : 0,
+          handicap_access: handicap_access === "oui" ? 1 : 0,
+          phone_number,
+          zipcode,
+        })
+        .then(() => {
+          axios
+            .get(`http://localhost:5000/clinics`)
+            .then((res) => setClinics(res.data));
+        });
+    } catch (error) {
+      console.error(error);
+    }
+    return e;
+  }, []);
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
@@ -62,7 +97,15 @@ function AdminClinics({ clinics }) {
 
   return (
     <Box sx={{ height: 631, maxWidth: "100%", mt: 2 }}>
-      <DataGrid rows={rows} columns={columns} pagination pageSize={10} />
+      <DataGrid
+        editMode="row"
+        rows={rows}
+        columns={columns}
+        pagination
+        processRowUpdate={handleCellEditCommit}
+        onProcessRowUpdateError={(e) => console.warn(e)}
+        pageSize={10}
+      />
     </Box>
   );
 }

@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import { IconButton, Tooltip } from "@mui/material";
 import axios from "axios";
 
-function AdminUsers({ users }) {
+function AdminUsers({ users, setUsers }) {
   const handleDeleteUser = (userId) => {
     axios
       .delete(`http://localhost:5000/users/${userId}`)
@@ -19,13 +19,19 @@ function AdminUsers({ users }) {
     const { id, email, firstName, lastName, roles } = e;
 
     try {
-      axios.put(`http://localhost:5000/users/${id}`, {
-        id,
-        email,
-        firstName,
-        lastName,
-        roles,
-      });
+      axios
+        .put(`http://localhost:5000/users/${id}`, {
+          id,
+          email,
+          firstName,
+          lastName,
+          roles,
+        })
+        .then(() => {
+          axios
+            .get(`http://localhost:5000/users`)
+            .then((res) => setUsers(res.data));
+        });
     } catch (error) {
       console.error(error);
     }
@@ -63,6 +69,7 @@ function AdminUsers({ users }) {
       headerName: "Full name",
       description: "This column has a value getter and is not sortable.",
       sortable: false,
+      editable: false,
       width: 160,
       valueGetter: (params) =>
         `${params.row.firstName || ""} ${params.row.lastName || ""}`,

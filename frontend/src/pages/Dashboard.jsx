@@ -35,6 +35,7 @@ function Dashboard() {
           users={users}
           clinics={clinics}
           setUsers={setUsers}
+          setClinics={setClinics}
         />
       </Box>
     </Box>
