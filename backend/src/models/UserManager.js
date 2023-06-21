@@ -47,7 +47,53 @@ class UserManager extends AbstractManager {
           JSON.stringify(user.roles),
         ]
       )
-      .then(([rows]) => {
+      .then((rows) => {
+        return {
+          status: 201,
+          message: {
+            id: rows.insertId,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+            roles: user.roles,
+          },
+        };
+      })
+      .catch((err) => {
+        console.error(err);
+        return {
+          status: 500,
+          message: err.errno === 1062 ? "Cet email existe déja" : "Error",
+        };
+      });
+  }
+
+  async insertSpecialist({ user }) {
+    if (user.roles === undefined) {
+      // eslint-disable-next-line no-param-reassign
+      user.roles = ["ROLE_USER"];
+    }
+    return this.connection
+      .query(
+        `insert into ${this.table} (firstname, lastname, email, password, roles) VALUES (?, ?, ?, ?, ?)`,
+        [
+          user.firstname,
+          user.lastname,
+          user.email,
+          await passwordHasher(user.password),
+          JSON.stringify(user.roles),
+        ]
+      )
+      .then(async ([rowsUser]) => {
+        const specialistInsert = async () =>
+          this.connection.query(`insert into specialist (user_id) VALUES (?)`, [
+            rowsUser.insertId,
+          ]);
+
+        const result = await specialistInsert();
+        return result;
+      })
+      .then((rows) => {
         return {
           status: 201,
           message: {
