@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useMemo } from "react";
 import PropTypes from "prop-types";
 import useLocalStorage from "../components/LocalStorage/UseLocalStorage";
 
@@ -10,20 +10,14 @@ export function CurrentUserContextProvider({ children }) {
   const [user, setUser] = useLocalStorage("user", {});
   const [token, setToken] = useLocalStorage("token", "");
 
-  const [currentUser, setCurrentUser] = useState([]);
-  const [profileUser, setProfileUser] = useLocalStorage("profileUser", {});
   const foo = useMemo(
     () => ({
       user,
       setUser,
       token,
       setToken,
-      currentUser,
-      setCurrentUser,
-      profileUser,
-      setProfileUser,
     }),
-    []
+    [user]
   );
 
   return (
