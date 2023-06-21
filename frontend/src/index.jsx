@@ -2,6 +2,7 @@ import Dashboard from "./pages/Dashboard";
 import App from "./App";
 import LoginPage from "./pages/LoginPage";
 import AdminUsers from "./components/AdminUsers";
+import PatientForm from "./pages/PatientForm";
 
 const Routes = [
   {
@@ -20,6 +21,10 @@ const Routes = [
       {
         path: "login",
         element: <LoginPage />,
+      },
+      {
+        path: "patient-form",
+        element: <PatientForm />,
       },
     ],
   },

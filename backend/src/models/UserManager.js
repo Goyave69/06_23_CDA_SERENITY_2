@@ -68,8 +68,15 @@ class UserManager extends AbstractManager {
       });
   }
 
-  update(data, id) {
+  async update(body, id) {
     let sqlQuery = `UPDATE ${this.table} SET `;
+
+    // v Because of ESLint
+    const data = body;
+
+    if (data.password) {
+      data.password = await passwordHasher(data.password);
+    }
 
     const keys = Object.keys(data);
     for (const key in keys) {
@@ -93,6 +100,7 @@ class UserManager extends AbstractManager {
     sqlQuery += ` WHERE id = ?`;
 
     const bodyResponse = { id, ...data };
+    delete bodyResponse.password;
 
     return this.connection
       .query(sqlQuery, sqlData)

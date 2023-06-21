@@ -58,14 +58,14 @@ INSERT INTO `serenity`.`specialist_has_intervention` (`specialist_id`, `interven
 (2, 2),
 (3, 3);
 
--- Insertions pour la table `serenity`.`specialty`
-INSERT INTO `serenity`.`specialty` (`name`) VALUES
-('Specialty 1'),
-('Specialty 2'),
-('Specialty 3');
+-- Insertions pour la table `serenity`.`speciality`
+INSERT INTO `serenity`.`speciality` (`name`) VALUES
+('Speciality 1'),
+('Speciality 2'),
+('Speciality 3');
 
--- Insertions pour la table `serenity`.`specialist_has_specialty`
-INSERT INTO `serenity`.`specialist_has_specialty` (`specialist_id`, `specialty_id`) VALUES
+-- Insertions pour la table `serenity`.`specialist_has_speciality`
+INSERT INTO `serenity`.`specialist_has_speciality` (`specialist_id`, `speciality_id`) VALUES
 (1, 1),
 (2, 2),
 (3, 3);

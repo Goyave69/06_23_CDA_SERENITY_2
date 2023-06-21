@@ -8,10 +8,14 @@ const updatePatientFormController = require("../controllers/patientFormControlle
 const readPatientForm = require("../controllers/patientFormControllers/ReadPatientFormController");
 const deletePatientFormController = require("../controllers/patientFormControllers/DeletePatientFormController");
 
+const readPatientFormByUserIdController = require("../controllers/patientFormControllers/ReadPatientFormByUserIdController");
+
 router.get("/", readPatientForm);
 router.get("/:id", readOnePatientFormController);
 router.put("/:id", updatePatientFormController);
 router.post("/", createPatientFormController);
 router.delete("/:id", deletePatientFormController);
+
+router.get("/user/:id", readPatientFormByUserIdController);
 
 module.exports = router;
