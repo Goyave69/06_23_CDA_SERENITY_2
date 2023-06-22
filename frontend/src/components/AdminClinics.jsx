@@ -1,13 +1,25 @@
 import React from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridDeleteIcon } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import { IconButton, Tooltip } from "@mui/material";
 import axios from "axios";
 
 function AdminClinics({ clinics, setClinics }) {
+  const handleDeleteClinic = (clinicId) => {
+    axios
+      .delete(`http://localhost:5000/clinics/${clinicId}`)
+      .then((res) => {
+        console.warn(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   const handleCellEditCommit = React.useCallback((e) => {
     const {
       id,
-
       name,
       address,
       free_parking,
@@ -29,6 +41,7 @@ function AdminClinics({ clinics, setClinics }) {
           zipcode,
         })
         .then(() => {
+          console.warn("ok");
           axios
             .get(`http://localhost:5000/clinics`)
             .then((res) => setClinics(res.data));
@@ -63,6 +76,22 @@ function AdminClinics({ clinics, setClinics }) {
       headerName: "Parking gratuit",
       width: 150,
       editable: true,
+      renderCell: (params) => (
+        <Select
+          value={params.row.free_parking} // Utilisez params.row.free_parking au lieu de params.value
+          onChange={(event) =>
+            params.api.setEditCellValue(
+              params.id,
+              params.field,
+              event.target.value
+            )
+          }
+          fullWidth
+        >
+          <MenuItem value="oui">Oui</MenuItem>
+          <MenuItem value="non">Non</MenuItem>
+        </Select>
+      ),
     },
     {
       field: "handicap_access",
@@ -81,6 +110,24 @@ function AdminClinics({ clinics, setClinics }) {
       headerName: "Code postal",
       sortable: false,
       width: 160,
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 150,
+      sortable: false,
+      renderCell: (params) => (
+        <div>
+          <Tooltip title="Supprimer le cabinet" arrow>
+            <IconButton
+              color="error"
+              onClick={() => handleDeleteClinic(params.row.id)}
+            >
+              <GridDeleteIcon />
+            </IconButton>
+          </Tooltip>
+        </div>
+      ),
     },
   ];
 
