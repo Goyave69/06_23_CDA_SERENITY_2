@@ -1,8 +1,9 @@
+
 -- Insert into `user`
-INSERT INTO `serenity`.`user` (`id`, `firstname`, `lastname`, `email`, `password`, `roles`) 
-VALUES 
-(1, 'John', 'Doe', 'john.doe@example.com', 'password123', '{"roles": ["user"]}'),
-(2, 'Jane', 'Doe', 'jane.doe@example.com', 'password123', '{"roles": ["user"]}');
+INSERT INTO `serenity`.`user` (`id`, `firstname`, `lastname`, `email`, `address`, `city`, `zipcode`, `phone_number`, `password`, `roles`)
+VALUES
+(1, 'John', 'Doe', 'john.doe@example.com', '123 Main Street', 'New York', '10001', '555-1234', 'password123', '{"roles": ["user"]}'),
+(2, 'Jane', 'Doe', 'jane.doe@example.com', '456 Elm Street', 'Los Angeles', '90001', '555-5678', 'password123', '{"roles": ["user"]}');
 
 -- Insert into `clinic`
 INSERT INTO `serenity`.`clinic` (`id`, `name`, `address`, `city`, `zipcode`, `phone_number`, `email`, `handicap_access`, `free_parking`) 
@@ -11,7 +12,7 @@ VALUES
 (2, 'Clinic 2', '456 Main St', 'Anytown', '12345', '555-555-5555', 'clinic2@example.com', 0, 1);
 
 -- Insertions pour la table `serenity`.`intervention`
-INSERT INTO `serenity`.`intervention` (`name`, `anesthesia`, `duration`, `location_body`, `user_id`, `clinic_id`) VALUES
+INSERT INTO `serenity`.`intervention` (`name`, `anaesthesia`, `duration`, `location_body`, `user_id`, `clinic_id`) VALUES
 ('Intervention 1', 1, NULL, 1, 1, 1),
 ('Intervention 2', 0, '02:30:00', 2, 2, 2),
 ('Intervention 3', 1, '01:15:00', 3, 3, 3);
@@ -35,7 +36,7 @@ VALUES
 (2, 2, '08:00:00', '17:00:00', 1);
 
 -- Insert into `check_list`
-INSERT INTO `serenity`.`check_list` (`id`, `identity_card`, `vital_card`, `blue_card`, `anesthesia_appointment`, `appointment_id`) 
+INSERT INTO `serenity`.`check_list` (`id`, `identity_card`, `vital_card`, `blue_card`, `anaesthesia_appointment`, `appointment_id`) 
 VALUES 
 (1, 1, 1, 1, 1, 1),
 (2, 1, 1, 1, 1, 2);

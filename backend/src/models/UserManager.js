@@ -38,12 +38,17 @@ class UserManager extends AbstractManager {
   async insert(user) {
     return this.connection
       .query(
-        `insert into ${this.table} (firstname, lastname, email, password, roles) VALUES (?, ?, ?, ?, ?)`,
+        `INSERT INTO ${this.table} (firstname, lastname, email, address, city, zipcode, phone_number, password, roles) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           user.firstname,
           user.lastname,
           user.email,
+          user.address,
+          user.city,
+          user.zipcode,
+          user.phone_number,
           await passwordHasher(user.password),
+
           JSON.stringify(user.roles),
         ]
       )
