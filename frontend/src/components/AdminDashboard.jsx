@@ -5,7 +5,7 @@ import AdminSpecialists from "./AdminSpecialists";
 import AdminClinics from "./AdminClinics";
 
 function AdminDashboard({ specialists, users, clinics, setUsers, setClinics }) {
-  const [manageUsers, setManageUsers] = useState(false);
+  const [manageUsers, setManageUsers] = useState(true);
   const [manageSpecialists, setManageSpecialists] = useState(false);
   const [manageClinics, setManageClinics] = useState(false);
   const boxStyle = {
@@ -49,7 +49,7 @@ function AdminDashboard({ specialists, users, clinics, setUsers, setClinics }) {
             color="black"
             onClick={handleMangeSpecialists}
           >
-            Parcticien
+            Practicien
           </Typography>
           <Typography variant="p">{specialists.length}</Typography>
         </Box>

@@ -1,8 +1,21 @@
 import React from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridDeleteIcon } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
+import { IconButton, Tooltip } from "@mui/material";
+import axios from "axios";
 
-function AdminSpecialists({ specialists, users }) {
+function AdminSpecialists({ specialists }) {
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:5000/specialists/${id}`)
+      .then((res) => {
+        console.warn(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
@@ -23,34 +36,47 @@ function AdminSpecialists({ specialists, users }) {
       width: 250,
       editable: true,
     },
+
     {
-      field: "roles",
-      headerName: "Roles",
-      width: 150,
+      field: "name",
+      headerName: "Specialité",
+      width: 250,
       editable: true,
     },
     {
-      field: "fullName",
-      headerName: "Full name",
-      description: "This column has a value getter and is not sortable.",
+      field: "c_name",
+      headerName: "Cabinet",
+      width: 250,
+      editable: true,
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 150,
       sortable: false,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+      renderCell: (params) => (
+        <div>
+          <Tooltip title="Supprimer" arrow>
+            <IconButton
+              color="error"
+              onClick={() => handleDelete(params.row.id)}
+            >
+              <GridDeleteIcon />
+            </IconButton>
+          </Tooltip>
+        </div>
+      ),
     },
   ];
 
-  const rows = users
-    .filter((user) =>
-      specialists.some((specialist) => specialist.user_id === user.id)
-    )
-    .map((user, index) => ({
-      id: index + 1,
-      lastName: user.lastname,
-      firstName: user.firstname,
-      email: user.email,
-      roles: user.roles,
-    }));
+  const rows = specialists.map((specialist, index) => ({
+    id: index + 1,
+    lastName: specialist.lastname,
+    firstName: specialist.firstname,
+    email: specialist.email,
+    name: specialist.name,
+    c_name: specialist.c_name,
+  }));
 
   return (
     <Box sx={{ height: 631, maxWidth: "100%", mt: 2 }}>

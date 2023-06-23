@@ -8,8 +8,10 @@ function AdminUsers({ users, setUsers }) {
   const handleDeleteUser = (userId) => {
     axios
       .delete(`http://localhost:5000/users/${userId}`)
-      .then((res) => {
-        console.warn(res);
+      .then(() => {
+        axios
+          .get(`http://localhost:5000/users`)
+          .then((res) => setUsers(res.data));
       })
       .catch((error) => {
         console.error(error);
@@ -99,7 +101,7 @@ function AdminUsers({ users, setUsers }) {
     lastName: user.lastname,
     firstName: user.firstname,
     email: user.email,
-    roles: user.roles,
+    roles: user.roles[0].role,
   }));
 
   return (
