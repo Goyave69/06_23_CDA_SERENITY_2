@@ -32,6 +32,7 @@ function Dashboard() {
         </Typography>
         <AdminDashboard
           specialists={specialists}
+          setSpecialists={setSpecialists}
           users={users}
           clinics={clinics}
           setUsers={setUsers}

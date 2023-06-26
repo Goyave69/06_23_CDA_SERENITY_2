@@ -4,7 +4,32 @@ import Box from "@mui/material/Box";
 import { IconButton, Tooltip } from "@mui/material";
 import axios from "axios";
 
-function AdminSpecialists({ specialists }) {
+function AdminSpecialists({ specialists, setSpecialists }) {
+  const handleCellEditCommit = React.useCallback((e) => {
+    const { id, firstname, lastname, name, c_name, email } = e;
+
+    try {
+      axios
+        .put(`http://localhost:5000/specialists/${id}`, {
+          id,
+          firstname,
+          lastname,
+          name,
+          c_name,
+          email,
+        })
+        .then(() => {
+          console.warn("ok");
+          axios
+            .get(`http://localhost:5000/specialists`)
+            .then((res) => setSpecialists(res.data));
+        });
+    } catch (error) {
+      console.error(error);
+    }
+    return e;
+  }, []);
+
   const handleDelete = (id) => {
     axios
       .delete(`http://localhost:5000/specialists/${id}`)
@@ -85,8 +110,7 @@ function AdminSpecialists({ specialists }) {
         columns={columns}
         pagination
         pageSize={10}
-        checkboxSelection
-        disableSelectionOnClick
+        processRowUpdate={handleCellEditCommit}
       />
     </Box>
   );

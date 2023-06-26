@@ -101,7 +101,7 @@ function AdminUsers({ users, setUsers }) {
     lastName: user.lastname,
     firstName: user.firstname,
     email: user.email,
-    roles: user.roles[0].role,
+    roles: user.roles,
   }));
 
   return (
