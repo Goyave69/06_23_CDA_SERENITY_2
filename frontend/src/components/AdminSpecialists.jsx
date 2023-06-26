@@ -8,6 +8,9 @@ function AdminSpecialists({ specialists, setSpecialists }) {
   const handleCellEditCommit = React.useCallback((e) => {
     const { id, firstname, lastname, name, c_name, email } = e;
 
+    // Si le champ "c_name" existe, effectuez une requête PUT pour mettre à jour le nom de la clinique
+
+    // Effectuez une requête PUT pour mettre à jour les autres données du spécialiste
     try {
       axios
         .put(`http://localhost:5000/specialists/${id}`, {
@@ -19,7 +22,7 @@ function AdminSpecialists({ specialists, setSpecialists }) {
           email,
         })
         .then(() => {
-          console.warn("ok");
+          console.warn("Mise à jour réussie");
           axios
             .get(`http://localhost:5000/specialists`)
             .then((res) => setSpecialists(res.data));
@@ -27,6 +30,7 @@ function AdminSpecialists({ specialists, setSpecialists }) {
     } catch (error) {
       console.error(error);
     }
+
     return e;
   }, []);
 

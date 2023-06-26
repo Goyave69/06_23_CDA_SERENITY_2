@@ -24,8 +24,8 @@ class SpecialistManager extends AbstractManager {
       .query(
         `
         SELECT clinic.name as c_name, user.firstname, user.lastname, user.email, speciality.name 
-        FROM user
-        JOIN specialist ON specialist.user_id = user.id
+        FROM specialist
+        JOIN user ON specialist.user_id = user.id
         JOIN specialist_has_speciality ON specialist.id = specialist_has_speciality.specialist_id
         JOIN speciality ON specialist_has_speciality.speciality_id = speciality.id
         JOIN clinic_has_specialist ON specialist.id = clinic_has_specialist.specialist_id
