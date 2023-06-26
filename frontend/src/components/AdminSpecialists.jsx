@@ -4,41 +4,42 @@ import Box from "@mui/material/Box";
 import { IconButton, Tooltip } from "@mui/material";
 import axios from "axios";
 
-function AdminUsers({ users, setUsers }) {
-  const handleDeleteUser = (userId) => {
-    axios
-      .delete(`http://localhost:5000/users/${userId}`)
-      .then(() => {
-        axios
-          .get(`http://localhost:5000/users`)
-          .then((res) => setUsers(res.data));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+function AdminSpecialists({ specialists, setSpecialists }) {
   const handleCellEditCommit = React.useCallback((e) => {
-    const { id, email, firstName, lastName, roles } = e;
+    const { id, firstname, lastname, name, c_name, email } = e;
 
     try {
       axios
-        .put(`http://localhost:5000/users/${id}`, {
+        .put(`http://localhost:5000/specialists/${id}`, {
           id,
+          firstname,
+          lastname,
+          name,
+          c_name,
           email,
-          firstName,
-          lastName,
-          roles,
         })
         .then(() => {
+          console.warn("ok");
           axios
-            .get(`http://localhost:5000/users`)
-            .then((res) => setUsers(res.data));
+            .get(`http://localhost:5000/specialists`)
+            .then((res) => setSpecialists(res.data));
         });
     } catch (error) {
       console.error(error);
     }
     return e;
   }, []);
+
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:5000/specialists/${id}`)
+      .then((res) => {
+        console.warn(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
@@ -60,21 +61,18 @@ function AdminUsers({ users, setUsers }) {
       width: 250,
       editable: true,
     },
+
     {
-      field: "roles",
-      headerName: "Roles",
-      width: 150,
+      field: "name",
+      headerName: "Specialité",
+      width: 250,
       editable: true,
     },
     {
-      field: "fullName",
-      headerName: "Full name",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      editable: false,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+      field: "c_name",
+      headerName: "Cabinet",
+      width: 250,
+      editable: true,
     },
     {
       field: "actions",
@@ -83,10 +81,10 @@ function AdminUsers({ users, setUsers }) {
       sortable: false,
       renderCell: (params) => (
         <div>
-          <Tooltip title="Supprimer l'utilisateur" arrow>
+          <Tooltip title="Supprimer" arrow>
             <IconButton
               color="error"
-              onClick={() => handleDeleteUser(params.row.id)}
+              onClick={() => handleDelete(params.row.id)}
             >
               <GridDeleteIcon />
             </IconButton>
@@ -96,27 +94,26 @@ function AdminUsers({ users, setUsers }) {
     },
   ];
 
-  const rows = users.map((user) => ({
-    id: user.id,
-    lastName: user.lastname,
-    firstName: user.firstname,
-    email: user.email,
-    roles: user.roles,
+  const rows = specialists.map((specialist, index) => ({
+    id: index + 1,
+    lastName: specialist.lastname,
+    firstName: specialist.firstname,
+    email: specialist.email,
+    name: specialist.name,
+    c_name: specialist.c_name,
   }));
 
   return (
     <Box sx={{ height: 631, maxWidth: "100%", mt: 2 }}>
       <DataGrid
-        editMode="row"
         rows={rows}
         columns={columns}
         pagination
-        processRowUpdate={handleCellEditCommit}
-        onProcessRowUpdateError={(e) => console.warn(e)}
         pageSize={10}
+        processRowUpdate={handleCellEditCommit}
       />
     </Box>
   );
 }
 
-export default AdminUsers;
+export default AdminSpecialists;

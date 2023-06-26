@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Typography, TextField, Button, Box } from "@mui/material";
 import jwt_decode from "jwt-decode";
-import ApiHelper from "@services/ApiHelper";
+import ApiHelper from "../services/ApiHelper";
 import { useCurrentUserContext } from "../Context/UserContext";
 
 function LoginPage() {
