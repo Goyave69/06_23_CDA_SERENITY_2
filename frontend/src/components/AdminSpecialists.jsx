@@ -6,20 +6,30 @@ import axios from "axios";
 
 function AdminSpecialists({ specialists, setSpecialists }) {
   const handleCellEditCommit = React.useCallback((e) => {
-    const { id, firstname, lastname, name, c_name, email } = e;
+    const { id, firstname, lastname, name, c_id, c_name, email } = e;
 
     // Si le champ "c_name" existe, effectuez une requête PUT pour mettre à jour le nom de la clinique
-
-    // Effectuez une requête PUT pour mettre à jour les autres données du spécialiste
+    if (e.c_name) {
+      axios
+        .put(`http://localhost:5000/specialists/clinic/${id}`, {
+          clinic_id: c_id,
+        })
+        .then(() => {
+          console.warn("Mise à jour réussie");
+          axios
+            .get(`http://localhost:5000/specialists`)
+            .then((res) => setSpecialists(res.data));
+        });
+      return e.c_name;
+    }
     try {
       axios
         .put(`http://localhost:5000/specialists/${id}`, {
-          id,
           firstname,
           lastname,
           name,
-          c_name,
           email,
+          c_name,
         })
         .then(() => {
           console.warn("Mise à jour réussie");
@@ -79,6 +89,12 @@ function AdminSpecialists({ specialists, setSpecialists }) {
       editable: true,
     },
     {
+      field: "c_id",
+      headerName: "Cabinet id",
+      width: 100,
+      editable: true,
+    },
+    {
       field: "actions",
       headerName: "Actions",
       width: 150,
@@ -105,6 +121,7 @@ function AdminSpecialists({ specialists, setSpecialists }) {
     email: specialist.email,
     name: specialist.name,
     c_name: specialist.c_name,
+    c_id: specialist.c_id,
   }));
 
   return (
