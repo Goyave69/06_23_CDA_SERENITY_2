@@ -8,16 +8,43 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import { Icon } from "@mui/material";
 
 import { NavLink } from "react-router-dom/dist";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 import CardMedia from "@mui/material/CardMedia";
 
 import UserInfo from "./UserInfo";
+import { useCurrentUserContext } from "../Context/UserContext";
 
 const drawerWidth = 240;
 
+const drawerItems = [
+  {
+    key: "Dashboard",
+    link: "/dashboard",
+    icon: DashboardCustomizeIcon,
+  },
+];
+
+const drawerAdmin = [
+  {
+    key: "Praticiens",
+    link: "/gestion-praticiens",
+    icon: DashboardCustomizeIcon,
+  },
+];
+
+const drawerUser = [
+  {
+    key: "User",
+    link: "/user",
+    icon: DashboardCustomizeIcon,
+  },
+];
+
 export default function Navigation() {
+  const { user } = useCurrentUserContext();
   return (
     <Box>
       <Drawer
@@ -64,7 +91,47 @@ export default function Navigation() {
         </Toolbar>
         <Divider />
         <List>
-          <ListItem key="Dashboard">
+          {drawerItems.map((item) => (
+            <ListItem key={item.key}>
+              <NavLink to={item.link}>
+                <ListItemButton
+                  sx={{ borderRadius: "12px", width: drawerWidth - 40 }}
+                >
+                  <Icon component={item.icon} />
+                  <ListItemText primary={item.key} sx={{ ml: 1 }} />
+                </ListItemButton>
+              </NavLink>
+            </ListItem>
+          ))}
+          {user.roles && user.roles.includes("ROLE_USER")
+            ? drawerUser.map((item) => (
+                <ListItem key={item.key}>
+                  <NavLink to={item.link}>
+                    <ListItemButton
+                      sx={{ borderRadius: "12px", width: drawerWidth - 40 }}
+                    >
+                      <Icon component={item.icon} />
+                      <ListItemText primary={item.key} sx={{ ml: 1 }} />
+                    </ListItemButton>
+                  </NavLink>
+                </ListItem>
+              ))
+            : null}
+          {user.roles && user.roles.includes("ROLE_ADMIN")
+            ? drawerAdmin.map((item) => (
+                <ListItem key={item.key}>
+                  <NavLink to={item.link}>
+                    <ListItemButton
+                      sx={{ borderRadius: "12px", width: drawerWidth - 40 }}
+                    >
+                      <Icon component={item.icon} />
+                      <ListItemText primary={item.key} sx={{ ml: 1 }} />
+                    </ListItemButton>
+                  </NavLink>
+                </ListItem>
+              ))
+            : null}
+          {/* <ListItem key="Dashboard">
             <NavLink to="/dashboard">
               <ListItemButton>
                 <DashboardCustomizeIcon />
