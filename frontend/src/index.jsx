@@ -2,6 +2,7 @@ import PraticienForm from "./components/PraticienForm";
 import Dashboard from "./pages/Dashboard";
 import App from "./App";
 import LoginPage from "./pages/LoginPage";
+import AdminUsers from "./components/AdminUsers";
 import PatientForm from "./pages/PatientForm";
 import Praticiens from "./pages/Praticiens";
 
@@ -14,6 +15,11 @@ const Routes = [
         path: "dashboard",
         element: <Dashboard />,
       },
+      {
+        path: "manage-users",
+        element: <AdminUsers />,
+      },
+
       {
         path: "login",
         element: <LoginPage />,

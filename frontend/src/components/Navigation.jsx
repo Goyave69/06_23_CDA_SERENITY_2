@@ -73,7 +73,7 @@ export default function Navigation() {
             </NavLink>
           </ListItem>
           <ListItem key="Praticiens">
-            <NavLink to="/add-praticien">
+            <NavLink to="/gestion-praticiens">
               <ListItemButton>
                 <DashboardCustomizeIcon />
                 <ListItemText primary="Praticiens" sx={{ ml: 1 }} />
