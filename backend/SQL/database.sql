@@ -22,9 +22,13 @@ CREATE TABLE IF NOT EXISTS `serenity`.`user` (
   `firstname` VARCHAR(70) NOT NULL,
   `lastname` VARCHAR(70) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
+  `address` VARCHAR(255) NOT NULL,
+  `city` VARCHAR(255) NOT NULL,
+  `zipcode` VARCHAR(45) NOT NULL,
+  `phone_number` VARCHAR(45) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `roles` JSON NOT NULL,
+  `roles` JSON NOT NULL ,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
@@ -50,13 +54,15 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
+
+
 -- -----------------------------------------------------
 -- Table `serenity`.`intervention`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `serenity`.`intervention` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
-  `anesthesia` INT NOT NULL,
+  `anaesthesia` INT NOT NULL,
   `duration` TIME NULL DEFAULT NULL,
   `location_body` INT NOT NULL,
   `user_id` INT NOT NULL,
@@ -104,6 +110,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 CREATE TABLE IF NOT EXISTS `serenity`.`specialist` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
+
   PRIMARY KEY (`id`, `user_id`),
   INDEX `fk_specialist_user1_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_specialist_user1`

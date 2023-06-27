@@ -29,8 +29,8 @@ const drawerItems = [
 
 const drawerAdmin = [
   {
-    key: "Admin",
-    link: "/admin",
+    key: "Praticiens",
+    link: "/gestion-praticiens",
     icon: DashboardCustomizeIcon,
   },
 ];
@@ -138,7 +138,24 @@ export default function Navigation() {
                 <ListItemText primary="Dashboard" sx={{ ml: 1 }} />
               </ListItemButton>
             </NavLink>
-          </ListItem> */}
+          </ListItem>
+          <ListItem key="Praticiens">
+            <NavLink to="/gestion-praticiens">
+              <ListItemButton>
+                <DashboardCustomizeIcon />
+                <ListItemText primary="Praticiens" sx={{ ml: 1 }} />
+              </ListItemButton>
+            </NavLink>
+          </ListItem>
+          {/* Ajouter la liste si dessous commentée en adaptant pour crée un lien sur la navigation */}
+          {/* <ListItem key="login">
+            <NavLink to="/login">
+              <ListItemButton>
+                <DashboardCustomizeIcon />
+                <ListItemText primary="login" sx={{ ml: 1 }} />
+              </ListItemButton> */}
+          {/* </NavLink> */}
+          {/* </ListItem> */}
         </List>
       </Drawer>
       <UserInfo />

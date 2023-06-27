@@ -50,12 +50,9 @@ function AdminDashboard({
         <Box
           sx={boxStyle}
           border={manageSpecialists ? "2px solid #00B8AB" : null}
+          onClick={handleMangeSpecialists}
         >
-          <Typography
-            variant="h4"
-            color="black"
-            onClick={handleMangeSpecialists}
-          >
+          <Typography variant="h4" color="black">
             Practicien
           </Typography>
           <Typography variant="p">{specialists.length}</Typography>
