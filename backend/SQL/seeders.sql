@@ -1,8 +1,11 @@
 -- Insertions pour la table `serenity`.`user`
 INSERT INTO `serenity`.`user` (`firstname`, `lastname`, `email`, `password`, `created_at`, `roles`) VALUES
-('Alice', 'Smith', 'alice.smith@example.com', 'password123', '2023-06-08 12:00:00', '{"role": "user"}'),
-('Bob', 'Johnson', 'bob.johnson@example.com', 'password456', '2023-06-08 13:00:00', '{"role": "user"}'),
-('Charlie', 'Brown', 'charlie.brown@example.com', 'password789', '2023-06-08 14:00:00', '{"role": "user"}');
+('Alice', 'Smith', 'alice.smith@example.com', '$argon2id$v=19$m=65536,t=3,p=4$S/jParJAIny6cxKTN7T54g$IZykcIK48nESE00ud1fy3mCfvNya/zHuwvTkl3CWmlc', '2023-06-08 12:00:00', '["ROLE_USER"]'),
+('Bob', 'Johnson', 'bob.johnson@example.com', '$argon2id$v=19$m=65536,t=3,p=4$WERaEYwgLXd8d3l7qJlE0Q$9QewYMWeCIg+Fbj66efohpA7JZhLB5q8MTfkVS408yg', '2023-06-08 13:00:00', '["ROLE_USER"]'),
+('Charlie', 'Brown', 'charlie.brown@example.com', '$argon2id$v=19$m=65536,t=3,p=4$ExENtD5LZWvfx45UyFADFQ$WdudY+XcFXjCFBmKuWHLNGndeLTFTZwWCpyqzEwy3WQ', '2023-06-08 14:00:00', '["ROLE_USER"]');
+-- Password User 1: password123
+-- Password User 2: password456
+-- Password User 3: password789
 
 -- Insertions pour la table `serenity`.`clinic`
 INSERT INTO `serenity`.`clinic` (`name`, `address`, `city`, `zipcode`, `phone_number`, `email`, `handicap_access`, `free_parking`) VALUES
