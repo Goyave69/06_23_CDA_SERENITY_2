@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `serenity`.`check_list` (
   `identity_card` TINYINT NOT NULL DEFAULT 0,
   `vital_card` TINYINT NOT NULL DEFAULT 0,
   `blue_card` TINYINT NOT NULL DEFAULT 0,
-  `anesthesia_appointment` TINYINT NOT NULL DEFAULT 0,
+  `anaesthesia_appointment` TINYINT NOT NULL DEFAULT 0,
   `appointment_id` INT NOT NULL,
   PRIMARY KEY (`id`, `appointment_id`),
   INDEX `fk_check_list_appointment1_idx` (`appointment_id` ASC) VISIBLE,
