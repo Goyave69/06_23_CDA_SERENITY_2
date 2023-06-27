@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { DataGrid, GridDeleteIcon } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import Select from "@mui/material/Select";
@@ -17,7 +17,7 @@ function AdminClinics({ clinics, setClinics }) {
         console.error(error);
       });
   };
-  const handleCellEditCommit = React.useCallback((e) => {
+  const handleCellEditCommit = useCallback((e) => {
     const {
       id,
       name,

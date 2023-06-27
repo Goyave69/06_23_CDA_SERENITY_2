@@ -1,44 +1,41 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { DataGrid, GridDeleteIcon } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import { IconButton, Tooltip } from "@mui/material";
-import axios from "axios";
+import ApiHelper from "../services/ApiHelper";
 
 function AdminSpecialists({ specialists, setSpecialists }) {
-  const handleCellEditCommit = React.useCallback((e) => {
+  const handleCellEditCommit = useCallback((e) => {
     const { id, firstname, lastname, name, c_name, email } = e;
 
-    try {
-      axios
-        .put(`http://localhost:5000/specialists/${id}`, {
-          id,
-          firstname,
-          lastname,
-          name,
-          c_name,
-          email,
-        })
-        .then(() => {
-          console.warn("ok");
-          axios
-            .get(`http://localhost:5000/specialists`)
-            .then((res) => setSpecialists(res.data));
-        });
-    } catch (error) {
-      console.error(error);
-    }
+    ApiHelper(
+      `specialists/${id}`,
+      "PUT",
+      JSON.stringify({
+        id,
+        firstname,
+        lastname,
+        name,
+        c_name,
+        email,
+      })
+    )
+      .then(() => {
+        console.warn("ok");
+        ApiHelper("specialists", "GET")
+          .then((res) => res.json())
+          .then((data) => setSpecialists(data))
+          .catch((error) => console.error(error));
+      })
+      .catch((error) => console.error(error));
+
     return e;
   }, []);
 
   const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:5000/specialists/${id}`)
-      .then((res) => {
-        console.warn(res);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    ApiHelper(`specialists/${id}`, "DELETE")
+      .then((res) => console.warn(res))
+      .catch((error) => console.error(error));
   };
 
   const columns = [
@@ -81,7 +78,7 @@ function AdminSpecialists({ specialists, setSpecialists }) {
       sortable: false,
       renderCell: (params) => (
         <div>
-          <Tooltip title="Supprimer" arrow>
+          <Tooltip title="Supprimer le praticien" arrow>
             <IconButton
               color="error"
               onClick={() => handleDelete(params.row.id)}

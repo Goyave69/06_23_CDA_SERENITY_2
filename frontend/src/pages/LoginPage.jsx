@@ -15,24 +15,33 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const body = JSON.stringify({
+    // create data object with email and password
+    const data = JSON.stringify({
       email,
       password,
     });
 
+    // make sure email and password are not empty
     if (email && password) {
-      await ApiHelper("login", "POST", body)
+      // send data object to login endpoint
+      await ApiHelper("login", "POST", data)
         .then((response) => response.json())
         .then((result) => {
+          // decode token to get user data
           const { user } = jwt_decode(result.token);
 
+          // set user state
           setUser(user);
+          // set token state
           setToken(result.token);
         })
         .then(() => {
+          // redirect to dashboard
           navigate("/dashboard");
         })
-        .catch(() => {});
+        .catch((error) => {
+          console.error(error);
+        });
     }
   };
 

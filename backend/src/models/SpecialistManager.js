@@ -22,15 +22,12 @@ class SpecialistManager extends AbstractManager {
   findAll() {
     return this.connection
       .query(
-        `
-        SELECT clinic.name as c_name, user.firstname, user.lastname, user.email, speciality.name 
-        FROM user
-        JOIN specialist ON specialist.user_id = user.id
-        JOIN specialist_has_speciality ON specialist.id = specialist_has_speciality.specialist_id
-        JOIN speciality ON specialist_has_speciality.speciality_id = speciality.id
-        JOIN clinic_has_specialist ON specialist.id = clinic_has_specialist.specialist_id
-        JOIN clinic ON clinic_has_specialist.clinic_id = clinic.id;
-  `
+        `SELECT u.firstname, u.lastname, u.email, u.address, u.city, u.zipcode, u.phone_number, u.password, u.created_at, u.roles
+        FROM user AS u
+        JOIN specialist AS s ON u.id = s.user_id;
+        
+    
+     `
       )
 
       .then(([rows]) => {
