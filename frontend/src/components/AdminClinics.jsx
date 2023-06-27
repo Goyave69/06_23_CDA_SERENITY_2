@@ -1,8 +1,6 @@
 import React from "react";
 import { DataGrid, GridDeleteIcon } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 import { IconButton, Tooltip } from "@mui/material";
 import axios from "axios";
 
@@ -74,30 +72,26 @@ function AdminClinics({ clinics, setClinics }) {
     {
       field: "free_parking",
       headerName: "Parking gratuit",
-      width: 150,
+      sortable: false,
+      width: 160,
       editable: true,
-      renderCell: (params) => (
-        <Select
-          value={params.row.free_parking} // Utilisez params.row.free_parking au lieu de params.value
-          onChange={(event) =>
-            params.api.setEditCellValue(
-              params.id,
-              params.field,
-              event.target.value
-            )
-          }
-          fullWidth
-        >
-          <MenuItem value="oui">Oui</MenuItem>
-          <MenuItem value="non">Non</MenuItem>
-        </Select>
-      ),
+      type: "singleSelect",
+      valueOptions: [
+        { value: "oui", label: "Oui" },
+        { value: "non", label: "Non" },
+      ],
     },
     {
       field: "handicap_access",
       headerName: "Accé handi",
       sortable: false,
       width: 160,
+      editable: true,
+      type: "singleSelect",
+      valueOptions: [
+        { value: "oui", label: "Oui" },
+        { value: "non", label: "Non" },
+      ],
     },
     {
       field: "phone_number",
