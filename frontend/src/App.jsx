@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { Box } from "@mui/material";
 import "./App.css";
 import Navigation from "./components/Navigation";
 import CurrentUserContext, {
@@ -9,8 +10,18 @@ function App() {
   const { user } = useCurrentUserContext(CurrentUserContext);
   return (
     <div>
-      {user.email ? <Navigation /> : null}
-      <Outlet />
+      <Box sx={{ display: { xs: "none", sm: "initial" } }}>
+        <Navigation />
+      </Box>
+      <Box
+        sx={{
+          marginLeft: { sm: 30 },
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Outlet />
+      </Box>
     </div>
   );
 }

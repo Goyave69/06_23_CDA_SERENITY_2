@@ -62,7 +62,7 @@ function AdminDashboard({
           onClick={handleMangeUsers}
           border={manageUsers ? "2px solid #00B8AB" : null}
         >
-          <Typography variant="h4" color="black">
+          <Typography variant="h4" class="text-red-600">
             Users
           </Typography>
           <Typography variant="p">{users.length}</Typography>
