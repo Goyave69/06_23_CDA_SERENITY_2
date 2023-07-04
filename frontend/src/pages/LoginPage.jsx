@@ -6,11 +6,19 @@ import ApiHelper from "../services/ApiHelper";
 import { useCurrentUserContext } from "../Context/UserContext";
 
 function LoginPage() {
-  const { setUser, setToken } = useCurrentUserContext();
+  const { user, setUser, setToken } = useCurrentUserContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+
+  if (user.roles) {
+    if (user.roles === "ROLE_USER") {
+      navigate("/patient");
+    } else {
+      navigate("/dashboard");
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,16 +36,12 @@ function LoginPage() {
         .then((response) => response.json())
         .then((result) => {
           // decode token to get user data
-          const { user } = jwt_decode(result.token);
+          const { user: connectUser } = jwt_decode(result.token);
 
           // set user state
-          setUser(user);
+          setUser(connectUser);
           // set token state
           setToken(result.token);
-        })
-        .then(() => {
-          // redirect to dashboard
-          navigate("/dashboard");
         })
         .catch((error) => {
           console.error(error);
