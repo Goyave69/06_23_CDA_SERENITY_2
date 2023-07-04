@@ -37,8 +37,8 @@ const drawerAdmin = [
 
 const drawerUser = [
   {
-    key: "User",
-    link: "/user",
+    key: "Patient",
+    link: "/patient",
     icon: DashboardCustomizeIcon,
   },
 ];

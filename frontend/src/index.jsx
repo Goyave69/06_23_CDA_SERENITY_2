@@ -1,3 +1,9 @@
+import PatientNavigation from "@components/PatientNavigation";
+import InfoOp from "@pages/InfoOp";
+import Administrative from "@pages/Administrative";
+import ArrivalQuiz from "@pages/ArrivalQuiz";
+import TakeRDV from "@pages/TakeRDV";
+import Checklist from "@pages/Checklist";
 import PraticienForm from "./components/PraticienForm";
 import Dashboard from "./pages/Dashboard";
 import App from "./App";
@@ -21,8 +27,30 @@ const Routes = [
       },
 
       {
-        path: "login",
-        element: <LoginPage />,
+        path: "patient/",
+        element: <PatientNavigation />,
+        children: [
+          {
+            path: "info-op",
+            element: <InfoOp />,
+          },
+          {
+            path: "administrative",
+            element: <Administrative />,
+          },
+          {
+            path: "quiz",
+            element: <ArrivalQuiz />,
+          },
+          {
+            path: "take-rdv",
+            element: <TakeRDV />,
+          },
+          {
+            path: "checklist",
+            element: <Checklist />,
+          },
+        ],
       },
       {
         path: "gestion-praticiens",
@@ -37,6 +65,10 @@ const Routes = [
         element: <PatientForm />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
   },
 ];
 
