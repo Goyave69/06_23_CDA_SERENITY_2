@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 -- Insertions pour la table `serenity`.`user`
 INSERT INTO `serenity`.`user` (`firstname`, `lastname`, `email`, `password`, `created_at`, `roles`) VALUES
 ('Alice', 'Smith', 'alice.smith@example.com', '$argon2id$v=19$m=65536,t=3,p=4$S/jParJAIny6cxKTN7T54g$IZykcIK48nESE00ud1fy3mCfvNya/zHuwvTkl3CWmlc', '2023-06-08 12:00:00', '["ROLE_USER"]'),
@@ -8,7 +6,6 @@ INSERT INTO `serenity`.`user` (`firstname`, `lastname`, `email`, `password`, `cr
 -- Password User 1: password123
 -- Password User 2: password456
 -- Password User 3: password789
->>>>>>> dev
 
 -- Insert into `user`
 INSERT INTO `serenity`.`user` (`id`, `firstname`, `lastname`, `email`, `address`, `city`, `zipcode`, `phone_number`, `password`, `roles`)

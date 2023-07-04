@@ -34,10 +34,12 @@ function PraticienForm() {
       firstname: "",
       email: "",
       password: "",
+      address: "",
+      city: "",
+      zipcode: "",
+      phone_number: "",
     },
     specialist: {
-      phone_number: "",
-      address: "",
       specialities: "",
       languages: "",
       bio: "",
@@ -223,7 +225,6 @@ function PraticienForm() {
                       value={formData.user.lastname}
                       onChange={handleChange}
                       fullWidth
-                      focused
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -233,76 +234,63 @@ function PraticienForm() {
                       value={formData.user.firstname}
                       onChange={handleChange}
                       fullWidth
-                      focused
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <TextField
-                      label="Téléphone"
-                      name="phone_number"
-                      value={formData.user.phone}
-                      onChange={handleChange}
-                      fullWidth
-                      focused
                     />
                   </Grid>
                   <Grid item xs={6}>
                     <TextField
                       label="Adresse"
-                      name="address"
+                      name="user.address"
+                      value={formData.specialist.address}
                       onChange={handleChange}
                       fullWidth
-                      focused
                     />
                   </Grid>
                   <Grid item xs={6}>
                     <TextField
-                      label="Spécialité"
-                      name="specialities"
-                      value={formData.user.specialities}
+                      label="Code Postale"
+                      name="user.zipcode"
+                      value={formData.user.zipcode}
                       onChange={handleChange}
                       fullWidth
-                      focused
                     />
                   </Grid>
                   <Grid item xs={6}>
                     <TextField
-                      label="Langues parlées"
-                      name="languages"
-                      value={formData.user.languages}
+                      label="Téléphone"
+                      name="user.phone_number"
+                      value={formData.user.phone_number}
                       onChange={handleChange}
                       fullWidth
-                      focused
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      label="Adresse Email"
+                      name="user.email"
+                      value={formData.user.email}
+                      onChange={handleChange}
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      label="Mot de passe"
+                      name="user.password"
+                      type="password"
+                      value={formData.user.password}
+                      onChange={handleChange}
+                      fullWidth
                     />
                   </Grid>{" "}
                   <Grid item xs={6}>
                     <TextField
-                      label="Spécialité"
-                      name="specialities"
-                      value={formData.user.specialities}
-                      onChange={handleChange}
+                      label="Confirmation Mot de passe"
+                      type="password"
                       fullWidth
-                      focused
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <TextField
-                      label="Langues parlées"
-                      name="languages"
-                      value={formData.user.languages}
-                      onChange={handleChange}
-                      fullWidth
-                      focused
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
-                      label="Bio"
-                      multiline
-                      rows={6}
-                      fullWidth
-                      focused
-                    />
+                    <TextField label="Bio" multiline rows={6} fullWidth />
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
@@ -310,7 +298,6 @@ function PraticienForm() {
                       multiline
                       rows={6}
                       fullWidth
-                      focused
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -319,7 +306,6 @@ function PraticienForm() {
                       multiline
                       rows={6}
                       fullWidth
-                      focused
                     />
                   </Grid>{" "}
                   <Grid item xs={12}>
@@ -353,7 +339,7 @@ function PraticienForm() {
               </Box>
             </div>
           )}
-          {currentForm === "password" && (
+          {/*      {currentForm === "password" && (
             <Box style={{ display: "flex", flexDirection: "column" }}>
               <TextField
                 label="Mot de passe"
@@ -389,7 +375,7 @@ function PraticienForm() {
                 sx={{ width: "50%" }}
               />
             </Box>
-          )}
+          )} */}
           <Button type="submit" variant="contained" sx={Style.ButtonSave}>
             Créer le Praticien
           </Button>
