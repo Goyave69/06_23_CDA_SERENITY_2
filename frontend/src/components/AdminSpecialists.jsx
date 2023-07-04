@@ -5,8 +5,27 @@ import { IconButton, Tooltip } from "@mui/material";
 import ApiHelper from "../services/ApiHelper";
 
 function AdminSpecialists({ specialists, setSpecialists }) {
+  console.log(specialists);
   const handleCellEditCommit = useCallback((e) => {
     const { id, firstname, lastname, name, c_name, email } = e;
+    const { c_id } = c;
+
+    console.log(e);
+    if (c.c_id) {
+      ApiHelper(
+        `specialists/clinic/${id}`,
+        "PUT",
+        JSON.stringify({
+          c_id,
+        })
+      ).then(() => {
+        console.warn("ok");
+        ApiHelper("specialists", "GET")
+          .then((res) => res.json())
+          .then((data) => setSpecialists(data))
+          .catch((error) => console.error(error));
+      });
+    }
 
     ApiHelper(
       `specialists/${id}`,
@@ -21,7 +40,6 @@ function AdminSpecialists({ specialists, setSpecialists }) {
       })
     )
       .then(() => {
-        console.warn("ok");
         ApiHelper("specialists", "GET")
           .then((res) => res.json())
           .then((data) => setSpecialists(data))
