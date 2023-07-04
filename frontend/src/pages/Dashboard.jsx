@@ -25,20 +25,18 @@ function Dashboard() {
   }, []);
 
   return (
-    <Box ml={30}>
-      <Box>
-        <Typography variant="h3" color="initial" sx={{ m: 5, ml: 6 }}>
-          {user.firstname ? `Bonjour ${user.firstname}` : null}
-        </Typography>
-        <AdminDashboard
-          specialists={specialists}
-          setSpecialists={setSpecialists}
-          users={users}
-          clinics={clinics}
-          setUsers={setUsers}
-          setClinics={setClinics}
-        />
-      </Box>
+    <Box>
+      <Typography variant="h3" color="initial" sx={{ m: 5, ml: 6 }}>
+        {user.firstname ? `Bonjour ${user.firstname}` : null}
+      </Typography>
+      <AdminDashboard
+        specialists={specialists}
+        setSpecialists={setSpecialists}
+        users={users}
+        clinics={clinics}
+        setUsers={setUsers}
+        setClinics={setClinics}
+      />
     </Box>
   );
 }
