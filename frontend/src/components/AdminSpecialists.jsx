@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import { DataGrid, GridDeleteIcon } from "@mui/x-data-grid";
-import Box from "@mui/material/Box";
 import { IconButton, Tooltip } from "@mui/material";
 import ApiHelper from "../services/ApiHelper";
 
@@ -91,25 +90,88 @@ function AdminSpecialists({ specialists, setSpecialists }) {
     },
   ];
 
-  const rows = specialists.map((specialist, index) => ({
-    id: index + 1,
-    lastName: specialist.lastname,
-    firstName: specialist.firstname,
-    email: specialist.email,
-    name: specialist.name,
-    c_name: specialist.c_name,
-  }));
-
   return (
-    <Box sx={{ height: 631, maxWidth: "100%", mt: 2 }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pagination
-        pageSize={10}
-        processRowUpdate={handleCellEditCommit}
-      />
-    </Box>
+    <div className="flex flex-col mt-8 max-w-full overflow-x-auto">
+      <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  {[
+                    "ID",
+                    "First name",
+                    "Last name",
+                    "Email",
+                    "Specialité",
+                    "Cabinet",
+                    "Cabinet id",
+                    "Actions",
+                  ].map((header) => (
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {specialists.map((specialist) => (
+                  <tr key={specialist.id}>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">
+                        {specialist.id + 1}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">
+                        {specialist.firstname}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">
+                        {specialist.lastname}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">
+                        {specialist.email}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">
+                        {specialist.name}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">
+                        {specialist.c_name}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">
+                        {specialist.c_id}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(specialist.id)}
+                        className="text-red-600 hover:text-red-900"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
