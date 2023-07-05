@@ -10,18 +10,8 @@ function App() {
   const { user } = useCurrentUserContext(CurrentUserContext);
   return (
     <div>
-      <Box sx={{ display: { xs: "none", sm: "initial" } }}>
-        <Navigation />
-      </Box>
-      <Box
-        sx={{
-          marginLeft: { sm: 30 },
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <Outlet />
-      </Box>
+      {user.email ? <Navigation /> : null}
+      <Outlet />
     </div>
   );
 }

@@ -11,9 +11,10 @@ function AdminDashboard({
   clinics,
   setUsers,
   setClinics,
+  speciality,
 }) {
-  const [manageUsers, setManageUsers] = useState(true);
-  const [manageSpecialists, setManageSpecialists] = useState(false);
+  const [manageUsers, setManageUsers] = useState(false);
+  const [manageSpecialists, setManageSpecialists] = useState(true);
   const [manageClinics, setManageClinics] = useState(false);
   const boxStyle = {
     width: "30%",
@@ -55,17 +56,19 @@ function AdminDashboard({
           <Typography variant="h4" color="black">
             Practicien
           </Typography>
-          <Typography variant="p">{specialists.length}</Typography>
+          <Typography variant="p">
+            {specialists ? specialists.length : 0}
+          </Typography>
         </Box>
         <Box
           sx={boxStyle}
           onClick={handleMangeUsers}
           border={manageUsers ? "2px solid #00B8AB" : null}
         >
-          <Typography variant="h4" class="text-red-600">
+          <Typography variant="h4" className="text-red-600">
             Users
           </Typography>
-          <Typography variant="p">{users.length}</Typography>
+          <Typography variant="p">{users ? users.length : 0}</Typography>
         </Box>
         <Box
           sx={boxStyle}
@@ -75,7 +78,7 @@ function AdminDashboard({
           <Typography variant="h4" color="black">
             Cabinets
           </Typography>
-          <Typography variant="p">{clinics.length}</Typography>
+          <Typography variant="p">{clinics ? clinics.length : 0}</Typography>
         </Box>
       </Box>
       {manageUsers ? <AdminUsers users={users} setUsers={setUsers} /> : null}
@@ -84,6 +87,8 @@ function AdminDashboard({
           specialists={specialists}
           setSpecialists={setSpecialists}
           users={users}
+          clinics={clinics}
+          speciality={speciality}
         />
       ) : null}
       {manageClinics ? (
