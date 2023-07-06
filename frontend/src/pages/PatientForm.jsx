@@ -17,8 +17,8 @@ import { useCurrentUserContext } from "../Context/UserContext";
 
 function PatientForm() {
   const { user, token } = useCurrentUserContext();
-  const [formMethod, setFormMethod] = useState("POST");
-  const [formId, setFormId] = useState(0);
+  // const [formMethod, setFormMethod] = useState("POST");
+  // const [formId, setFormId] = useState(0);
   const [patientForm, setPatientForm] = useState({
     gender: "",
     birthdate: "",
@@ -33,42 +33,38 @@ function PatientForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user.id) {
-      ApiHelper(`patient-form/user/${user.id}`, "GET", null, token)
-        .then((response) => {
-          if (response.status !== 200) {
-            throw new Error("Not found");
-          }
-          return response.json();
-        })
-        .then((result) => {
-          const { id, user_id, ...data } = result;
-          setFormMethod("PUT");
-          setPatientForm({ ...data });
-          setFormId(id);
-        })
-        .catch(() => {});
-    }
+    ApiHelper(`users/${user.id}`, "GET", null, token)
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error("Not found");
+        }
+        return response.json();
+      })
+      .then((result) => {
+        setPatientForm({
+          gender: result.gender || "",
+          birthdate: result.birthdate || "",
+          family_situation: result.family_situation || "",
+          child: result.child || 0,
+          city: result.city || "",
+          address: result.address || "",
+          zipcode: result.zipcode || "",
+          country: result.country || "",
+        });
+      })
+      .catch(() => {});
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault(e);
 
-    const body = JSON.stringify({
-      ...patientForm,
-      user_id: user.id,
-    });
+    const body = JSON.stringify(patientForm);
 
-    let route = "patient-form";
-    if (formMethod === "PUT") {
-      route += `/${formId}`;
-    }
-
-    await ApiHelper(route, formMethod, body, token)
+    await ApiHelper(`users/${user.id}`, "PUT", body, token)
       .then((response) => response.status)
       .then((status) => {
         if (status === 201) {
-          navigate("/dashboard");
+          navigate("/patient");
         }
       })
       .catch(() => {});
