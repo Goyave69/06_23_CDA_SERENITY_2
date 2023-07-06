@@ -33,6 +33,16 @@ const drawerAdmin = [
     link: "/gestion-praticiens",
     icon: DashboardCustomizeIcon,
   },
+  {
+    key: "Cabinets",
+    link: "/gestion-cabinets",
+    icon: DashboardCustomizeIcon,
+  },
+  {
+    key: "Interventions",
+    link: "/gestion-interventions",
+    icon: DashboardCustomizeIcon,
+  },
 ];
 
 const drawerUser = [

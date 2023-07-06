@@ -1,9 +1,11 @@
-import PatientNavigation from "@components/PatientNavigation";
-import InfoOp from "@pages/InfoOp";
-import Administrative from "@pages/Administrative";
-import ArrivalQuiz from "@pages/ArrivalQuiz";
-import TakeRDV from "@pages/TakeRDV";
-import Checklist from "@pages/Checklist";
+import PatientNavigation from "./components/PatientNavigation";
+import InfoOp from "./pages/InfoOp";
+import Administrative from "./pages/Administrative";
+import ArrivalQuiz from "./pages/ArrivalQuiz";
+import TakeRDV from "./pages/TakeRDV";
+import Checklist from "./pages/Checklist";
+import Interventions from "./pages/Interventions";
+import Clinic from "./pages/Clinic";
 import PraticienForm from "./components/PraticienForm";
 import Dashboard from "./pages/Dashboard";
 import App from "./App";
@@ -61,8 +63,16 @@ const Routes = [
         element: <PraticienForm />,
       },
       {
+        path: "gestion-cabinets",
+        element: <Clinic />,
+      },
+      {
         path: "patient-form",
         element: <PatientForm />,
+      },
+      {
+        path: "gestion-interventions",
+        element: <Interventions />,
       },
     ],
   },

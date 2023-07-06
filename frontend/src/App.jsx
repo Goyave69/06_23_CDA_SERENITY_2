@@ -10,8 +10,16 @@ function App() {
   const { user } = useCurrentUserContext(CurrentUserContext);
   return (
     <div>
-      {user.email ? <Navigation /> : null}
-      <Outlet />
+      {user.email && <Box sx={{ display: { xs: "none", sm: "initial" } }}>
+        <Navigation />
+      </Box>}
+      <Box
+        sx={{
+          marginLeft: { sm: 30 },
+        }}
+      >
+        <Outlet />
+      </Box>
     </div>
   );
 }
