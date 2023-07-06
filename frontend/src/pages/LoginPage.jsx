@@ -13,7 +13,7 @@ function LoginPage() {
   const navigate = useNavigate();
 
   if (user.roles) {
-    if (user.roles === "ROLE_USER") {
+    if (user.roles === 1) {
       navigate("/patient");
     } else {
       navigate("/dashboard");

@@ -34,7 +34,7 @@ function Dashboard() {
         <Typography variant="h3" color="initial" sx={{ m: 5, ml: 6 }}>
           {user.firstname ? `Bonjour ${user.firstname}` : null}
         </Typography>
-        {user.roles && user.roles.includes("ADMIN_ROLE") ? (
+        {user.roles && user.roles === 3 ? (
           <AdminDashboard
             specialists={specialists}
             setSpecialists={setSpecialists}

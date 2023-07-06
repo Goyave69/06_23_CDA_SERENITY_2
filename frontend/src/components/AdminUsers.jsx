@@ -38,7 +38,7 @@ function AdminUsers({ users, setUsers }) {
           email,
           firstName,
           lastName,
-          roles,
+          roles: parseInt(roles, 10),
         })
         .then(() => {
           axios
