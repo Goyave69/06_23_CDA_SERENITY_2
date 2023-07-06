@@ -8,7 +8,7 @@ class ClinicManager extends AbstractManager {
   insert(clinic) {
     return this.connection
       .query(
-        `insert into ${this.table} (name, address, city, zipcode, phone_number, email, handicap_access, free_parking) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        `insert into ${this.table} (name, address, city, zipcode, phone_number, email, handicap_access, free_parking, open_hours, close_hours) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           clinic.name,
           clinic.address,
@@ -18,6 +18,8 @@ class ClinicManager extends AbstractManager {
           clinic.email,
           clinic.handicap_access || 0,
           clinic.free_parking || 0,
+          clinic.open_hours,
+          clinic.close_hours,
         ]
       )
       .then(([rows]) => {
