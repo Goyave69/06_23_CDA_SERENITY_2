@@ -76,7 +76,7 @@ class UserManager extends AbstractManager {
   async insertSpecialist({ user }) {
     if (user.roles === undefined) {
       // eslint-disable-next-line no-param-reassign
-      user.roles = ["ROLE_USER"];
+      user.roles = 2;
     }
     return this.connection
       .query(

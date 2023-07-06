@@ -12,8 +12,6 @@ function App() {
       <Box
         sx={{
           marginLeft: { sm: 30 },
-          display: "flex",
-          justifyContent: "center",
         }}
       >
         <Outlet />

@@ -3,6 +3,7 @@ import Avatar from "@mui/material/Avatar";
 import { Button, Stack, Grid, TextField, Box } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { useNavigate } from "react-router-dom";
 import CurrentUserContext, {
   useCurrentUserContext,
 } from "../Context/UserContext";
@@ -27,6 +28,7 @@ function PraticienForm() {
   const { user } = useCurrentUserContext(CurrentUserContext);
   const [currentForm, setCurrentForm] = useState("profil");
   const [praticiens, setPraticiens] = useState([]);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     user: {
@@ -52,36 +54,18 @@ function PraticienForm() {
   });
 
   const Style = {
-    HelloDoctor: {
-      position: "absolute",
-      width: "580px",
-      height: "99px",
-      left: "317px",
-      top: "48px",
-    },
+    HelloDoctor: {},
 
     FormContainer: {
-      position: "relative",
-      width: "1024px",
-      height: "2341px",
-      left: "356px",
-      top: "299px",
+      display: "flex",
+      justifyContent: "center",
+
+      width: "80%",
+
       // backgroundColor: "#242731",
     },
-    FormSection: {
-      position: "relative",
-      width: "647px",
-      height: "100px",
-      left: "356px",
-      top: "377px",
-    },
-    GroupButtonsSection: {
-      position: "relative",
-      width: "647px",
-      height: "100px",
-      left: "356px",
-      top: "300px",
-    },
+    FormSection: {},
+    GroupButtonsSection: {},
 
     SegmentPhoto2: {
       display: "flex",
@@ -136,6 +120,7 @@ function PraticienForm() {
         .then((response) => response.json())
         .then((data) => {
           setPraticiens(data);
+          navigate("/dashboard");
         });
     }
   };
@@ -143,9 +128,9 @@ function PraticienForm() {
   console.warn(praticiens);
 
   return (
-    <div>
-      <h2 style={Style.HelloDoctor}>Bonjour Docteur {user.firstname}</h2>
-      <div style={Style.GroupButtonsSection}>
+    <div className="mb-5">
+      <h2 className="font-bold text-3xl">Bonjour Docteur {user.firstname}</h2>
+      <div style={Style.GroupButtonsSection} className=" ml-[9rem]">
         <ThemeProvider theme={theme}>
           <Stack
             display="block"
@@ -187,7 +172,7 @@ function PraticienForm() {
         </ThemeProvider>
       </div>
       <div>
-        <form onSubmit={handleSubmit} style={Style.FormContainer}>
+        <form style={Style.FormContainer} className="mx-auto h-auto">
           {currentForm === "profil" && (
             <div>
               <div style={Style.SegmentPhoto1}>
@@ -218,7 +203,7 @@ function PraticienForm() {
                 }}
               >
                 <Grid container spacing={2} sx={{ marginTop: "50px" }}>
-                  <Grid item xs={6}>
+                  <Grid item xs={5}>
                     <TextField
                       label="Nom"
                       name="user.lastname"
@@ -227,7 +212,7 @@ function PraticienForm() {
                       fullWidth
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={5}>
                     <TextField
                       label="Prénom"
                       name="user.firstname"
@@ -236,7 +221,7 @@ function PraticienForm() {
                       fullWidth
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={5}>
                     <TextField
                       label="Adresse"
                       name="user.address"
@@ -245,7 +230,7 @@ function PraticienForm() {
                       fullWidth
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={5}>
                     <TextField
                       label="Code Postale"
                       name="user.zipcode"
@@ -254,7 +239,7 @@ function PraticienForm() {
                       fullWidth
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={5}>
                     <TextField
                       label="Téléphone"
                       name="user.phone_number"
@@ -263,7 +248,7 @@ function PraticienForm() {
                       fullWidth
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={5}>
                     <TextField
                       label="Adresse Email"
                       name="user.email"
@@ -272,7 +257,7 @@ function PraticienForm() {
                       fullWidth
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={5}>
                     <TextField
                       label="Mot de passe"
                       name="user.password"
@@ -282,57 +267,11 @@ function PraticienForm() {
                       fullWidth
                     />
                   </Grid>{" "}
-                  <Grid item xs={6}>
+                  <Grid item xs={5}>
                     <TextField
                       label="Confirmation Mot de passe"
                       type="password"
                       fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField label="Bio" multiline rows={6} fullWidth />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      label="Diplômes Nationaux et universitaire"
-                      multiline
-                      rows={6}
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      label="Autres Formations"
-                      multiline
-                      rows={6}
-                      fullWidth
-                    />
-                  </Grid>{" "}
-                  <Grid item xs={12}>
-                    <TextField
-                      label="Expériences"
-                      multiline
-                      rows={6}
-                      fullWidth
-                      focused
-                    />
-                  </Grid>{" "}
-                  <Grid item xs={12}>
-                    <TextField
-                      label="Travaux et publications"
-                      multiline
-                      rows={6}
-                      fullWidth
-                      focused
-                    />
-                  </Grid>{" "}
-                  <Grid item xs={12}>
-                    <TextField
-                      label="Distinctions et prix"
-                      multiline
-                      rows={6}
-                      fullWidth
-                      focused
                     />
                   </Grid>
                 </Grid>
@@ -376,10 +315,14 @@ function PraticienForm() {
               />
             </Box>
           )} */}
-          <Button type="submit" variant="contained" sx={Style.ButtonSave}>
-            Créer le Praticien
-          </Button>
         </form>
+
+        <button
+          type="button"
+          className="text-center whitespace-nowrap text-sm font-['Inter'] font-bold leading-[20px] text-white ml-[8rem]  bg-[#6c5dd3] flex flex-col justify-center h-12 shrink-0 items-stretch px-5 rounded-lg "
+        >
+          Ajouter le Praticien
+        </button>
       </div>
     </div>
   );

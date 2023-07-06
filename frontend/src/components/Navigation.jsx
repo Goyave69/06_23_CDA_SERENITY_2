@@ -33,6 +33,16 @@ const drawerAdmin = [
     link: "/gestion-praticiens",
     icon: DashboardCustomizeIcon,
   },
+  {
+    key: "Cabinets",
+    link: "/gestion-cabinets",
+    icon: DashboardCustomizeIcon,
+  },
+  {
+    key: "Interventions",
+    link: "/gestion-interventions",
+    icon: DashboardCustomizeIcon,
+  },
 ];
 
 const drawerUser = [
@@ -103,7 +113,7 @@ export default function Navigation() {
               </NavLink>
             </ListItem>
           ))}
-          {user.roles && user.roles.includes("ROLE_USER")
+          {user.roles && user.roles === 1
             ? drawerUser.map((item) => (
                 <ListItem key={item.key}>
                   <NavLink to={item.link}>
@@ -117,7 +127,7 @@ export default function Navigation() {
                 </ListItem>
               ))
             : null}
-          {user.roles && user.roles.includes("ROLE_ADMIN")
+          {user.roles && user.roles === 3
             ? drawerAdmin.map((item) => (
                 <ListItem key={item.key}>
                   <NavLink to={item.link}>
