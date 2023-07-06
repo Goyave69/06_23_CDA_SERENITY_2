@@ -1,21 +1,32 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { DataGrid, GridDeleteIcon } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import { IconButton, Tooltip } from "@mui/material";
 import axios from "axios";
+import ConfirmModal from "./ConfirmModal";
 
 function AdminUsers({ users, setUsers }) {
-  const handleDeleteUser = (userId) => {
-    axios
-      .delete(`http://localhost:5000/users/${userId}`)
-      .then(() => {
-        axios
-          .get(`http://localhost:5000/users`)
-          .then((res) => setUsers(res.data));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  const [confirm, setConfirm] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+
+  const handleDelete = (id) => {
+    setConfirm(true);
+    setDeleteId(id);
+  };
+
+  const deleteUser = (userId, confirmer) => {
+    if (confirmer) {
+      axios
+        .delete(`http://localhost:5000/users/${userId}`)
+        .then(() => {
+          axios
+            .get(`http://localhost:5000/users`)
+            .then((res) => setUsers(res.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
   const handleCellEditCommit = useCallback((e) => {
     const { id, email, firstName, lastName, roles } = e;
@@ -86,7 +97,7 @@ function AdminUsers({ users, setUsers }) {
           <Tooltip title="Supprimer l'utilisateur" arrow>
             <IconButton
               color="error"
-              onClick={() => handleDeleteUser(params.row.id)}
+              onClick={() => handleDelete(params.row.id)}
             >
               <GridDeleteIcon />
             </IconButton>
@@ -106,6 +117,13 @@ function AdminUsers({ users, setUsers }) {
 
   return (
     <Box sx={{ height: 631, maxWidth: "100%", mt: 2 }}>
+      {confirm && (
+        <ConfirmModal
+          setConfirm={setConfirm}
+          deleteId={deleteId}
+          handleDelete={deleteUser}
+        />
+      )}
       <DataGrid
         editMode="row"
         rows={rows}
