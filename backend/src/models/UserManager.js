@@ -9,7 +9,7 @@ class UserManager extends AbstractManager {
   find(id) {
     return this.connection
       .query(
-        `select firstname, lastname, email, roles from  ${this.table} where id = ?`,
+        `select firstname, lastname, email, roles, phone_number, gender, birthdate, address, city, zipcode, country, family_situation, child from  ${this.table} where id = ?`,
         [id]
       )
       .then(([rows]) => {
@@ -25,7 +25,9 @@ class UserManager extends AbstractManager {
 
   findAll() {
     return this.connection
-      .query(`select id,firstname, lastname, email, roles from  ${this.table}`)
+      .query(
+        `select id,firstname, lastname, email, roles, phone_number, gender, birthdate, address, city, zipcode, country, family_situation, child from  ${this.table}`
+      )
       .then(([rows]) => {
         return { status: 200, message: rows };
       })
@@ -38,18 +40,22 @@ class UserManager extends AbstractManager {
   async insert(user) {
     return this.connection
       .query(
-        `INSERT INTO ${this.table} (firstname, lastname, email, address, city, zipcode, phone_number, password, roles) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        `INSERT INTO ${this.table} (firstname, lastname, email, password, phone_number, address, city, zipcode, country, gender, birthdate, family_situation, child, roles) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           user.firstname,
           user.lastname,
           user.email,
+          await passwordHasher(user.password),
+          user.phone_number,
           user.address,
           user.city,
           user.zipcode,
-          user.phone_number,
-          await passwordHasher(user.password),
-
-          JSON.stringify(user.roles),
+          user.country,
+          user.gender,
+          user.birthdate,
+          user.family_situation,
+          user.child,
+          user.roles || 1,
         ]
       )
       .then((rows) => {
@@ -74,23 +80,24 @@ class UserManager extends AbstractManager {
   }
 
   async insertSpecialist({ user }) {
-    if (user.roles === undefined) {
-      // eslint-disable-next-line no-param-reassign
-      user.roles = ["ROLE_USER"];
-    }
     return this.connection
       .query(
-        `insert into ${this.table} (firstname, lastname, email, address, city, zipcode, phone_number, password, roles) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        `INSERT INTO ${this.table} (firstname, lastname, email, password, phone_number, address, city, zipcode, country, gender, birthdate, family_situation, child, roles) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           user.firstname,
           user.lastname,
           user.email,
+          await passwordHasher(user.password),
+          user.phone_number,
           user.address,
           user.city,
           user.zipcode,
-          user.phone_number,
-          await passwordHasher(user.password),
-          JSON.stringify(user.roles),
+          user.country,
+          user.gender,
+          user.birthdate,
+          user.family_situation,
+          user.child,
+          user.roles || 2,
         ]
       )
       .then(async ([rowsUser]) => {
