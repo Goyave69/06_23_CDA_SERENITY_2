@@ -1,19 +1,32 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { DataGrid, GridDeleteIcon } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import { IconButton, Tooltip } from "@mui/material";
 import axios from "axios";
+import ConfirmModal from "./ConfirmModal";
 
 function AdminClinics({ clinics, setClinics }) {
-  const handleDeleteClinic = (clinicId) => {
-    axios
-      .delete(`http://localhost:5000/clinics/${clinicId}`)
-      .then((res) => {
-        console.warn(res);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  const [confirm, setConfirm] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+
+  const handleDelete = (id) => {
+    setConfirm(true);
+    setDeleteId(id);
+  };
+
+  const deleteClinic = (clinicId, confirmer) => {
+    if (confirmer) {
+      axios
+        .delete(`http://localhost:5000/clinics/${clinicId}`)
+        .then(() => {
+          axios
+            .get("http://localhost:5000/clinics")
+            .then((res) => setClinics(res.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
   const handleCellEditCommit = useCallback((e) => {
     const {
@@ -30,7 +43,6 @@ function AdminClinics({ clinics, setClinics }) {
       axios
         .put(`http://localhost:5000/clinics/${id}`, {
           id,
-
           name,
           address,
           free_parking: free_parking === "oui" ? 1 : 0,
@@ -115,7 +127,7 @@ function AdminClinics({ clinics, setClinics }) {
           <Tooltip title="Supprimer le cabinet" arrow>
             <IconButton
               color="error"
-              onClick={() => handleDeleteClinic(params.row.id)}
+              onClick={() => handleDelete(params.row.id)}
             >
               <GridDeleteIcon />
             </IconButton>
@@ -137,17 +149,26 @@ function AdminClinics({ clinics, setClinics }) {
   }));
 
   return (
-    <Box sx={{ height: 631, maxWidth: "100%", mt: 2 }}>
-      <DataGrid
-        editMode="row"
-        rows={rows}
-        columns={columns}
-        pagination
-        processRowUpdate={handleCellEditCommit}
-        onProcessRowUpdateError={(e) => console.warn(e)}
-        pageSize={10}
-      />
-    </Box>
+    <>
+      {confirm && (
+        <ConfirmModal
+          setConfirm={setConfirm}
+          deleteId={deleteId}
+          handleDelete={deleteClinic}
+        />
+      )}
+      <Box sx={{ height: 631, maxWidth: "100%", mt: 2 }}>
+        <DataGrid
+          editMode="row"
+          rows={rows}
+          columns={columns}
+          pagination
+          processRowUpdate={handleCellEditCommit}
+          onProcessRowUpdateError={(e) => console.warn(e)}
+          pageSize={10}
+        />
+      </Box>
+    </>
   );
 }
 
