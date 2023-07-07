@@ -116,7 +116,7 @@ function Clinic() {
           className="self-center flex flex-col justify-start relative items-stretch"
         >
           <div className="bg-[#6c5dd3] flex flex-col justify-center relative h-12 shrink-0 items-stretch px-5 rounded-lg">
-            <NavLink to="/add-praticien">
+            <NavLink to="/add-clinic">
               <button
                 type="button"
                 className="text-center whitespace-nowrap text-sm font-['Inter'] font-bold leading-[20px] text-white ml-px relative"

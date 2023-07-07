@@ -13,6 +13,7 @@ import LoginPage from "./pages/LoginPage";
 import AdminUsers from "./components/AdminUsers";
 import PatientForm from "./pages/PatientForm";
 import Praticiens from "./pages/Praticiens";
+import AddClinic from "./components/AddClinic";
 
 const Routes = [
   {
@@ -61,6 +62,10 @@ const Routes = [
       {
         path: "add-praticien",
         element: <PraticienForm />,
+      },
+      {
+        path: "add-clinic",
+        element: <AddClinic />,
       },
       {
         path: "gestion-cabinets",

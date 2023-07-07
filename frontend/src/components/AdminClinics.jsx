@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import { IconButton, Tooltip } from "@mui/material";
 import axios from "axios";
 import ConfirmModal from "./ConfirmModal";
-import AddClinic from "./AddClinic";
 
 function AdminClinics({ clinics, setClinics }) {
   const [confirm, setConfirm] = useState(false);
@@ -169,7 +168,6 @@ function AdminClinics({ clinics, setClinics }) {
           pageSize={10}
         />
       </Box>
-      <AddClinic />
     </>
   );
 }
