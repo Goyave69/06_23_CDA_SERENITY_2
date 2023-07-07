@@ -138,7 +138,7 @@ function AdminClinics({ clinics, setClinics }) {
   ];
 
   const rows = clinics.map((clinic, index) => ({
-    id: index + 1,
+    id: clinic.id,
     name: clinic.name,
     address: clinic.address,
     email: clinic.email,
