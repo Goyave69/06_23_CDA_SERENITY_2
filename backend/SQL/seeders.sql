@@ -1,62 +1,84 @@
--- Table serenity.clinic
-INSERT INTO `serenity`.`clinic` (`id`, `name`, `address`, `city`, `zipcode`, `phone_number`, `email`, `handicap_access`, `free_parking`, `open_hours`, `close_hours`) VALUES
-(1, 'Clinic A', '123 Main Street', 'City A', '12345', '123-456-7890', 'clinicA@example.com', 1, 1, '08:00:00', '18:00:00'),
-(2, 'Clinic B', '456 Elm Street', 'City B', '67890', '987-654-3210', 'clinicB@example.com', 0, 1, '09:00:00', '17:00:00');
+-- Génération des fausses données pour la table check_list
+INSERT INTO check_list (name) VALUES
+  ('CheckList1'),
+  ('CheckList2');
 
--- Table serenity.user
-INSERT INTO `serenity`.`user` (`id`, `email`, `password`, `phone_number`, `firstname`, `lastname`, `gender`, `birthdate`, `address`, `city`, `zipcode`, `country`, `family_situation`, `child`, `created_at`, `roles`) VALUES
-(1, 'user1@example.com', '$argon2id$v=19$m=65536,t=3,p=4$iz5HhlXHVDbYEL/LbhHN+w$gDXco5nIM6i8DuM/1LNv1uDfQ7TQK53TIXKYH9AA5O4', '111-111-1111', 'John', 'Doe', 'Male', '1980-01-01', '789 Oak Street', 'City A', '12345', 'Country A', 'Married', 2, '2022-01-01 12:00:00', 1),
-(2, 'user2@example.com', '$argon2id$v=19$m=65536,t=3,p=4$O6U3Km+IxC3L8UyMa7JNOQ$V9woZss1q40pVGzglleMFaCjAfClyZHNLrD4+iuRH8I', '222-222-2222', 'Jane', 'Smith', 'Female', '1990-02-02', '987 Pine Street', 'City B', '67890', 'Country B', 'Single', 0, '2022-02-02 12:00:00', 2);
--- Password User 1: password1
--- Password User 2: password2
+-- Génération des fausses données pour la table clinic
+INSERT INTO clinic (name, address, city, zipcode, phone_number, email, handicap_access, free_parking, open_hours, close_hours) VALUES
+  ('Clinic1', '123 Main St', 'City1', '12345', '123-456-7890', 'clinic1@example.com', 1, 1, '08:00:00', '17:00:00'),
+  ('Clinic2', '456 Elm St', 'City2', '67890', '987-654-3210', 'clinic2@example.com', 0, 1, '09:00:00', '18:00:00');
 
--- Table serenity.intervention
-INSERT INTO `serenity`.`intervention` (`id`, `name`, `anaesthesia`, `duration`, `location_body`, `user_id`, `clinic_id`) VALUES
-(1, 'Intervention A', 1, '02:30:00', 1, 1, 1),
-(2, 'Intervention B', 0, '01:45:00', 2, 2, 2);
+-- Génération des fausses données pour la table user
+INSERT INTO user (email, password, roles, phone_number, firstname, lastname, gender, birthdate, address, city, zipcode, country, family_situation, child, created_at) VALUES
+  ('user1@example.com', 'password1', 1, '123-456-7890', 'John', 'Doe', 'Male', '1990-01-01', '123 Main St', 'City1', '12345', 'Country1', 'Married', 2, NOW()),
+  ('user2@example.com', 'password2', 2, '987-654-3210', 'Jane', 'Smith', 'Female', '1995-02-02', '456 Elm St', 'City2', '67890', 'Country2', 'Single', 0, NOW());
 
--- Table serenity.appointment
-INSERT INTO `serenity`.`appointment` (`id`, `date`, `type`, `user_id`, `intervention_id`) VALUES
-(1, '2022-05-01 10:00:00', 'Type A', 1, 1),
-(2, '2022-06-01 11:30:00', 'Type B', 2, 2);
+-- Génération des fausses données pour la table specialist
+INSERT INTO specialist (user_id) VALUES
+  (1),
+  (2);
 
--- Table serenity.check_list
-INSERT INTO `serenity`.`check_list` (`id`, `identity_card`, `vital_card`, `blue_card`, `anaesthesia_appointment`, `appointment_id`) VALUES
-(1, 1, 1, 0, 0, 1),
-(2, 1, 0, 0, 1, 2);
+-- Génération des fausses données pour la table clinic_has_specialist
+INSERT INTO clinic_has_specialist (clinic_id, specialist_id) VALUES
+  (1, 1),
+  (2, 2);
 
--- Table serenity.specialist
-INSERT INTO `serenity`.`specialist` (`id`, `user_id`) VALUES
-(1, 1),
-(2, 2);
+-- Génération des fausses données pour la table surgery
+INSERT INTO surgery (id, name, location) VALUES
+  (1, 'Surgery1', 'Location1'),
+  (2, 'Surgery2', 'Location2');
 
--- Table serenity.clinic_has_specialist
-INSERT INTO `serenity`.`clinic_has_specialist` (`clinic_id`, `specialist_id`) VALUES
-(1, 1),
-(2, 2);
+-- Génération des fausses données pour la table intervention
+INSERT INTO intervention (anaesthesia, date, duration, user_id, clinic_id, surgery_id) VALUES
+  (1, '2023-07-10', '02:30:00', 1, 1, 1),
+  (2, '2023-07-11', '01:45:00', 2, 2, 2);
 
--- Table serenity.steps_info
-INSERT INTO `serenity`.`steps_info` (`id`, `title`, `description`) VALUES
-(1, 'Step 1', 'Description of Step 1'),
-(2, 'Step 2', 'Description of Step 2'),
-(3, 'Step 3', 'Description of Step 3');
+-- Génération des fausses données pour la table steps_info
+INSERT INTO steps_info (title, description, surgery_id) VALUES
+  ('Step1', 'Description1', 1),
+  ('Step2', 'Description2', 2);
 
--- Table serenity.read_steps_info
-INSERT INTO `serenity`.`read_steps_info` (`id`, `is_checked`, `steps_info_id`, `intervention_id`) VALUES
-(1, 1, 1, 1),
-(2, 0, 2, 2);
+-- Génération des fausses données pour la table read_steps_info
+INSERT INTO read_steps_info (is_checked, steps_info_id, intervention_id) VALUES
+  (1, 1, 1),
+  (0, 2, 2);
 
--- Table serenity.specialist_has_intervention
-INSERT INTO `serenity`.`specialist_has_intervention` (`specialist_id`, `intervention_id`) VALUES
-(1, 1),
-(2, 2);
+-- Génération des fausses données pour la table speciality
+INSERT INTO speciality (name) VALUES
+  ('Speciality1'),
+  ('Speciality2');
 
--- Table serenity.speciality
-INSERT INTO `serenity`.`speciality` (`id`, `name`) VALUES
-(1, 'Speciality A'),
-(2, 'Speciality B');
+-- Génération des fausses données pour la table specialist_has_speciality
+INSERT INTO specialist_has_speciality (specialist_id, speciality_id) VALUES
+  (1, 1),
+  (2, 2);
 
--- Table serenity.specialist_has_speciality
-INSERT INTO `serenity`.`specialist_has_speciality` (`specialist_id`, `speciality_id`) VALUES
-(1, 1),
-(2, 2);
+-- Génération des fausses données pour la table specialist_has_intervention
+INSERT INTO specialist_has_intervention (specialist_id, intervention_id) VALUES
+  (1, 1),
+  (2, 2);
+
+-- Génération des fausses données pour la table arrival_preparation
+INSERT INTO arrival_preparation (title, description, image) VALUES
+  ('Preparation1', 'Description1', 'image1.jpg'),
+  ('Preparation2', 'Description2', 'image2.jpg');
+
+-- Génération des fausses données pour la table read_arrival_preparation
+INSERT INTO read_arrival_preparation (is_checked, intervention_id, arrival_preparation_id) VALUES
+  (1, 1, 1),
+  (0, 2, 2);
+
+-- Génération des fausses données pour la table done_check_list
+INSERT INTO done_check_list (is_checked, intervention_id, check_list_id) VALUES
+  (1, 1, 1),
+  (0, 2, 2);
+
+-- Génération des fausses données pour la table administrative
+INSERT INTO administrative (title) VALUES
+  ('Administrative1'),
+  ('Administrative2');
+
+-- Génération des fausses données pour la table done_administrative
+INSERT INTO done_administrative (is_checked, intervention_id, administrative_id) VALUES
+  (1, 1, 1),
+  (0, 2, 2);
