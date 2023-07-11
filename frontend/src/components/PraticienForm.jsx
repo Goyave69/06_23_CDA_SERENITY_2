@@ -318,6 +318,7 @@ function PraticienForm() {
         </form>
 
         <button
+          onClick={handleSubmit}
           type="button"
           className="text-center whitespace-nowrap text-sm font-['Inter'] font-bold leading-[20px] text-white ml-[8rem]  bg-[#6c5dd3] flex flex-col justify-center h-12 shrink-0 items-stretch px-5 rounded-lg "
         >

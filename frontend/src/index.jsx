@@ -1,3 +1,4 @@
+import PatientSignUp from "./pages/PatientSignUp";
 import PatientNavigation from "./components/PatientNavigation";
 import InfoOp from "./pages/InfoOp";
 import Administrative from "./pages/Administrative";
@@ -84,6 +85,10 @@ const Routes = [
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/sign-up",
+    element: <PatientSignUp />,
   },
 ];
 
