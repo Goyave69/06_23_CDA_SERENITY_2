@@ -5,6 +5,7 @@ import AdminDashboard from "../components/AdminDashboard";
 import CurrentUserContext, {
   useCurrentUserContext,
 } from "../Context/UserContext";
+import SpecialistDashboard from "../components/SpecialistDashboard";
 
 function Dashboard() {
   const { user } = useCurrentUserContext(CurrentUserContext);
@@ -35,15 +36,18 @@ function Dashboard() {
           {user.firstname ? `Bonjour ${user.firstname}` : null}
         </Typography>
         {user.roles && user.roles === 3 ? (
-          <AdminDashboard
-            specialists={specialists}
-            setSpecialists={setSpecialists}
-            users={users}
-            clinics={clinics}
-            setUsers={setUsers}
-            setClinics={setClinics}
-            speciality={speciality}
-          />
+          <>
+            <AdminDashboard
+              specialists={specialists}
+              setSpecialists={setSpecialists}
+              users={users}
+              clinics={clinics}
+              setUsers={setUsers}
+              setClinics={setClinics}
+              speciality={speciality}
+            />
+            <SpecialistDashboard user={user} clinics={clinics} />
+          </>
         ) : null}
       </Box>
     </Box>

@@ -43,7 +43,7 @@ function AdminSpecialists({
 
   const handleSaveEdit = async (id, updatedSpecialist) => {
     try {
-      const { firstname, lastname, email, clinic_id, speciality_id, name } =
+      const { firstname, lastname, email, clinic_id, speciality_id } =
         updatedSpecialist;
 
       await Promise.all([

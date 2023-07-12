@@ -8,11 +8,11 @@ class AppointmentManager extends AbstractManager {
   findAll() {
     return this.connection
       .query(
-        `SELECT i.*, a.date, u.firstname, u.lastname, u.email
-      FROM serenity.intervention i
-      JOIN serenity.appointment a ON i.id = a.intervention_id
-      JOIN serenity.user u ON a.user_id = u.id;
-      `
+        `SELECT appointment_fo_intervention.id,clinic.id as clinic_id, clinic.name as clinic_name, user.firstname,user.lastname,surgery.name, intervention.date, specialist_id ,intervention_id,speciality_id,intervention.user_id as user_id FROM appointment_fo_intervention
+        JOIN intervention ON appointment_fo_intervention.intervention_id=intervention.id
+        JOIN surgery ON intervention.surgery_id=surgery.id
+        JOIN user ON intervention.user_id=user.id
+        JOIN clinic ON intervention.clinic_id=clinic.id`
       )
       .then(([rows]) => {
         return { status: 200, message: rows };
