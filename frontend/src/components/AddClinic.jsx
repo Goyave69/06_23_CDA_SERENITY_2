@@ -11,8 +11,10 @@ import {
   Typography,
 } from "@mui/material";
 import { TimePicker } from "@mui/x-date-pickers";
+import { useNavigate } from "react-router-dom";
 
 function AddClinic({ setClinics }) {
+  const navigate = useNavigate();
   const [clinicData, setClinicData] = useState({
     name: "",
     address: "",
@@ -25,7 +27,6 @@ function AddClinic({ setClinics }) {
     open_hours: null,
     close_hours: null,
   });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setClinicData((prevState) => ({
@@ -33,14 +34,12 @@ function AddClinic({ setClinics }) {
       [name]: value,
     }));
   };
-
   const handleTimeChange = (name, time) => {
     setClinicData((prevState) => ({
       ...prevState,
       [name]: time ? time.toJSON().slice(11, 16) : null,
     }));
   };
-
   const handleSelectChange = (e) => {
     const { name, value } = e.target;
     setClinicData((prevState) => ({
@@ -48,7 +47,6 @@ function AddClinic({ setClinics }) {
       [name]: value === "oui",
     }));
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -66,12 +64,12 @@ function AddClinic({ setClinics }) {
           open_hours: null,
           close_hours: null,
         });
+        navigate("/dashboard");
       })
       .catch((error) => {
         console.error(error);
       });
   };
-
   return (
     <form
       onSubmit={handleSubmit}
@@ -188,7 +186,6 @@ function AddClinic({ setClinics }) {
           />
         </Box>
       </Box>
-
       <Button
         sx={{ width: 250, m: "auto" }}
         type="submit"
@@ -200,5 +197,4 @@ function AddClinic({ setClinics }) {
     </form>
   );
 }
-
 export default AddClinic;
