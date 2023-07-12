@@ -27,6 +27,7 @@
     "@mui/styled-engine-sc": "^5.12.0",
     "@mui/x-date-pickers": "^6.9.1",
     "argon2": "^0.30.3",
+    "moment": "^2.29.4",
     "styled-components": "^5.3.11"
   }
 }
