@@ -3,6 +3,7 @@ import moment from "moment";
 import "moment/locale/fr";
 import axios from "axios";
 import DateTimePicker from "react-datetime-picker";
+import "react-datetime-picker/dist/DateTimePicker.css";
 
 export default function specialistAppointement({
   appointements,
@@ -30,7 +31,7 @@ export default function specialistAppointement({
           speciality_id,
         }),
         axios.put(`http://localhost:5000/interventions/${intervention_id}`, {
-          date: moment(date).format("YYYY-MM-DD"),
+          date: moment(date).utc().format("YYYY-MM-DD HH:mm:ss"),
           clinic_id,
         }),
       ]);
@@ -85,22 +86,29 @@ export default function specialistAppointement({
                         {`${appointement.firstname} ${appointement.lastname}`}
                       </div>
                     </td>
-                    <td className="px-2 py-4 whitespace-nowrap">
+                    <td className="px-2 py-4 whitespace-nowrap ">
                       {!editMode ? (
-                        <div className="text-sm text-gray-900">
+                        <div className="text-sm text-gray-900 w-full">
                           {moment(appointement.date).format("LLL")}
                         </div>
                       ) : (
-                        <DateTimePicker
-                          disableCalendar
-                          value={moment(selectedappointement?.date).toDate()}
-                          onChange={(value) =>
-                            setSelectedappointement((prevState) => ({
-                              ...prevState,
-                              date: value,
-                            }))
-                          }
-                        />
+                        <div className="text-sm text-gray-900 w-full">
+                          <DateTimePicker
+                            disableClock
+                            disableCalendar
+                            value={moment
+                              .utc(selectedappointement?.date)
+                              .toDate()}
+                            onChange={(value) =>
+                              setSelectedappointement((prevState) => ({
+                                ...prevState,
+                                date: moment(value)
+                                  .utc()
+                                  .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+                              }))
+                            }
+                          />
+                        </div>
                       )}
                     </td>
                     <td className="px-2 py-4 whitespace-nowrap">
