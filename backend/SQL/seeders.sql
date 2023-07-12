@@ -30,8 +30,8 @@ INSERT INTO `serenity`.`surgery` (`id`, `name`, `location`) VALUES
 
 -- Insérer des données dans la table `intervention`
 INSERT INTO `serenity`.`intervention` (`id`, `anaesthesia`, `date`, `duration`, `user_id`, `clinic_id`, `surgery_id`) VALUES
-(1, 1, '2023-07-10', '02:00:00', 1, 1, 1),
-(2, 2, '2023-07-11', '01:30:00', 2, 2, 2);
+(1, 1, '2023-07-12 10:00:00', '02:00:00', 1, 1, 1),
+(2, 2, '2023-07-12 10:00:00', '01:30:00', 2, 2, 2);
 
 -- Insérer des données dans la table `steps_info`
 INSERT INTO `serenity`.`steps_info` (`id`, `title`, `description`, `surgery_id`) VALUES

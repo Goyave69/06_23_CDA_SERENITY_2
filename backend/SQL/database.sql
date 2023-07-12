@@ -130,7 +130,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `serenity`.`intervention` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `anaesthesia` INT NOT NULL,
-  `date` DATE NOT NULL,
+  `date` DATETIME NOT NULL,
   `duration` TIME NULL DEFAULT NULL,
   `user_id` INT NOT NULL,
   `clinic_id` INT NOT NULL,
