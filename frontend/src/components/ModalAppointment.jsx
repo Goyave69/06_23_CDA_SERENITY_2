@@ -1,9 +1,37 @@
+import axios from "axios";
 import moment from "moment";
 import React, { useState } from "react";
 import DateTimePicker from "react-datetime-picker";
 
-function ModalAppointment({ patient, clinics }) {
-  const [selectedappointement, setSelectedappointement] = useState(null);
+function ModalAppointment({
+  patient,
+  clinics,
+  interventions,
+  specialistId,
+  setModal,
+}) {
+  const [selectedappointement, setSelectedappointement] = useState([]);
+
+  const handleSubmit = () => {
+    const { clinic_id, date, intervention_id } = selectedappointement;
+    axios
+      .post(`http://localhost:5000/appointments`, {
+        date: moment(date).utc().format("YYYY-MM-DD HH:mm:ss"),
+        clinic_id,
+        intervention_id: intervention_id || 1,
+        speciality_id: 1,
+        specialist_id: specialistId,
+      })
+      .then(() => {
+        axios
+          .get("http://localhost:5000/appointments")
+          .then((res) => setSelectedappointement(res.data));
+        setModal(false);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   return (
     <div classNameName="absolute w-screen h-screen bg-black/25">
@@ -67,10 +95,30 @@ function ModalAppointment({ patient, clinics }) {
               </option>
             ))}
           </select>
+          <babel className="block text-gray-700 text-sm font-bold mb-2">
+            Intervention
+          </babel>
+          <select
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+            value={selectedappointement?.intervention_id || ""}
+            onChange={(e) =>
+              setSelectedappointement((prevState) => ({
+                ...prevState,
+                clinic_id: e.target.value,
+              }))
+            }
+          >
+            {interventions?.map((intervention) => (
+              <option key={intervention.id} value={intervention.id}>
+                {intervention.name}
+              </option>
+            ))}
+          </select>
 
           <button
             className="mt-4 w-full bg-indigo-500 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300"
-            type="submit"
+            type="button"
+            onClick={handleSubmit}
           >
             Register
           </button>

@@ -13,6 +13,7 @@ function Dashboard() {
   const [users, setUsers] = useState([]);
   const [clinics, setClinics] = useState([]);
   const [speciality, setSpeciality] = useState([]);
+  const [interventions, setInterventions] = useState([]);
 
   useEffect(() => {
     axios
@@ -28,8 +29,8 @@ function Dashboard() {
       .get("http://localhost:5000/specialities")
       .then((results) => setSpeciality(results.data));
     axios
-      .get("http://localhost:5000/specialities")
-      .then((results) => setSpeciality(results.data));
+      .get("http://localhost:5000/interventions")
+      .then((results) => setInterventions(results.data));
   }, []);
 
   return (
@@ -49,7 +50,12 @@ function Dashboard() {
               setClinics={setClinics}
               speciality={speciality}
             />
-            <SpecialistDashboard user={user} clinics={clinics} users={users} />
+            <SpecialistDashboard
+              user={user}
+              clinics={clinics}
+              users={users}
+              interventions={interventions}
+            />
           </>
         ) : null}
       </Box>

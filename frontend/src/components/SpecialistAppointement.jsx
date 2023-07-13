@@ -30,8 +30,10 @@ export default function specialistAppointement({
           speciality_id,
         }),
         axios.put(`http://localhost:5000/interventions/${intervention_id}`, {
-          date: moment(date).utc().format("YYYY-MM-DD HH:mm:ss"),
           clinic_id,
+        }),
+        axios.put(`http://localhost:5000/appointments/${id}`, {
+          date: moment(date).utc().format("YYYY-MM-DD HH:mm:ss"),
         }),
       ]);
 

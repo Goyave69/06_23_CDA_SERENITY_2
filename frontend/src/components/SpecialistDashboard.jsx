@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import SpecialistAppointement from "./SpecialistAppointement";
 import PatientSpecialist from "./PatientSpecialist";
 
-function SpecialistDashboard({ user, clinics, users }) {
+function SpecialistDashboard({ user, clinics, users, interventions }) {
   const [appointements, setAppointement] = useState([]);
   const [manageAppointment, setManageAppointement] = useState(false);
   const [managePatient, setManagePatient] = useState(true);
@@ -79,6 +79,7 @@ function SpecialistDashboard({ user, clinics, users }) {
           patients={patients}
           clinics={clinics}
           specialistId={user.id}
+          interventions={interventions}
         />
       ) : null}
     </>

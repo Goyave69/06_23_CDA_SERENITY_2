@@ -2,7 +2,7 @@ import moment from "moment";
 import React, { useState } from "react";
 import ModalAppointment from "./ModalAppointment";
 
-function PatientSpecialist({ patients, clinics, specialistId }) {
+function PatientSpecialist({ patients, clinics, specialistId, interventions }) {
   const [modal, setModal] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState([]);
 
@@ -59,6 +59,8 @@ function PatientSpecialist({ patients, clinics, specialistId }) {
             patient={selectedPatient}
             clinics={clinics}
             specialistId={specialistId}
+            interventions={interventions}
+            setModal={setModal}
           />
         ) : null}
       </div>
