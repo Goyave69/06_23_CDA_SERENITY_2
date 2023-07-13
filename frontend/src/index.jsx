@@ -1,3 +1,4 @@
+import PatientSignUp from "./pages/PatientSignUp";
 import PatientNavigation from "./components/PatientNavigation";
 import InfoOp from "./pages/InfoOp";
 import Administrative from "./pages/Administrative";
@@ -13,6 +14,7 @@ import LoginPage from "./pages/LoginPage";
 import AdminUsers from "./components/AdminUsers";
 import PatientForm from "./pages/PatientForm";
 import Praticiens from "./pages/Praticiens";
+import AddClinic from "./components/AddClinic";
 
 const Routes = [
   {
@@ -63,6 +65,10 @@ const Routes = [
         element: <PraticienForm />,
       },
       {
+        path: "add-clinic",
+        element: <AddClinic />,
+      },
+      {
         path: "gestion-cabinets",
         element: <Clinic />,
       },
@@ -79,6 +85,10 @@ const Routes = [
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/sign-up",
+    element: <PatientSignUp />,
   },
 ];
 

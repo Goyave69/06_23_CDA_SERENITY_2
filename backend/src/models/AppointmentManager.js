@@ -2,17 +2,17 @@ const AbstractManager = require("./AbstractManager");
 
 class AppointmentManager extends AbstractManager {
   constructor() {
-    super({ table: "appointment" });
+    super({ table: "appointment_for_intervention" });
   }
 
   findAll() {
     return this.connection
       .query(
-        `SELECT i.*, a.date, u.firstname, u.lastname, u.email
-      FROM serenity.intervention i
-      JOIN serenity.appointment a ON i.id = a.intervention_id
-      JOIN serenity.user u ON a.user_id = u.id;
-      `
+        `SELECT appointment_for_intervention.id,clinic.id as clinic_id, clinic.name as clinic_name, user.firstname,user.lastname,surgery.name, intervention.date, specialist_id ,intervention_id,speciality_id,intervention.user_id as user_id FROM ${this.table}
+        JOIN intervention ON appointment_for_intervention.intervention_id=intervention.id
+        JOIN surgery ON intervention.surgery_id=surgery.id
+        JOIN user ON intervention.user_id=user.id
+        JOIN clinic ON intervention.clinic_id=clinic.id`
       )
       .then(([rows]) => {
         return { status: 200, message: rows };
@@ -26,8 +26,13 @@ class AppointmentManager extends AbstractManager {
   insert(appointment) {
     return this.connection
       .query(
-        `INSERT INTO ${this.table} (date, user_id, intervention_id) VALUES (?, ?, ?)`,
-        [appointment.date, appointment.user_id, appointment.intervention_id]
+        `INSERT INTO ${this.table} (date, specialist_id, speciality_id, intervention_id) VALUES (?, ?, ?, ?)`,
+        [
+          appointment.date,
+          appointment.specialist_id,
+          appointment.speciality_id,
+          appointment.intervention_id,
+        ]
       )
       .then(([rows]) => {
         return { status: 201, message: { id: rows.insertId, ...appointment } };
