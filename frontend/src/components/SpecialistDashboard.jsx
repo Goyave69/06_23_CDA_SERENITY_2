@@ -2,16 +2,19 @@ import { Box, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SpecialistAppointement from "./SpecialistAppointement";
+import PatientSpecialist from "./PatientSpecialist";
 
-function SpecialistDashboard({ user, clinics }) {
+function SpecialistDashboard({ user, clinics, users }) {
   const [appointements, setAppointement] = useState([]);
-  const [manageAppointment, setManageAppointement] = useState([]);
+  const [manageAppointment, setManageAppointement] = useState(false);
+  const [managePatient, setManagePatient] = useState(true);
   useEffect(() => {
     axios
       .get("http://localhost:5000/appointments")
       .then((res) => setAppointement(res.data));
   }, []);
 
+  const patients = users.filter((patient) => patient.roles === 1);
   const Specialistappointements = appointements.filter(
     (appoint) => appoint.specialist_id === user.id
   );
@@ -30,7 +33,12 @@ function SpecialistDashboard({ user, clinics }) {
     cursor: "pointer",
   };
   const handleMangeAppointements = () => {
+    setManagePatient(false);
     setManageAppointement(true);
+  };
+  const handleMangePatient = () => {
+    setManageAppointement(false);
+    setManagePatient(true);
   };
   return (
     <>
@@ -47,12 +55,30 @@ function SpecialistDashboard({ user, clinics }) {
             {Specialistappointements ? Specialistappointements.length : 0}
           </Typography>
         </Box>
+        <Box
+          sx={boxStyle}
+          border={managePatient ? "2px solid #00B8AB" : null}
+          onClick={handleMangePatient}
+        >
+          <Typography variant="h4" color="black">
+            Patient
+          </Typography>
+          <Typography variant="p">{patients ? patients.length : 0}</Typography>
+        </Box>
       </Box>
+
       {manageAppointment ? (
         <SpecialistAppointement
           appointements={Specialistappointements}
           clinics={clinics}
           setAppointements={setAppointement}
+        />
+      ) : null}
+      {managePatient ? (
+        <PatientSpecialist
+          patients={patients}
+          clinics={clinics}
+          specialistId={user.id}
         />
       ) : null}
     </>

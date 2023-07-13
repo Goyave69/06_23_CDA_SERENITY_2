@@ -8,9 +8,10 @@ class InterventionManager extends AbstractManager {
   insert(intervention) {
     return this.connection
       .query(
-        `insert into ${this.table} (name, anaesthesia, duration, location_body, user_id, clinic_id) VALUES (?, ?, ?, ?, ?, ?)`,
+        `insert into ${this.table} (name, date, anaesthesia, duration, location_body, user_id, clinic_id) VALUES (?, ?, ?, ?, ?, ?, ? )`,
         [
           intervention.name,
+          intervention.date,
           intervention.anaesthesia,
           intervention.duration || "01:00:00",
           intervention.location_body,

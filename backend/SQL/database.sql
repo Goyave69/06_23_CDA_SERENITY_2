@@ -328,7 +328,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `serenity`.`appointment_fo_intervention` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `date` DATE NULL,
+  `date` DATETIME NULL,
   `specialist_id` INT NULL,
   `intervention_id` INT NOT NULL,
   `speciality_id` INT NOT NULL,

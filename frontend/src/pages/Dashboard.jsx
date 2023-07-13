@@ -27,6 +27,9 @@ function Dashboard() {
     axios
       .get("http://localhost:5000/specialities")
       .then((results) => setSpeciality(results.data));
+    axios
+      .get("http://localhost:5000/specialities")
+      .then((results) => setSpeciality(results.data));
   }, []);
 
   return (
@@ -46,7 +49,7 @@ function Dashboard() {
               setClinics={setClinics}
               speciality={speciality}
             />
-            <SpecialistDashboard user={user} clinics={clinics} />
+            <SpecialistDashboard user={user} clinics={clinics} users={users} />
           </>
         ) : null}
       </Box>

@@ -12,7 +12,6 @@ export default function specialistAppointement({
 }) {
   const [editMode, setEditMode] = useState(false);
   const [selectedappointement, setSelectedappointement] = useState(null);
-  console.warn(selectedappointement);
 
   const handleEdit = (id) => {
     console.warn(id);
