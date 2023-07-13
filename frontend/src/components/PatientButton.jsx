@@ -66,6 +66,7 @@ export default function PatientButton({
     },
     margin: 1,
     padding: 1,
+    backgroundColor: "#F6F4F4",
   };
   // const { user } = useCurrentUserContext();
   return (

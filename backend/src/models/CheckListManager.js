@@ -7,16 +7,10 @@ class CheckListManager extends AbstractManager {
 
   insert(checkList) {
     return this.connection
-      .query(
-        `insert into ${this.table} (identity_card, vital_card, blue_card, anesthesia_appointment,appointment_id) VALUES (?, ?, ?, ?, ?)`,
-        [
-          checkList.identity_card,
-          checkList.vital_card,
-          checkList.blue_card,
-          checkList.anesthesia_appointment,
-          checkList.appointment_id,
-        ]
-      )
+      .query(`insert into ${this.table} (name, subtext) VALUES (?, ?)`, [
+        checkList.name,
+        checkList.subtext,
+      ])
       .then(([rows]) => {
         return { status: 201, message: { id: rows.insertId, ...checkList } };
       })

@@ -1,7 +1,7 @@
 -- Insérer des données dans la table `check_list`
-INSERT INTO `serenity`.`check_list` (`id`, `name`) VALUES
-(1, 'Checklist 1'),
-(2, 'Checklist 2');
+INSERT INTO `serenity`.`check_list` (`id`, `name`, `subtext`) VALUES
+(1, 'Checklist 1', 'Obligatoire'),
+(2, 'Checklist 2', 'De moins de 3 jours');
 
 -- Insérer des données dans la table `clinic`
 INSERT INTO `serenity`.`clinic` (`id`, `name`, `address`, `city`, `zipcode`, `phone_number`, `email`, `handicap_access`, `free_parking`, `open_hours`, `close_hours`) VALUES
@@ -33,6 +33,7 @@ INSERT INTO `serenity`.`intervention` (`id`, `anaesthesia`, `date`, `duration`, 
 (1, 1, '2023-07-12 10:00:00', '02:00:00', 1, 1, 1),
 (2, 2, '2023-07-12 10:00:00', '01:30:00', 2, 2, 2);
 
+
 -- Insérer des données dans la table `steps_info`
 INSERT INTO `serenity`.`steps_info` (`id`, `title`, `description`, `surgery_id`) VALUES
 (1, 'Step 1', 'Description for Step 1', 1),
@@ -59,32 +60,22 @@ INSERT INTO `serenity`.`specialist_has_intervention` (`specialist_id`, `interven
 (1, 1),
 (2, 2);
 
--- Insérer des données dans la table `arrival_preparation`
-INSERT INTO `serenity`.`arrival_preparation` (`id`, `title`, `description`, `image`) VALUES
-(1, 'Preparation 1', 'Description for Preparation 1', 'image1.jpg'),
-(2, 'Preparation 2', 'Description for Preparation 2', 'image2.jpg');
-
 -- Insérer des données dans la table `read_arrival_preparation`
-INSERT INTO `serenity`.`read_arrival_preparation` (`id`, `is_checked`, `intervention_id`, `arrival_preparation_id`) VALUES
-(1, 1, 1, 1),
-(2, 0, 2, 2);
+INSERT INTO `serenity`.`read_arrival_preparation` (`id`, `steps`, `intervention_id`) VALUES
+(1, 1, 1),
+(2, 0, 2);
 
 -- Insérer des données dans la table `done_check_list`
 INSERT INTO `serenity`.`done_check_list` (`id`, `is_checked`, `intervention_id`, `check_list_id`) VALUES
 (1, 1, 1, 1),
 (2, 0, 2, 2);
 
--- Insérer des données dans la table `appointment_fo_intervention`
-INSERT INTO `serenity`.`appointment_fo_intervention` (`id`, `date`, `specialist_id`, `intervention_id`, `speciality_id`) VALUES
-(1, '2023-07-12 10:00:00', 1, 1, 1),
-(2, '2023-07-12 10:00:00', 2, 2, 2);
-
--- Insérer des données dans la table `administrative`
-INSERT INTO `serenity`.`administrative` (`id`, `title`) VALUES
-(1, 'Administrative 1'),
-(2, 'Administrative 2');
+-- Insérer des données dans la table `appointment_for_intervention`
+INSERT INTO `serenity`.`appointment_for_intervention` (`id`, `date`, `specialist_id`, `intervention_id`, `speciality_id`) VALUES
+(1, '2023-07-10 15:00:00', 1, 1, 1),
+(2, '2023-07-11 14:30:00', 2, 2, 2);
 
 -- Insérer des données dans la table `done_administrative`
-INSERT INTO `serenity`.`done_administrative` (`id`, `is_checked`, `intervention_id`, `administrative_id`) VALUES
+INSERT INTO `serenity`.`done_administrative` (`id`, `is_checked`, `category`, `intervention_id`) VALUES
 (1, 1, 1, 1),
 (2, 0, 2, 2);

@@ -1,15 +1,18 @@
+/* eslint-disable import/no-unresolved */
 const express = require("express");
 
 const router = express.Router();
 
-const CreateChecklistContoller = require("../controllers/checkListController/CreateChecklistContoller");
-const ReadChecklistContoller = require("../controllers/checkListController/ReadChecklistController");
+const CreateCheckListController = require("../controllers/checkListController/CreateCheckListController");
+const ReadCheckListController = require("../controllers/checkListController/ReadCheckListController");
 const UpdateCheckListController = require("../controllers/checkListController/UpdateCheckListController");
-const ReadOneChecklistContoller = require("../controllers/checkListController/ReadOneCheckListController");
+const ReadOneCheckListController = require("../controllers/checkListController/ReadOneCheckListController");
+const DeleteCheckListController = require("../controllers/checkListController/DeleteCheckListController");
 
-router.get("/", ReadChecklistContoller);
-router.get("/:id", ReadOneChecklistContoller);
-router.post("/", CreateChecklistContoller);
+router.get("/", ReadCheckListController);
+router.get("/:id", ReadOneCheckListController);
+router.post("/", CreateCheckListController);
 router.put("/:id", UpdateCheckListController);
+router.delete("/:id", DeleteCheckListController);
 
 module.exports = router;
