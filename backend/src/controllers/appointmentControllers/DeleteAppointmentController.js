@@ -1,7 +1,7 @@
-const { appointment } = require("../../models");
+const { appointment_for_intervention } = require("../../models");
 
 async function deleteAppointmentController(req, res) {
-  const { status, message } = await appointment.delete(
+  const { status, message } = await appointment_for_intervention.delete(
     parseInt(req.params.id, 10)
   );
 

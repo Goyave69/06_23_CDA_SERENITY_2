@@ -8,8 +8,12 @@ class ReadStepsInfoManager extends AbstractManager {
   insert(readStepsInfo) {
     return this.connection
       .query(
-        `insert into ${this.table} (steps_info_id, intervention_id) VALUES (?, ?)`,
-        [readStepsInfo.steps_info_id, readStepsInfo.intervention_id]
+        `insert into ${this.table} (is_checked, steps_info_id, intervention_id) VALUES (?, ?, ?)`,
+        [
+          readStepsInfo.is_checked,
+          readStepsInfo.steps_info_id,
+          readStepsInfo.intervention_id,
+        ]
       )
       .then(([rows]) => {
         return {

@@ -14,18 +14,30 @@ export default function PatientNavigation() {
   const location = useLocation().pathname;
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box
+      sx={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       {isMobile && hasOutlet && (
-        <Typography component={Link} to="/patient">
-          {" "}
+        <Typography
+          sx={{ alignSelf: "flex-start", marginX: 3, marginY: 2 }}
+          component={Link}
+          to="/patient"
+        >
+          {"< "}
           Retour{" "}
         </Typography>
       )}
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-evenly",
-          width: "100%",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "90%",
           flexDirection: { xs: "column", sm: "row" },
         }}
       >
