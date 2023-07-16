@@ -20,6 +20,16 @@ export default function specialistAppointement({
     setEditMode(true);
   };
 
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:5000/appointments/${id}`)
+      .then(() =>
+        axios
+          .get("http://localhost:5000/appointments")
+          .then((res) => setAppointements(res.data))
+      );
+  };
+
   const handleSaveEdit = async (id, updatedAppointment) => {
     try {
       const { clinic_id, speciality_id, intervention_id, date } =
@@ -158,6 +168,7 @@ export default function specialistAppointement({
                       {!editMode ? (
                         <td className="px-2 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button
+                            onClick={() => handleDelete(appointement.id)}
                             type="button"
                             className=" bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
                           >

@@ -3,11 +3,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SpecialistAppointement from "./SpecialistAppointement";
 import PatientSpecialist from "./PatientSpecialist";
+import CreateIntervention from "./CreateIntervention";
 
 function SpecialistDashboard({ user, clinics, users, interventions }) {
   const [appointements, setAppointement] = useState([]);
   const [manageAppointment, setManageAppointement] = useState(false);
   const [managePatient, setManagePatient] = useState(true);
+  const [manageInterventions, setManageInterventions] = useState(false);
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/appointments")
@@ -32,12 +35,22 @@ function SpecialistDashboard({ user, clinics, users, interventions }) {
     color: "#00B8AB",
     cursor: "pointer",
   };
+
+  const handleManageIntervention = () => {
+    setManageAppointement(false);
+    setManagePatient(false);
+    setManageInterventions(true);
+  };
+
   const handleMangeAppointements = () => {
     setManagePatient(false);
+    setManageInterventions(false);
     setManageAppointement(true);
   };
+
   const handleMangePatient = () => {
     setManageAppointement(false);
+    setManageInterventions(false);
     setManagePatient(true);
   };
   return (
@@ -65,6 +78,18 @@ function SpecialistDashboard({ user, clinics, users, interventions }) {
           </Typography>
           <Typography variant="p">{patients ? patients.length : 0}</Typography>
         </Box>
+        <Box
+          sx={boxStyle}
+          border={manageInterventions ? "2px solid #00B8AB" : null}
+          onClick={handleManageIntervention}
+        >
+          <Typography variant="h4" color="black">
+            Interventions
+          </Typography>
+          <Typography variant="p">
+            {interventions ? interventions.length : 0}
+          </Typography>
+        </Box>
       </Box>
 
       {manageAppointment ? (
@@ -74,13 +99,19 @@ function SpecialistDashboard({ user, clinics, users, interventions }) {
           setAppointements={setAppointement}
         />
       ) : null}
+
       {managePatient ? (
         <PatientSpecialist
           patients={patients}
           clinics={clinics}
           specialistId={user.id}
           interventions={interventions}
+          setAppointement={setAppointement}
         />
+      ) : null}
+
+      {manageInterventions ? (
+        <CreateIntervention interventions={interventions} />
       ) : null}
     </>
   );

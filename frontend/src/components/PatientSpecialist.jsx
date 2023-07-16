@@ -2,7 +2,13 @@ import moment from "moment";
 import React, { useState } from "react";
 import ModalAppointment from "./ModalAppointment";
 
-function PatientSpecialist({ patients, clinics, specialistId, interventions }) {
+function PatientSpecialist({
+  patients,
+  clinics,
+  specialistId,
+  interventions,
+  setAppointement,
+}) {
   const [modal, setModal] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState([]);
 
@@ -31,7 +37,7 @@ function PatientSpecialist({ patients, clinics, specialistId, interventions }) {
               </p>
               <p className="text-sm text-gray-600">{patient.email}</p>
               <div className="mt-5">
-                {!patient.intervention_date.length > 5 ? (
+                {patient.intervention_date.length > 5 ? (
                   <button
                     type="button"
                     className="border rounded-full py-2 px-4 text-xs font-semibold text-green-500"
@@ -61,6 +67,7 @@ function PatientSpecialist({ patients, clinics, specialistId, interventions }) {
             specialistId={specialistId}
             interventions={interventions}
             setModal={setModal}
+            setAppointement={setAppointement}
           />
         ) : null}
       </div>

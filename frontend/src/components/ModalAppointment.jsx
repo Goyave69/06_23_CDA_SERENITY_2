@@ -9,6 +9,7 @@ function ModalAppointment({
   interventions,
   specialistId,
   setModal,
+  setAppointement,
 }) {
   const [selectedappointement, setSelectedappointement] = useState([]);
 
@@ -25,7 +26,7 @@ function ModalAppointment({
       .then(() => {
         axios
           .get("http://localhost:5000/appointments")
-          .then((res) => setSelectedappointement(res.data));
+          .then((res) => setAppointement(res.data));
         setModal(false);
       })
       .catch((err) => {
@@ -45,7 +46,7 @@ function ModalAppointment({
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="name"
             >
-              Name
+              Nom
             </label>
             <input
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
