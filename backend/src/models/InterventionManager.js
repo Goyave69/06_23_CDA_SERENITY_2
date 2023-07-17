@@ -5,6 +5,18 @@ class InterventionManager extends AbstractManager {
     super({ table: "intervention" });
   }
 
+  findAll() {
+    return this.connection
+      .query(`select * from  ${this.table}`)
+      .then(([rows]) => {
+        return { status: 200, message: rows };
+      })
+      .catch((err) => {
+        console.error(err);
+        return { status: 500, message: "Error" };
+      });
+  }
+
   insert(intervention) {
     return this.connection
       .query(
