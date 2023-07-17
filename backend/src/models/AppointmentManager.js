@@ -8,7 +8,7 @@ class AppointmentManager extends AbstractManager {
   findAll() {
     return this.connection
       .query(
-        `SELECT appointment_for_intervention.id,clinic.id as clinic_id, clinic.name as clinic_name, user.firstname,user.lastname,surgery.name, intervention.date, specialist_id ,intervention_id,speciality_id,intervention.user_id as user_id FROM ${this.table}
+        `SELECT appointment_for_intervention.id,clinic.id as clinic_id, clinic.name as clinic_name, user.firstname,user.lastname,surgery.name, appointment_for_intervention.date, specialist_id ,intervention_id,speciality_id,intervention.user_id as user_id FROM ${this.table}
         JOIN intervention ON appointment_for_intervention.intervention_id=intervention.id
         JOIN surgery ON intervention.surgery_id=surgery.id
         JOIN user ON intervention.user_id=user.id

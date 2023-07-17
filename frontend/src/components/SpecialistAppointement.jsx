@@ -12,13 +12,22 @@ export default function specialistAppointement({
 }) {
   const [editMode, setEditMode] = useState(false);
   const [selectedappointement, setSelectedappointement] = useState(null);
-  console.warn(selectedappointement);
 
   const handleEdit = (id) => {
     console.warn(id);
     const appoint = appointements.find((item) => item.id === id);
     setSelectedappointement(appoint);
     setEditMode(true);
+  };
+
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:5000/appointments/${id}`)
+      .then(() =>
+        axios
+          .get("http://localhost:5000/appointments")
+          .then((res) => setAppointements(res.data))
+      );
   };
 
   const handleSaveEdit = async (id, updatedAppointment) => {
@@ -31,8 +40,10 @@ export default function specialistAppointement({
           speciality_id,
         }),
         axios.put(`http://localhost:5000/interventions/${intervention_id}`, {
-          date: moment(date).utc().format("YYYY-MM-DD HH:mm:ss"),
           clinic_id,
+        }),
+        axios.put(`http://localhost:5000/appointments/${id}`, {
+          date: moment(date).utc().format("YYYY-MM-DD HH:mm:ss"),
         }),
       ]);
 
@@ -157,6 +168,7 @@ export default function specialistAppointement({
                       {!editMode ? (
                         <td className="px-2 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button
+                            onClick={() => handleDelete(appointement.id)}
                             type="button"
                             className=" bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
                           >

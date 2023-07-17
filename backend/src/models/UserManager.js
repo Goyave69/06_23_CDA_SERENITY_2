@@ -26,7 +26,8 @@ class UserManager extends AbstractManager {
   findAll() {
     return this.connection
       .query(
-        `select id,firstname, lastname, email, roles, phone_number, gender, birthdate, address, city, zipcode, country, family_situation, child from  ${this.table}`
+        `select user.id,firstname, lastname, email, roles, phone_number, gender, birthdate, address, city, zipcode, country, family_situation, child,intervention.date as intervention_date from ${this.table}
+        JOIN intervention ON user.id=user_id`
       )
       .then(([rows]) => {
         return { status: 200, message: rows };
