@@ -1,7 +1,7 @@
 import React from "react";
 
 function ModalAddInterventions() {
-  return <div>AddInteventionModal</div>;
+  return <div>AddInteventionModals</div>;
 }
 
 export default ModalAddInterventions;
