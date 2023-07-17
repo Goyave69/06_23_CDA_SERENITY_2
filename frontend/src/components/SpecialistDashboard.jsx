@@ -3,12 +3,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SpecialistAppointement from "./SpecialistAppointement";
 import PatientSpecialist from "./PatientSpecialist";
-import CreateIntervention from "./CreateIntervention";
 import SpecialistInterventions from "./SpecialistInterventions";
 
 function SpecialistDashboard({ user, clinics, users, interventions }) {
   const [appointements, setAppointement] = useState([]);
-  const [surgery, setSurgery] = useState([]);
+  const [surgerys, setSurgery] = useState([]);
   const [manageAppointment, setManageAppointement] = useState(false);
   const [managePatient, setManagePatient] = useState(true);
   const [manageInterventions, setManageInterventions] = useState(false);
@@ -23,6 +22,7 @@ function SpecialistDashboard({ user, clinics, users, interventions }) {
   }, []);
 
   const patients = users.filter((patient) => patient.roles === 1);
+
   const Specialistappointements = appointements.filter(
     (appoint) => appoint.specialist_id === user.id
   );
@@ -102,7 +102,7 @@ function SpecialistDashboard({ user, clinics, users, interventions }) {
           appointements={Specialistappointements}
           clinics={clinics}
           setAppointements={setAppointement}
-          surgery={surgery}
+          surgery={surgerys}
         />
       ) : null}
 
@@ -117,7 +117,12 @@ function SpecialistDashboard({ user, clinics, users, interventions }) {
       ) : null}
 
       {manageInterventions ? (
-        <SpecialistInterventions interventions={interventions} />
+        <SpecialistInterventions
+          interventions={interventions}
+          patients={patients}
+          clinics={clinics}
+          surgerys={surgerys}
+        />
       ) : null}
     </>
   );

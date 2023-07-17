@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ModalAddSurgery from "./ModalAddSurgery";
 import ModalAddInterventions from "./ModalAddInterventions";
 
-function CreateIntervention({ interventions }) {
+function CreateIntervention({ interventions, patients, clinics, surgerys }) {
   const [modalSurgery, setModalSurgery] = useState(false);
   const [modalInterventions, setModalInterventions] = useState(false);
   const handleModalSurgery = () => {
@@ -66,7 +66,14 @@ function CreateIntervention({ interventions }) {
       {modalSurgery ? (
         <ModalAddSurgery setModalSurgery={setModalSurgery} />
       ) : null}
-      {modalInterventions ? <ModalAddInterventions /> : null}
+      {modalInterventions ? (
+        <ModalAddInterventions
+          interventions={interventions}
+          patients={patients}
+          clinics={clinics}
+          surgerys={surgerys}
+        />
+      ) : null}
     </div>
   );
 }

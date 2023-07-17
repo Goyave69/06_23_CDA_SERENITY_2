@@ -2,10 +2,20 @@ import React from "react";
 import moment from "moment";
 import CreateIntervention from "./CreateIntervention";
 
-function SpecialistInterventions({ interventions }) {
+function SpecialistInterventions({
+  interventions,
+  patients,
+  clinics,
+  surgerys,
+}) {
   return (
     <div>
-      <CreateIntervention interventions={interventions} />
+      <CreateIntervention
+        interventions={interventions}
+        patients={patients}
+        clinics={clinics}
+        surgerys={surgerys}
+      />
       <div className="flex ">
         {interventions.map((element) => (
           <div className="bg-white rounded overflow-hidden shadow-lg m-5 p-5">
