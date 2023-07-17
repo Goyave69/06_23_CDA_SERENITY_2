@@ -9,6 +9,7 @@ export default function specialistAppointement({
   appointements,
   clinics,
   setAppointements,
+  surgery,
 }) {
   const [editMode, setEditMode] = useState(false);
   const [selectedappointement, setSelectedappointement] = useState(null);

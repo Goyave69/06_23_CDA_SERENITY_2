@@ -7,6 +7,7 @@ import CreateIntervention from "./CreateIntervention";
 
 function SpecialistDashboard({ user, clinics, users, interventions }) {
   const [appointements, setAppointement] = useState([]);
+  const [surgery, setSurgery] = useState([]);
   const [manageAppointment, setManageAppointement] = useState(false);
   const [managePatient, setManagePatient] = useState(true);
   const [manageInterventions, setManageInterventions] = useState(false);
@@ -15,6 +16,9 @@ function SpecialistDashboard({ user, clinics, users, interventions }) {
     axios
       .get("http://localhost:5000/appointments")
       .then((res) => setAppointement(res.data));
+    axios
+      .get("http://localhost:5000/surgeries")
+      .then((res) => setSurgery(res.data));
   }, []);
 
   const patients = users.filter((patient) => patient.roles === 1);
@@ -97,6 +101,7 @@ function SpecialistDashboard({ user, clinics, users, interventions }) {
           appointements={Specialistappointements}
           clinics={clinics}
           setAppointements={setAppointement}
+          surgery={surgery}
         />
       ) : null}
 

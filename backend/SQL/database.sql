@@ -114,7 +114,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- Table `serenity`.`surgery`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `serenity`.`surgery` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
   `location` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`))
