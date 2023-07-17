@@ -55,6 +55,7 @@ function Dashboard() {
               clinics={clinics}
               users={users}
               interventions={interventions}
+              setInterventions={setInterventions}
             />
           </>
         ) : null}

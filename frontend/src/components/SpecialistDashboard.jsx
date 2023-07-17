@@ -5,7 +5,13 @@ import SpecialistAppointement from "./SpecialistAppointement";
 import PatientSpecialist from "./PatientSpecialist";
 import SpecialistInterventions from "./SpecialistInterventions";
 
-function SpecialistDashboard({ user, clinics, users, interventions }) {
+function SpecialistDashboard({
+  user,
+  clinics,
+  users,
+  interventions,
+  setInterventions,
+}) {
   const [appointements, setAppointement] = useState([]);
   const [surgerys, setSurgery] = useState([]);
   const [manageAppointment, setManageAppointement] = useState(false);
@@ -122,6 +128,7 @@ function SpecialistDashboard({ user, clinics, users, interventions }) {
           patients={patients}
           clinics={clinics}
           surgerys={surgerys}
+          setInterventions={setInterventions}
         />
       ) : null}
     </>
