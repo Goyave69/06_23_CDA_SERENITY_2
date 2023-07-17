@@ -67,14 +67,15 @@ export default function PatientButton({
     margin: 1,
     padding: 1,
     backgroundColor: "#F6F4F4",
+    "&:hover": { backgroundColor: "#F1F1F1" },
+    "&:active": { backgroundColor: "#ECECEC" },
   };
   // const { user } = useCurrentUserContext();
   return (
     <Paper elevation={1} sx={style} component={Link} to={link}>
       <CircularProgressWithLabel sx={{ color }} total={total} done={done} />
       <Typography
-        sx={{ textAlign: "center" }}
-        variant={{ xs: "body2", sm: "body1" }}
+        sx={{ textAlign: "center", typography: { sm: "body1", xs: "body2" } }}
       >
         {title}
       </Typography>
