@@ -7,7 +7,13 @@ class InterventionManager extends AbstractManager {
 
   findAll() {
     return this.connection
-      .query(`select * from  ${this.table}`)
+      .query(
+        `select intervention.id, user_id ,clinic_id,anaesthesia,date,duration,surgery_id,user_id ,user.firstname, user.lastname,surgery.name as surgery_name,clinic.name AS clinic_name FROM ${this.table}
+        JOIN user ON user.id=intervention.user_id
+        JOIN clinic ON clinic.id=intervention.clinic_id
+        JOIN surgery ON surgery.id=intervention.surgery_id
+        `
+      )
       .then(([rows]) => {
         return { status: 200, message: rows };
       })

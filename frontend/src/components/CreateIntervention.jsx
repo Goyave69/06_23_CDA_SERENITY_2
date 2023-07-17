@@ -1,20 +1,27 @@
 import React, { useState } from "react";
 import ModalAddSurgery from "./ModalAddSurgery";
+import ModalAddInterventions from "./ModalAddInterventions";
 
 function CreateIntervention({ interventions }) {
   const [modalSurgery, setModalSurgery] = useState(false);
+  const [modalInterventions, setModalInterventions] = useState(false);
   const handleModalSurgery = () => {
+    setModalInterventions(false);
     setModalSurgery(true);
+  };
+  const handleModalInterventions = () => {
+    setModalSurgery(false);
+    setModalInterventions(true);
   };
   console.warn(interventions);
   return (
     <div>
       <h3>interventions</h3>
-      <div className="flex justify-between w-full m-5">
+      <div className="flex w-full m-5">
         <button
           onClick={handleModalSurgery}
           type="button"
-          className="mb-2 text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="ml-12 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Ajouter une chirurgie
           <svg
@@ -34,8 +41,9 @@ function CreateIntervention({ interventions }) {
           </svg>
         </button>
         <button
+          onClick={handleModalInterventions}
           type="button"
-          className="mr-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="ml-12 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Ajouter une interventions
           <svg
@@ -58,6 +66,7 @@ function CreateIntervention({ interventions }) {
       {modalSurgery ? (
         <ModalAddSurgery setModalSurgery={setModalSurgery} />
       ) : null}
+      {modalInterventions ? <ModalAddInterventions /> : null}
     </div>
   );
 }
