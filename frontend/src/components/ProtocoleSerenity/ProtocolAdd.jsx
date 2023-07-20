@@ -1,6 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+const { VITE_BACKEND_URL } = import.meta.env;
 
 function ProtocolAdd({ task, selectedComponent, setSelectedComponent }) {
+  const [stepsSurgeries, setStepsSurgeries] = useState([]);
+  const [currentData, setCurrentData] = useState([]);
+
+  const fetchData = () => {
+    switch (task.id) {
+      case 1:
+        fetch("http://localhost:5000/steps-infos")
+          .then((res) => res.json())
+          .then((response) => setCurrentData(response))
+          .catch((err) => console.error(err));
+        break;
+      case 2:
+        fetch("http://localhost:5000/users")
+          .then((res) => res.json())
+          .then((response) => setCurrentData(response))
+          .catch((err) => console.error(err));
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [task]);
+
   const buttons = [1];
 
   const handleClick = (index) => {
@@ -16,7 +45,7 @@ function ProtocolAdd({ task, selectedComponent, setSelectedComponent }) {
       <div>
         <div className={`${task.className} mx-5 mt-3 `}>
           <p className="w-[30rem] ml-5 text-white text-2xl">{task.title}</p>
-          <p className="mr-5 text-white">10</p>
+          <p className="mr-5 text-white">{currentData.length}</p>
         </div>
         {selectedComponent !== null && task.component[selectedComponent] ? (
           task.component[selectedComponent]
@@ -31,6 +60,17 @@ function ProtocolAdd({ task, selectedComponent, setSelectedComponent }) {
               >
                 Ajouter
               </button>
+            ))}
+            {currentData.map((steps) => (
+              <div key={steps.id}>
+                <img
+                  className="h-20 w-20"
+                  src={`${VITE_BACKEND_URL}/uploads/${steps?.image}`}
+                  alt=""
+                />
+
+                <p>{steps.title}</p>
+              </div>
             ))}
           </div>
         )}

@@ -4,9 +4,10 @@ function AddImageIntervention() {
   const inputRef = useRef(null);
   const [surgery, setSurgery] = useState([]);
   const [dataForm, setDataForm] = useState({
-    name: "",
-    image: "",
-    surgery_id: surgery.id,
+    title: "",
+    image: null,
+    surgery_id: null,
+    description: "",
   });
 
   const fetchSurgery = () => {
@@ -23,6 +24,10 @@ function AddImageIntervention() {
     setDataForm({ ...dataForm, [e.target.name]: e.target.value });
   };
 
+  const handleImageChange = (e) => {
+    setDataForm({ ...dataForm, image: e.target.files[0] });
+  };
+
   const handleUpload = (e) => {
     e.preventDefault();
     if (dataForm.image) {
@@ -32,13 +37,13 @@ function AddImageIntervention() {
       formData.append("pipin", pipin);
       formData.append("picture", inputRef.current.files[0]);
 
-      const resquestOptions = {
+      const requestOptions = {
         method: "POST",
         headers: myHeaders,
         body: formData,
       };
 
-      fetch("http://localhost:5000/steps-infos", resquestOptions)
+      fetch("http://localhost:5000/steps-infos", requestOptions)
         .then((response) => response.json())
         .then((result) => console.warn(result))
         .catch((error) => console.error("error", error));
@@ -48,13 +53,13 @@ function AddImageIntervention() {
   return (
     <div>
       <div className="flex">
-        <div className="ml-5 ">
+        <div className="ml-5">
           <p className="ml-2 mb-3">Titre</p>
           <input
             type="text"
             placeholder="Titre.."
             className="h-10 w-92 rounded-md px-2"
-            name="name"
+            name="title"
             onChange={handleChange}
           />
         </div>
@@ -64,14 +69,14 @@ function AddImageIntervention() {
             ref={inputRef}
             className="border h-44 w-44 bg-gray-300 rounded-2xl"
             name="image"
-            value={dataForm.image}
+            onChange={handleImageChange}
           />
         </div>
       </div>
       <select
-        name="Surgeries"
+        name="surgery_id"
         id="surgeries"
-        value={dataForm.surgery}
+        value={dataForm.surgery_id}
         onChange={handleChange}
         className="h-10 w-80 rounded-md mt-5 ml-5 px-2 bg-yellow-300"
       >
@@ -85,17 +90,18 @@ function AddImageIntervention() {
       <div className="ml-5">
         <p>Description Courte</p>
         <textarea
-          name="Description"
+          name="description"
           id="description"
           cols="40"
           rows="8"
           className="rounded-md mt-5"
+          onChange={handleChange}
         />
       </div>
       <button
         onClick={handleUpload}
         type="button"
-        className="h-12  w-28 px-5 bg-[#f3d03d] text-white rounded-md mt-5 ml-10"
+        className="h-12 w-28 px-5 bg-[#f3d03d] text-white rounded-md mt-5 ml-10"
       >
         Créer
       </button>
