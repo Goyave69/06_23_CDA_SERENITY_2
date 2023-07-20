@@ -72,6 +72,7 @@ function CreateIntervention({ interventions, patients, clinics, surgerys }) {
           patients={patients}
           clinics={clinics}
           surgerys={surgerys}
+          setModalIntervention={setModalInterventions}
         />
       ) : null}
     </div>
