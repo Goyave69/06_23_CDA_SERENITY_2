@@ -159,6 +159,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 CREATE TABLE IF NOT EXISTS `serenity`.`steps_info` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(255) NOT NULL,
+  `image` VARCHAR(255) NULL,
   `description` TEXT NOT NULL,
   `surgery_id` INT NOT NULL,
   PRIMARY KEY (`id`, `surgery_id`),
