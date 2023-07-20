@@ -8,7 +8,7 @@ class StepsInfoManager extends AbstractManager {
   insert(stepsInfo) {
     return this.connection
       .query(
-        `insert into ${this.table} (title, description, surgery_id) VALUES (?, ?, ?)`,
+        `insert into ${this.table} (title, description, image, surgery_id) VALUES (?, ?, ?, ?)`,
         [stepsInfo.title, stepsInfo.description, stepsInfo.surgery_id]
       )
       .then(([rows]) => {
