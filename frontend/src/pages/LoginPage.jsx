@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Container, Typography, TextField, Button, Box } from "@mui/material";
 import jwt_decode from "jwt-decode";
 import ApiHelper from "../services/ApiHelper";
@@ -101,6 +101,12 @@ function LoginPage() {
                 Se connecter
               </button>
             </div>
+            <p className="mt-6 text-white">
+              Vous n'avez pas de compte ?
+              <NavLink to="/sign-up">
+                <span className="text-cyan-200 underline"> Inscrivez-vous</span>
+              </NavLink>
+            </p>
           </form>
         </div>
         <div className=" bg-bgLogin w-[50%] flex flex-col justify- items-center">
