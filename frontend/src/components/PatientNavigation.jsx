@@ -84,7 +84,19 @@ export default function PatientNavigation() {
           link="checklist"
         />
       </Box>
-      <Outlet />
+      {hasOutlet && (
+        <Box
+          sx={{
+            width: "90%",
+            backgroundColor: !isMobile && "#F6F4F4",
+            marginTop: 3,
+            borderRadius: 2,
+            p: 4,
+          }}
+        >
+          <Outlet />
+        </Box>
+      )}
     </Box>
   );
 }

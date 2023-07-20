@@ -9,6 +9,7 @@ function ConfirmModal({ setConfirm, deleteId, handleDelete }) {
     setConfirm(false);
     handleDelete(deleteId, true);
   };
+
   return (
     <div className="fixed z-50 inset-0 flex items-center justify-center">
       <div className="relative w-full ">

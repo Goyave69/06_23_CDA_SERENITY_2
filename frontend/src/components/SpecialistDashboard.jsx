@@ -2,16 +2,22 @@ import { Box, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SpecialistAppointement from "./SpecialistAppointement";
+import PatientSpecialist from "./PatientSpecialist";
+import CreateIntervention from "./CreateIntervention";
 
-function SpecialistDashboard({ user, clinics }) {
+function SpecialistDashboard({ user, clinics, users, interventions }) {
   const [appointements, setAppointement] = useState([]);
-  const [manageAppointment, setManageAppointement] = useState([]);
+  const [manageAppointment, setManageAppointement] = useState(false);
+  const [managePatient, setManagePatient] = useState(true);
+  const [manageInterventions, setManageInterventions] = useState(false);
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/appointments")
       .then((res) => setAppointement(res.data));
   }, []);
 
+  const patients = users.filter((patient) => patient.roles === 1);
   const Specialistappointements = appointements.filter(
     (appoint) => appoint.specialist_id === user.id
   );
@@ -29,8 +35,23 @@ function SpecialistDashboard({ user, clinics }) {
     color: "#00B8AB",
     cursor: "pointer",
   };
+
+  const handleManageIntervention = () => {
+    setManageAppointement(false);
+    setManagePatient(false);
+    setManageInterventions(true);
+  };
+
   const handleMangeAppointements = () => {
+    setManagePatient(false);
+    setManageInterventions(false);
     setManageAppointement(true);
+  };
+
+  const handleMangePatient = () => {
+    setManageAppointement(false);
+    setManageInterventions(false);
+    setManagePatient(true);
   };
   return (
     <>
@@ -47,13 +68,50 @@ function SpecialistDashboard({ user, clinics }) {
             {Specialistappointements ? Specialistappointements.length : 0}
           </Typography>
         </Box>
+        <Box
+          sx={boxStyle}
+          border={managePatient ? "2px solid #00B8AB" : null}
+          onClick={handleMangePatient}
+        >
+          <Typography variant="h4" color="black">
+            Patient
+          </Typography>
+          <Typography variant="p">{patients ? patients.length : 0}</Typography>
+        </Box>
+        <Box
+          sx={boxStyle}
+          border={manageInterventions ? "2px solid #00B8AB" : null}
+          onClick={handleManageIntervention}
+        >
+          <Typography variant="h4" color="black">
+            Interventions
+          </Typography>
+          <Typography variant="p">
+            {interventions ? interventions.length : 0}
+          </Typography>
+        </Box>
       </Box>
+
       {manageAppointment ? (
         <SpecialistAppointement
           appointements={Specialistappointements}
           clinics={clinics}
           setAppointements={setAppointement}
         />
+      ) : null}
+
+      {managePatient ? (
+        <PatientSpecialist
+          patients={patients}
+          clinics={clinics}
+          specialistId={user.id}
+          interventions={interventions}
+          setAppointement={setAppointement}
+        />
+      ) : null}
+
+      {manageInterventions ? (
+        <CreateIntervention interventions={interventions} />
       ) : null}
     </>
   );

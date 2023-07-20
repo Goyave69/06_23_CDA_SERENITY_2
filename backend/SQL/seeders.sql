@@ -10,8 +10,10 @@ INSERT INTO `serenity`.`clinic` (`id`, `name`, `address`, `city`, `zipcode`, `ph
 
 -- Insérer des données dans la table `user`
 INSERT INTO `serenity`.`user` (`id`, `email`, `password`, `roles`, `phone_number`, `firstname`, `lastname`, `gender`, `birthdate`, `address`, `city`, `zipcode`, `country`, `family_situation`, `child`, `created_at`) VALUES
-(1, 'user1@example.com', 'password1', 1, '111-111-1111', 'John', 'Doe', 'Male', '1990-01-01', '123 First Street', 'City 1', '12345', 'Country 1', 'Single', 0, '2023-07-07 10:00:00'),
-(2, 'user2@example.com', 'password2', 1, '222-222-2222', 'Jane', 'Smith', 'Female', '1995-01-01', '456 Second Street', 'City 2', '67890', 'Country 2', 'Married', 2, '2023-07-07 11:00:00');
+(1, 'user1@example.com', '$argon2id$v=19$m=65536,t=3,p=4$ZklWurDoLrvMGSM2IAeUWw$buc8JVRSYNY5zlS4OMfPgn3UovCs/xSy4cJj2boZom0', 1, '111-111-1111', 'John', 'Doe', 'Male', '1990-01-01', '123 First Street', 'City 1', '12345', 'Country 1', 'Single', 0, '2023-07-07 10:00:00'),
+(2, 'user2@example.com', '$argon2id$v=19$m=65536,t=3,p=4$spb2Fq6XfjZRZAfNXn46gA$s5M+xMrmFFn52juW7G1Qi28mv5k6aKHtoC6qoaxee4I', 1, '222-222-2222', 'Jane', 'Smith', 'Female', '1995-01-01', '456 Second Street', 'City 2', '67890', 'Country 2', 'Married', 2, '2023-07-07 11:00:00');
+-- User 1 Password : password1
+-- User 2 Password : password2
 
 -- Insérer des données dans la table `specialist`
 INSERT INTO `serenity`.`specialist` (`id`, `user_id`) VALUES
