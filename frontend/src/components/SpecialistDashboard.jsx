@@ -17,6 +17,7 @@ function SpecialistDashboard({
   const [manageAppointment, setManageAppointement] = useState(false);
   const [managePatient, setManagePatient] = useState(true);
   const [manageInterventions, setManageInterventions] = useState(false);
+  const [specialists, setSpecialists] = useState([]);
 
   useEffect(() => {
     axios
@@ -25,13 +26,20 @@ function SpecialistDashboard({
     axios
       .get("http://localhost:5000/surgeries")
       .then((res) => setSurgery(res.data));
+    axios
+      .get("http://localhost:5000/specialists")
+      .then((res) => setSpecialists(res.data));
   }, []);
 
   const patients = users.filter((patient) => patient.roles === 1);
 
   const Specialistappointements = appointements.filter(
-    (appoint) => appoint.specialist_id === user.id
+    (appoint) => appoint.specialist_id === 2
   );
+  const praticien = specialists?.filter(
+    (specialist) => specialist.id === user.id
+  );
+  const specialist_id = praticien[0]?.specialist_id;
 
   const boxStyle = {
     width: "30%",
@@ -116,7 +124,7 @@ function SpecialistDashboard({
         <PatientSpecialist
           patients={patients}
           clinics={clinics}
-          specialistId={user.id}
+          specialistId={specialist_id}
           interventions={interventions}
           setAppointement={setAppointement}
         />

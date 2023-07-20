@@ -103,6 +103,7 @@ function ModalAddInterventions({
               <option value="1">Anesthésie locale</option>
               <option value="2">Anesthésie Genérale</option>
             </select>
+            <p>Date</p>
             <div className="mt-2 text-sm text-gray-900 w-full">
               <DateTimePicker
                 disableClock
@@ -118,6 +119,7 @@ function ModalAddInterventions({
                 }
               />
             </div>
+            <p>Durée</p>
             <div className="mt-2">
               <TimePicker
                 disableClock
