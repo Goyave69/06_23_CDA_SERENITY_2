@@ -50,7 +50,7 @@ function ProtocolAdd({ task, selectedComponent, setSelectedComponent }) {
         {selectedComponent !== null && task.component[selectedComponent] ? (
           task.component[selectedComponent]
         ) : (
-          <div className="flex justify-between gap-5 mt-5 px-5 rounded-lg">
+          <div className="flex gap-5 mt-5 px-5 rounded-lg">
             {buttons.map((_, index) => (
               <button
                 key={_}

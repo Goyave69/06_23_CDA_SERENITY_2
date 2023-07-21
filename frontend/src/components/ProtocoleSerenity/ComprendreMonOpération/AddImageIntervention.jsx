@@ -66,11 +66,18 @@ function AddImageIntervention() {
         <div className="ml-20">
           <input
             type="file"
+            id="file-input"
             ref={inputRef}
-            className="border h-44 w-44 bg-gray-300 rounded-2xl"
+            className="hidden" // cache l'input
             name="image"
             onChange={handleImageChange}
           />
+          <label
+            htmlFor="file-input" // pointe vers l'input caché
+            className="cursor-pointer border h-44 w-44 bg-yellow-300 rounded-2xl flex items-center justify-center" // vos styles
+          >
+            <span>Attribuer une photo</span>
+          </label>
         </div>
       </div>
       <select
@@ -80,7 +87,7 @@ function AddImageIntervention() {
         onChange={handleChange}
         className="h-10 w-80 rounded-md mt-5 ml-5 px-2 bg-yellow-300"
       >
-        <option value="">Select a surgery</option>
+        <option value="">Sélectionner une opération</option>
         {surgery.map((surgeryItem) => (
           <option key={surgeryItem.id} value={surgeryItem.id}>
             {surgeryItem.name}
@@ -88,7 +95,7 @@ function AddImageIntervention() {
         ))}
       </select>
       <div className="ml-5">
-        <p>Description Courte</p>
+        <p className="mt-3">Résumé synthétique de l'opération</p>
         <textarea
           name="description"
           id="description"

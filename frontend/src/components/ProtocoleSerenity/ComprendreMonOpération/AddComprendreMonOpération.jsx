@@ -11,7 +11,7 @@ function AddComprendreMonOpération({ underProtocols }) {
   };
 
   return (
-    <div className="mt-20 h-[800px]">
+    <div className="mt-10 h-[800px]">
       <div>
         {showImage ? (
           <AddImageIntervention />
