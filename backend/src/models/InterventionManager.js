@@ -44,6 +44,59 @@ class InterventionManager extends AbstractManager {
         return { status: 500, message: "Error" };
       });
   }
+
+  progression(id) {
+    const data = [];
+    for (let index = 0; index < 9; index += 1) {
+      data.push(id);
+    }
+
+    return this.connection
+      .query(
+        `
+        SELECT ${this.table}.id AS interventionId, ${this.table}.date AS interventionDate, 
+        (SELECT SUM(rsi.is_checked) FROM read_steps_info AS rsi WHERE rsi.intervention_id = ?) AS rsiDone,
+        (SELECT count(rsi.is_checked) FROM read_steps_info AS rsi WHERE rsi.intervention_id = ?) AS rsiMax,
+        (SELECT SUM(da.is_checked) FROM done_administrative AS da WHERE da.intervention_id = ?) AS daDone,
+        (SELECT count(da.is_checked) FROM done_administrative AS da WHERE da.intervention_id = ?) AS daMax,
+        rap.steps AS rapDone,
+        (SELECT count(afi.date) FROM appointment_for_intervention AS afi WHERE afi.intervention_id = ?) AS afiDone,
+        (SELECT count(afi.id) FROM appointment_for_intervention AS afi WHERE afi.intervention_id = ?) AS afiMax,
+        (SELECT SUM(dcl.is_checked) FROM done_check_list AS dcl WHERE dcl.intervention_id = ?) AS dclDone,
+        (SELECT count(dcl.is_checked) FROM done_check_list AS dcl WHERE dcl.intervention_id = ?) AS dclMax
+        FROM  ${this.table} 
+        JOIN read_arrival_preparation AS rap ON ${this.table}.id = rap.intervention_id
+        WHERE ${this.table}.id = ?
+      `,
+        data
+      )
+      .then(([rows]) => {
+        return rows.length === 0
+          ? { status: 404, message: {} }
+          : { status: 200, message: rows[0] };
+      })
+      .catch((err) => {
+        console.error(err);
+        return { status: 500, message: "Error" };
+      });
+  }
+
+  nextPatientIntervention(userId) {
+    return this.connection
+      .query(
+        `select id from  ${this.table} WHERE user_id = ? AND date >= CURDATE() ORDER BY date ASC LIMIT 1`,
+        [userId]
+      )
+      .then(([rows]) => {
+        return rows.length === 0
+          ? { status: 404, message: {} }
+          : { status: 200, message: rows[0] };
+      })
+      .catch((err) => {
+        console.error(err);
+        return { status: 500, message: "Error" };
+      });
+  }
 }
 
 module.exports = InterventionManager;

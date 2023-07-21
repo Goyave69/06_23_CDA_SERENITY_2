@@ -5,14 +5,22 @@ import { Paper, Box, Typography } from "@mui/material";
 import ApiHelper from "@services/ApiHelper";
 import { useCurrentUserContext } from "../Context/UserContext";
 
-export default function CheckboxLabel({ id, name, subtext, is_checked }) {
+export default function CheckboxLabel({
+  id,
+  name,
+  subtext,
+  is_checked,
+  reload,
+  setReload,
+}) {
   const { token } = useCurrentUserContext();
   const [checked, setChecked] = React.useState(!!is_checked);
 
   const handleCheckboxChange = () => {
     const data = JSON.stringify({ is_checked: !checked });
     ApiHelper(`done-check-list/${id}`, "PUT", data, token)
-      .then((response) => {
+      .then(() => {
+        setReload(!reload);
         return setChecked(!checked);
       })
       .catch((err) => {
