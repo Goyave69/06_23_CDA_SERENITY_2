@@ -3,24 +3,43 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SpecialistAppointement from "./SpecialistAppointement";
 import PatientSpecialist from "./PatientSpecialist";
-import CreateIntervention from "./CreateIntervention";
+import SpecialistInterventions from "./SpecialistInterventions";
 
-function SpecialistDashboard({ user, clinics, users, interventions }) {
+function SpecialistDashboard({
+  user,
+  clinics,
+  users,
+  interventions,
+  setInterventions,
+}) {
   const [appointements, setAppointement] = useState([]);
+  const [surgerys, setSurgery] = useState([]);
   const [manageAppointment, setManageAppointement] = useState(false);
   const [managePatient, setManagePatient] = useState(true);
   const [manageInterventions, setManageInterventions] = useState(false);
+  const [specialists, setSpecialists] = useState([]);
 
   useEffect(() => {
     axios
       .get("http://localhost:5000/appointments")
       .then((res) => setAppointement(res.data));
+    axios
+      .get("http://localhost:5000/surgeries")
+      .then((res) => setSurgery(res.data));
+    axios
+      .get("http://localhost:5000/specialists")
+      .then((res) => setSpecialists(res.data));
   }, []);
 
   const patients = users.filter((patient) => patient.roles === 1);
+
   const Specialistappointements = appointements.filter(
-    (appoint) => appoint.specialist_id === user.id
+    (appoint) => appoint.specialist_id === 2
   );
+  const praticien = specialists?.filter(
+    (specialist) => specialist.id === user.id
+  );
+  const specialist_id = praticien[0]?.specialist_id;
 
   const boxStyle = {
     width: "30%",
@@ -97,6 +116,7 @@ function SpecialistDashboard({ user, clinics, users, interventions }) {
           appointements={Specialistappointements}
           clinics={clinics}
           setAppointements={setAppointement}
+          surgery={surgerys}
         />
       ) : null}
 
@@ -104,14 +124,20 @@ function SpecialistDashboard({ user, clinics, users, interventions }) {
         <PatientSpecialist
           patients={patients}
           clinics={clinics}
-          specialistId={user.id}
+          specialistId={specialist_id}
           interventions={interventions}
           setAppointement={setAppointement}
         />
       ) : null}
 
       {manageInterventions ? (
-        <CreateIntervention interventions={interventions} />
+        <SpecialistInterventions
+          interventions={interventions}
+          patients={patients}
+          clinics={clinics}
+          surgerys={surgerys}
+          setInterventions={setInterventions}
+        />
       ) : null}
     </>
   );

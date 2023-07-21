@@ -121,7 +121,7 @@ function ModalAppointment({
             type="button"
             onClick={handleSubmit}
           >
-            Register
+            Ajouter
           </button>
         </form>
       </div>

@@ -37,7 +37,7 @@ function PatientSpecialist({
               </p>
               <p className="text-sm text-gray-600">{patient.email}</p>
               <div className="mt-5">
-                {/*  {patient.intervention_date.length > 5 ? (
+                {patient.intervention_date?.length > 5 ? (
                   <button
                     type="button"
                     className="border rounded-full py-2 px-4 text-xs font-semibold text-green-500"
@@ -55,7 +55,7 @@ function PatientSpecialist({
                   >
                     Ajouter rendez-vous
                   </button>
-                )} */}
+                )}
               </div>
             </div>
           </div>
