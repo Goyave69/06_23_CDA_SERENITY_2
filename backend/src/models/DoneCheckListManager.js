@@ -30,7 +30,9 @@ class DoneCheckListManager extends AbstractManager {
   getByInterventionId(interventionId) {
     return this.connection
       .query(
-        `select ${this.table}.id, is_checked, cl.name, cl.subtext from ${this.table} JOIN check_list as cl on cl.id = ${this.table}.check_list_id where intervention_id = ?`,
+        `select ${this.table}.id, is_checked, cl.name, cl.subtext from ${this.table} 
+        JOIN check_list as cl on cl.id = ${this.table}.check_list_id 
+        where intervention_id = ?`,
         [interventionId]
       )
       .then(([rows]) => {

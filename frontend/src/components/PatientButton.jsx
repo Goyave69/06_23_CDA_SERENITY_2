@@ -54,21 +54,22 @@ export default function PatientButton({
   done,
 }) {
   const style = {
-    height: { xs: 100, sm: 170 },
-    width: { xs: 300, sm: 170 },
+    height: { xs: 80, sm: 170 },
+    width: { xs: 280, sm: 170 },
     display: { xs: selected ? "flex" : "none", sm: "flex" },
     justifyContent: { xs: "space-between", sm: "space-evenly" },
     alignItems: "center",
     flexDirection: { xs: "row-reverse", sm: "column" },
     border: {
-      xs: `3px solid ${color}`,
-      sm: selected ? `3px solid ${color}` : "none",
+      xs: `5px solid ${color}`,
+      sm: selected ? `5px solid ${color}` : "none",
     },
     margin: 1,
-    padding: 1,
+    padding: 2,
     backgroundColor: "#F6F4F4",
     "&:hover": { backgroundColor: "#F1F1F1" },
     "&:active": { backgroundColor: "#ECECEC" },
+    borderRadius: 5,
   };
   // const { user } = useCurrentUserContext();
   return (

@@ -12,12 +12,10 @@ import {
 } from "@mui/material";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import LogoutIcon from "@mui/icons-material/Logout";
-import CurrentUserContext, {
-  useCurrentUserContext,
-} from "../Context/UserContext";
+import { useCurrentUserContext } from "../Context/UserContext";
 
 function UserInfo() {
-  const { user, setUser } = useCurrentUserContext(CurrentUserContext);
+  const { user, setUser } = useCurrentUserContext();
   const drawerWidth = 240;
 
   const navigate = useNavigate();
