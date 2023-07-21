@@ -8,8 +8,13 @@ class StepsInfoManager extends AbstractManager {
   insert(stepsInfo) {
     return this.connection
       .query(
-        `insert into ${this.table} (title, description, surgery_id) VALUES (?, ?, ?)`,
-        [stepsInfo.title, stepsInfo.description, stepsInfo.surgery_id]
+        `insert into ${this.table} (title, description, image, surgery_id) VALUES (?, ?, ?, ?)`,
+        [
+          stepsInfo.title,
+          stepsInfo.description,
+          stepsInfo.image,
+          stepsInfo.surgery_id,
+        ]
       )
       .then(([rows]) => {
         return { status: 201, message: { id: rows.insertId, ...stepsInfo } };

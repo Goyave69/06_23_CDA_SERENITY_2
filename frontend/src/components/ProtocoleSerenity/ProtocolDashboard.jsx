@@ -10,9 +10,9 @@ function ProtocolDashboard({ protocols, onTaskClick }) {
   return (
     <div>
       <div className="relative flex flex-col justify-start pb-8 w-80  mt-9 items-stretch ml-20">
-        <div className="w-64 h-[648px] bg-[#e2e6eb] absolute top-8 left-4 rounded-[24px]" />
+        <div className="w-64 h-[648px] bg-gray-100 absolute top-8 left-4 rounded-[24px]" />
         <div className="w-[298px] h-[648px] bg-white absolute top-2 left-0 rounded-[24px]" />
-        <div className="bg-gray-200 relative flex flex-col justify-start gap-4 h-[648px] shrink-0 items-stretch p-8 rounded-[24px]">
+        <div className="bg-gray-100 relative flex flex-col justify-start gap-4 h-[648px] shrink-0 items-stretch p-8 rounded-[24px]">
           <div className="whitespace-nowrap text-lg font-['Poppins'] font-medium leading-[24px] text-[#11142d] self-start relative w-3/4 mb-10 ml-px">
             Protolcole Serenity
           </div>

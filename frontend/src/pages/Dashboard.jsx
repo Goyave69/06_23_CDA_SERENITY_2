@@ -40,23 +40,24 @@ function Dashboard() {
           {user.firstname ? `Bonjour ${user.firstname}` : null}
         </Typography>
         {user.roles && user.roles === 3 ? (
-          <>
-            <AdminDashboard
-              specialists={specialists}
-              setSpecialists={setSpecialists}
-              users={users}
-              clinics={clinics}
-              setUsers={setUsers}
-              setClinics={setClinics}
-              speciality={speciality}
-            />
-            <SpecialistDashboard
-              user={user}
-              clinics={clinics}
-              users={users}
-              interventions={interventions}
-            />
-          </>
+          <AdminDashboard
+            specialists={specialists}
+            setSpecialists={setSpecialists}
+            users={users}
+            clinics={clinics}
+            setUsers={setUsers}
+            setClinics={setClinics}
+            speciality={speciality}
+          />
+        ) : null}
+        {user.roles && user.roles === 2 ? (
+          <SpecialistDashboard
+            user={user}
+            clinics={clinics}
+            users={users}
+            interventions={interventions}
+            setInterventions={setInterventions}
+          />
         ) : null}
       </Box>
     </Box>

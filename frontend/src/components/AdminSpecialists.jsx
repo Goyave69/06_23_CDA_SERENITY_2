@@ -226,7 +226,7 @@ function AdminSpecialists({
                                 onClick={() => handleDelete(specialist.id)}
                                 className=" bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
                               >
-                                Delete
+                                Supprimer
                               </button>
 
                               <button
@@ -234,7 +234,7 @@ function AdminSpecialists({
                                 onClick={() => handleEdit(specialist.id)}
                                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ml-2"
                               >
-                                Edit
+                                Modifier
                               </button>
                             </td>
                           ) : (

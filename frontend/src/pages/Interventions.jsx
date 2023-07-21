@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Add } from "@mui/icons-material";
+import AddImageIntervention from "../components/ProtocoleSerenity/ComprendreMonOpération/AddImageIntervention";
 import ProtocolAdd from "../components/ProtocoleSerenity/ProtocolAdd";
 import ProtocolDashboard from "../components/ProtocoleSerenity/ProtocolDashboard";
-import AddComprendreMonOpération from "../components/ProtocoleSerenity/AddComprendreMonOpération";
-import AddFinirLesDemarches from "../components/ProtocoleSerenity/AddFinirLesDemarches";
+import AddComprendreMonOpération from "../components/ProtocoleSerenity/ComprendreMonOpération/AddComprendreMonOpération";
+import AddFinirLesDemarches from "../components/ProtocoleSerenity/FinirLesDémarches/AddFinirLesDemarches";
 import CurrentUserContext, {
   useCurrentUserContext,
 } from "../Context/UserContext";
@@ -12,6 +13,7 @@ function Interventions() {
   const { user } = useCurrentUserContext(CurrentUserContext);
   const [selectedTask, setSelectedTask] = useState(null);
   const [selectedComponent, setSelectedComponent] = useState(null);
+
   const protocols = [
     {
       title: "Comprendre mon opération",
@@ -49,6 +51,7 @@ function Interventions() {
       id: 5,
     },
   ];
+
   const handleTaskClick = (task) => {
     setSelectedTask(task);
     console.warn("data de la task", task);
@@ -63,14 +66,14 @@ function Interventions() {
           protocols={protocols}
           onTaskClick={handleTaskClick}
         />
-        <div className="mt-20 ml-20">
-          {selectedTask && (
+        <div className="mt-12 ml-20">
+          {selectedTask ? (
             <ProtocolAdd
               task={selectedTask}
               setSelectedComponent={setSelectedComponent}
               selectedComponent={selectedComponent}
             />
-          )}
+          ) : null}
         </div>
       </div>
     </div>

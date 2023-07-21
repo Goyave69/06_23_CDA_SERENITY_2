@@ -23,7 +23,7 @@ class SpecialistManager extends AbstractManager {
     return this.connection
       .query(
         `
-        SELECT clinic.name as clinic_name,clinic.id as clinic_id,user.id, user.firstname, user.lastname, user.email, speciality.name ,speciality.id as speciality_id
+        SELECT specialist.id as specialist_id,clinic.name as clinic_name,clinic.id as clinic_id,user.id, user.firstname, user.lastname, user.email, speciality.name ,speciality.id as speciality_id
         FROM specialist
         JOIN user ON specialist.user_id = user.id
         JOIN specialist_has_speciality ON specialist.id = specialist_has_speciality.specialist_id
