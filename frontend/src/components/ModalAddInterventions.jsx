@@ -108,7 +108,7 @@ function ModalAddInterventions({
               <DateTimePicker
                 disableClock
                 disableCalendar
-                value={moment.utc().toDate()}
+                value={moment.utc(interventionToAdd?.date).toDate()}
                 onChange={(value) =>
                   setInterventionToAdd((prevState) => ({
                     ...prevState,

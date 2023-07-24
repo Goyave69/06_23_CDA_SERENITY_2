@@ -19,7 +19,7 @@ function ModalAppointment({
       .post(`http://localhost:5000/appointments`, {
         date: moment(date).utc().format("YYYY-MM-DD HH:mm:ss"),
         clinic_id,
-        intervention_id: intervention_id || 1,
+        intervention_id,
         speciality_id: 1,
         specialist_id: specialistId,
       })
@@ -105,13 +105,15 @@ function ModalAppointment({
             onChange={(e) =>
               setSelectedappointement((prevState) => ({
                 ...prevState,
-                clinic_id: e.target.value,
+                intervention_id: e.target.value,
               }))
             }
           >
             {interventions?.map((intervention) => (
               <option key={intervention.id} value={intervention.id}>
-                {intervention.name}
+                {`${intervention.surgery_name} / ${moment(
+                  intervention.date
+                ).format("LLL")}`}
               </option>
             ))}
           </select>
