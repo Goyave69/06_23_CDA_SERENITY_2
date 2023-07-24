@@ -9,6 +9,7 @@ function ModalAddInterventions({
   patients,
   clinics,
   surgerys,
+  setInterventions,
 }) {
   const [interventionToAdd, setInterventionToAdd] = useState([]);
 
@@ -24,7 +25,14 @@ function ModalAddInterventions({
         surgery_id,
         duration,
       })
-      .then((res) => console.warn(res))
+      .then((res) =>
+        axios
+          .get("http://localhost:5000/interventions")
+          .then(
+            (result) => setInterventions(result.data),
+            setModalIntervention(false)
+          )
+      )
       .catch((err) => console.warn(err));
   };
   return (

@@ -31,8 +31,6 @@ function SpecialistDashboard({
       .then((res) => setSpecialists(res.data));
   }, []);
 
-  const patients = users.filter((patient) => patient.roles === 1);
-
   const Specialistappointements = appointements.filter(
     (appoint) => appoint.specialist_id === 2
   );
@@ -40,6 +38,8 @@ function SpecialistDashboard({
     (specialist) => specialist.id === user.id
   );
   const specialist_id = praticien[0]?.specialist_id;
+
+  const patients = users.filter((patient) => patient.roles === 1);
 
   const boxStyle = {
     width: "30%",

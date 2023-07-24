@@ -26,6 +26,7 @@ function SpecialistInterventions({
         patients={patients}
         clinics={clinics}
         surgerys={surgerys}
+        setInterventions={setInterventions}
       />
       <div className="flex">
         {sortedInterventions.map((element) => (
