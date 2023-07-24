@@ -61,7 +61,8 @@ export default function PatientNavigation() {
         flexDirection: "column",
         alignItems: "center",
         // backgroundColor: isMobile && "#040055",
-        minHeight: "100vh",
+        minHeight: "95vh",
+        mb: 2,
       }}
     >
       {isMobile ? (
@@ -127,8 +128,8 @@ export default function PatientNavigation() {
             title="Préparer mon arrivée"
             total={5}
             done={progression.rapDone}
-            selected={(!hasOutlet && isMobile) || location.includes("quiz")}
-            link="quiz"
+            selected={(!hasOutlet && isMobile) || location.includes("prep")}
+            link="prep"
           />
           <PatientButton
             color="#66E47A"

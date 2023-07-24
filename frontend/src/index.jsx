@@ -3,7 +3,7 @@ import PatientSignUp from "./pages/PatientSignUp";
 import PatientNavigation from "./components/PatientNavigation";
 import InfoOp from "./pages/InfoOp";
 import Administrative from "./pages/Administrative";
-import ArrivalQuiz from "./pages/ArrivalQuiz";
+import ArrivalPrep from "./pages/ArrivalPrep";
 import TakeRDV from "./pages/TakeRDV";
 import Checklist from "./pages/Checklist";
 import Interventions from "./pages/Interventions";
@@ -44,8 +44,8 @@ const Routes = [
             element: <Administrative />,
           },
           {
-            path: "quiz",
-            element: <ArrivalQuiz />,
+            path: "prep",
+            element: <ArrivalPrep />,
           },
           {
             path: "take-rdv",
