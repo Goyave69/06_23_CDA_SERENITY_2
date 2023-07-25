@@ -1,3 +1,4 @@
+import NoIntervention from "@pages/NoIntervention";
 import PatientSignUp from "./pages/PatientSignUp";
 import PatientNavigation from "./components/PatientNavigation";
 import InfoOp from "./pages/InfoOp";
@@ -55,6 +56,10 @@ const Routes = [
             element: <Checklist />,
           },
         ],
+      },
+      {
+        path: "no-intervention",
+        element: <NoIntervention />,
       },
       {
         path: "gestion-praticiens",
