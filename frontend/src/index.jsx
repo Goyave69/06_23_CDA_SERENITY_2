@@ -1,4 +1,6 @@
 import NoIntervention from "@pages/NoIntervention";
+import Agreement from "@components/Agreement";
+import GeneralConditions from "@components/GeneralConditions";
 import PatientSignUp from "./pages/PatientSignUp";
 import PatientNavigation from "./components/PatientNavigation";
 import InfoOp from "./pages/InfoOp";
@@ -42,6 +44,20 @@ const Routes = [
           {
             path: "administrative",
             element: <Administrative />,
+            children: [
+              {
+                path: "patient-form",
+                element: <PatientForm />,
+              },
+              {
+                path: "agreement",
+                element: <Agreement />,
+              },
+              {
+                path: "conditions",
+                element: <GeneralConditions />,
+              },
+            ],
           },
           {
             path: "quiz",

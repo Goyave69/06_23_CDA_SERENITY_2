@@ -60,7 +60,6 @@ export default function PatientNavigation() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        // backgroundColor: isMobile && "#040055",
         minHeight: "100vh",
       }}
     >
@@ -92,7 +91,7 @@ export default function PatientNavigation() {
             to="/patient"
           >
             {"< "}
-            Retour{" "}
+            Menu{" "}
           </Typography>
         )}
         <Box
