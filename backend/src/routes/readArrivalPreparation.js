@@ -2,6 +2,13 @@ const express = require("express");
 
 const router = express.Router();
 
+const ReadByInterventionIdReadArrivalPreparationController = require("../controllers/readArrivalPreparationControllers/ReadByInterventionIdReadArrivalPreparationController");
+
+router.get(
+  "/byInterventionId/:interventionId",
+  ReadByInterventionIdReadArrivalPreparationController
+);
+
 const readReadArrivalPreparationController = require("../controllers/readArrivalPreparationControllers/ReadReadArrivalPreparationController");
 const readOneReadArrivalPreparationController = require("../controllers/readArrivalPreparationControllers/ReadOneReadArrivalPreparationController");
 const updateReadArrivalPreparationController = require("../controllers/readArrivalPreparationControllers/UpdateReadArrivalPreparationController");
