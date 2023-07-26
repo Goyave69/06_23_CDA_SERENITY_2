@@ -1,9 +1,11 @@
 import NoIntervention from "@pages/NoIntervention";
+import Agreement from "@components/Agreement";
+import GeneralConditions from "@components/GeneralConditions";
 import PatientSignUp from "./pages/PatientSignUp";
 import PatientNavigation from "./components/PatientNavigation";
 import InfoOp from "./pages/InfoOp";
 import Administrative from "./pages/Administrative";
-import ArrivalQuiz from "./pages/ArrivalQuiz";
+import ArrivalPrep from "./pages/ArrivalPrep";
 import TakeRDV from "./pages/TakeRDV";
 import Checklist from "./pages/Checklist";
 import Interventions from "./pages/Interventions";
@@ -42,10 +44,24 @@ const Routes = [
           {
             path: "administrative",
             element: <Administrative />,
+            children: [
+              {
+                path: "patient-form",
+                element: <PatientForm />,
+              },
+              {
+                path: "agreement",
+                element: <Agreement />,
+              },
+              {
+                path: "conditions",
+                element: <GeneralConditions />,
+              },
+            ],
           },
           {
-            path: "quiz",
-            element: <ArrivalQuiz />,
+            path: "prep",
+            element: <ArrivalPrep />,
           },
           {
             path: "take-rdv",

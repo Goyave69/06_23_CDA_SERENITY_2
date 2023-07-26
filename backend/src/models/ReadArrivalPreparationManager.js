@@ -22,6 +22,20 @@ class ReadArrivalPreparationManager extends AbstractManager {
         return { status: 500, message: "Error" };
       });
   }
+
+  getByInterventionId(interventionId) {
+    return this.connection
+      .query(`select id, steps from ${this.table} where intervention_id = ?`, [
+        interventionId,
+      ])
+      .then(([rows]) => {
+        return { status: 200, message: rows[0] };
+      })
+      .catch((err) => {
+        console.error(err);
+        return { status: 500, message: "Error" };
+      });
+  }
 }
 
 module.exports = ReadArrivalPreparationManager;
