@@ -32,6 +32,6 @@ export function daysUntilIntervention(date) {
   const interventionDate = new Date(date);
   return (
     Math.trunc((interventionDate - today) / (1000 * 3600 * 24)) +
-    (interventionDate.getHours() < today.getHours())
+    (interventionDate.getHours() <= today.getHours())
   );
 }
