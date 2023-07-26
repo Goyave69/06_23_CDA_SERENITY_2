@@ -11,8 +11,8 @@ import {
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 import ApiHelper from "@services/ApiHelper";
-import { useCurrentUserContext } from "../Context/UserContext";
 import HeaderPatient from "./HeaderPatient";
+import { useCurrentUserContext } from "../Context/UserContext";
 import HeaderPatientMobile from "./HeaderPatientMobile";
 
 const defaultProgression = {

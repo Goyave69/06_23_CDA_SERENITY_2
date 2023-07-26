@@ -68,13 +68,13 @@ function AddImageIntervention() {
             type="file"
             id="file-input"
             ref={inputRef}
-            className="hidden" // cache l'input
+            className="hidden"
             name="image"
             onChange={handleImageChange}
           />
           <label
-            htmlFor="file-input" // pointe vers l'input caché
-            className="cursor-pointer border h-44 w-44 bg-yellow-300 rounded-2xl flex items-center justify-center" // vos styles
+            htmlFor="file-input"
+            className="cursor-pointer border h-44 w-44 bg-yellow-300 rounded-2xl flex items-center justify-center"
           >
             <span>Attribuer une photo</span>
           </label>
