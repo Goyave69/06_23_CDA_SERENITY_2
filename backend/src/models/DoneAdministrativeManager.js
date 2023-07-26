@@ -26,6 +26,21 @@ class DoneAdministrativeManager extends AbstractManager {
         return { status: 500, message: "Error" };
       });
   }
+
+  getByInterventionId(interventionId) {
+    return this.connection
+      .query(
+        `select id, is_checked as isChecked from ${this.table} where intervention_id = ?`,
+        [interventionId]
+      )
+      .then(([rows]) => {
+        return { status: 200, message: rows };
+      })
+      .catch((err) => {
+        console.error(err);
+        return { status: 500, message: "Error" };
+      });
+  }
 }
 
 module.exports = DoneAdministrativeManager;

@@ -11,14 +11,14 @@ import {
   FormControlLabel,
   Radio,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import ApiHelper from "../services/ApiHelper";
 import { useCurrentUserContext } from "../Context/UserContext";
 
 function PatientForm() {
   const { user, token } = useCurrentUserContext();
-  // const [formMethod, setFormMethod] = useState("POST");
-  // const [formId, setFormId] = useState(0);
+  const [reload, setReload, doneAdministrative] = useOutletContext();
+
   const [patientForm, setPatientForm] = useState({
     gender: "",
     birthdate: "",
@@ -57,14 +57,30 @@ function PatientForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault(e);
+    let empty = 0;
+
+    const values = Object.values(patientForm);
+    values.forEach((value) => {
+      if (value === "" || value === null) {
+        empty += 1;
+      }
+    });
 
     const body = JSON.stringify(patientForm);
 
     await ApiHelper(`users/${user.id}`, "PUT", body, token)
       .then((response) => response.status)
-      .then((status) => {
+      .then(async (status) => {
         if (status === 201) {
-          navigate("/patient");
+          await ApiHelper(
+            `done-administrative/${doneAdministrative[0]?.id}`,
+            "PUT",
+            JSON.stringify({ is_checked: !empty }),
+            token
+          ).then(() => {
+            setReload(!reload);
+            return navigate("/patient/administrative");
+          });
         }
       })
       .catch(() => {});
