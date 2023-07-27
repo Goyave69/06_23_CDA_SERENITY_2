@@ -22,7 +22,7 @@ function CreateIntervention({
   console.warn(interventions);
   return (
     <div>
-      <h3>interventions</h3>
+      <h2 className="text-3xl m-5">Interventions</h2>
       <div className="flex w-full m-5">
         <button
           onClick={handleModalSurgery}
