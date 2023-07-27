@@ -19,7 +19,7 @@ function ModalAppointment({
       .post(`http://localhost:5000/appointments`, {
         date: moment(date).utc().format("YYYY-MM-DD HH:mm:ss"),
         clinic_id,
-        intervention_id: intervention_id || 1,
+        intervention_id,
         speciality_id: 1,
         specialist_id: specialistId,
       })
@@ -35,12 +35,19 @@ function ModalAppointment({
   };
 
   return (
-    <div classNameName="absolute w-screen h-screen bg-black/25">
-      <div className="absolute left-1/2 transform -translate-x-1/2 container mx-auto py-8">
-        <h1 className="text-2xl font-bold mb-6 text-center">
-          Ajouter un rendez-vous
-        </h1>
-        <form className="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
+    <div classNameName="absolute w-screen h-screen bg-black/25 bg-white ">
+      <div className="absolute left-1/2 transform -translate-x-1/2 container mx-auto py-8 bg-white p-8 rounded-md ">
+        <form className="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md ">
+          <div className="flex justify-around text-2xl font-bold mb-6 text-center">
+            <h1>Ajouter un rendez-vous</h1>
+            <button
+              onClick={() => setModal(false)}
+              type="button"
+              className="text-xl align-center cursor-pointer alert-del color-red"
+            >
+              &times;
+            </button>
+          </div>
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -105,13 +112,15 @@ function ModalAppointment({
             onChange={(e) =>
               setSelectedappointement((prevState) => ({
                 ...prevState,
-                clinic_id: e.target.value,
+                intervention_id: e.target.value,
               }))
             }
           >
             {interventions?.map((intervention) => (
               <option key={intervention.id} value={intervention.id}>
-                {intervention.name}
+                {`${intervention.surgery_name} / ${moment(
+                  intervention.date
+                ).format("LLL")}`}
               </option>
             ))}
           </select>
