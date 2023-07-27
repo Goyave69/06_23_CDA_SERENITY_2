@@ -32,15 +32,14 @@ INSERT INTO `serenity`.`surgery` (`id`, `name`, `location`) VALUES
 
 -- Insérer des données dans la table `intervention`
 INSERT INTO `serenity`.`intervention` (`id`, `anaesthesia`, `date`, `duration`, `user_id`, `clinic_id`, `surgery_id`) VALUES
-(1, 1, '2023-07-12 10:00:00', '02:00:00', 1, 1, 1),
-(2, 2, '2023-07-12 10:00:00', '01:30:00', 2, 2, 2);
+(1, 1, '2023-08-12 10:00:00', '02:00:00', 1, 1, 1),
+(2, 2, '2023-09-12 10:00:00', '01:30:00', 2, 2, 2);
 
 
 -- Insérer des données dans la table `steps_info`
-INSERT INTO `serenity`.`steps_info` (`id`, `title`, `description`, `surgery_id`) VALUES
-(1, 'Step 1', 'Description for Step 1', 1),
-(2, 'Step 2', 'Description for Step 2', 2),
-(3, 'Step 3', 'Description for Step 3', 2);
+INSERT INTO `serenity`.`steps_info` (`id`, `title`, `image`, `description`, `surgery_id`) VALUES
+(1, 'Step 1', '0bcbda94-a200-4b6e-aa61-37479fd11103-heart-cartoon.png', 'Description for Step 1', 1),
+(2, 'Step 2', '6b0a8da1-11c0-4d02-b816-73e9f81ffa96-hand-cartoon.png', 'Description for Step 2', 2);
 
 -- Insérer des données dans la table `read_steps_info`
 INSERT INTO `serenity`.`read_steps_info` (`id`, `is_checked`, `steps_info_id`, `intervention_id`) VALUES
