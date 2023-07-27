@@ -31,7 +31,7 @@ export default function Checklist() {
       sx={{
         width: "90%",
         backgroundColor: !isMobile && "#F6F4F4",
-        marginTop: 3,
+        marginTop: 2,
         borderRadius: 4,
         p: 4,
         border: !isMobile && `3px solid #8D77F0`,

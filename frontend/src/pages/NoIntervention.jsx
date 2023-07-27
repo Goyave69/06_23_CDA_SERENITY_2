@@ -12,7 +12,7 @@ export default function NoIntervention() {
       }}
     >
       <Typography variant="h3" align="center">
-        Vous n'avez pas de chirurgie de prévu ;
+        Vous n'avez pas de chirurgie de prévu {" ;)"}
       </Typography>
     </Box>
   );
