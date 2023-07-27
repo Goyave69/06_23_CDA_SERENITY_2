@@ -93,7 +93,7 @@ function SpecialistDashboard({
           onClick={handleMangePatient}
         >
           <Typography variant="h4" color="black">
-            Patient
+            Patients
           </Typography>
           <Typography variant="p">{patients ? patients.length : 0}</Typography>
         </Box>

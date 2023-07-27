@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Container, Typography, TextField, Button, Box } from "@mui/material";
+// import { Container, Typography, TextField, Button, Box } from "@mui/material";
 import jwt_decode from "jwt-decode";
 import ApiHelper from "../services/ApiHelper";
 import { useCurrentUserContext } from "../Context/UserContext";
-import medecin from "../assets/img/medecin-welcome.webp";
+// import medecin from "../assets/img/medecin-welcome.webp";
 import logo from "../assets/img/logo3.svg";
 
 function LoginPage() {
@@ -14,13 +14,15 @@ function LoginPage() {
 
   const navigate = useNavigate();
 
-  if (user.roles) {
-    if (user.roles === 1) {
-      navigate("/patient");
-    } else {
-      navigate("/dashboard");
+  useEffect(() => {
+    if (user.roles) {
+      if (user.roles === 1) {
+        navigate("/patient");
+      } else {
+        navigate("/dashboard");
+      }
     }
-  }
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

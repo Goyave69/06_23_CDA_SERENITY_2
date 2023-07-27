@@ -28,16 +28,16 @@ const drawerItems = [
 ];
 
 const drawerAdmin = [
-  {
-    key: "Praticiens",
-    link: "/gestion-praticiens",
-    icon: DashboardCustomizeIcon,
-  },
-  {
-    key: "Cabinets",
-    link: "/gestion-cabinets",
-    icon: DashboardCustomizeIcon,
-  },
+  // {
+  //   key: "Praticiens",
+  //   link: "/gestion-praticiens",
+  //   icon: DashboardCustomizeIcon,
+  // },
+  // {
+  //   key: "Cabinets",
+  //   link: "/gestion-cabinets",
+  //   icon: DashboardCustomizeIcon,
+  // },
   {
     key: "Interventions",
     link: "/gestion-interventions",
@@ -101,18 +101,20 @@ export default function Navigation() {
         </Toolbar>
         <Divider />
         <List>
-          {drawerItems.map((item) => (
-            <ListItem key={item.key}>
-              <NavLink to={item.link}>
-                <ListItemButton
-                  sx={{ borderRadius: "12px", width: drawerWidth - 40 }}
-                >
-                  <Icon component={item.icon} />
-                  <ListItemText primary={item.key} sx={{ ml: 1 }} />
-                </ListItemButton>
-              </NavLink>
-            </ListItem>
-          ))}
+          {user.roles &&
+            user.roles !== 1 &&
+            drawerItems.map((item) => (
+              <ListItem key={item.key}>
+                <NavLink to={item.link}>
+                  <ListItemButton
+                    sx={{ borderRadius: "12px", width: drawerWidth - 40 }}
+                  >
+                    <Icon component={item.icon} />
+                    <ListItemText primary={item.key} sx={{ ml: 1 }} />
+                  </ListItemButton>
+                </NavLink>
+              </ListItem>
+            ))}
           {user.roles && user.roles === 1
             ? drawerUser.map((item) => (
                 <ListItem key={item.key}>
