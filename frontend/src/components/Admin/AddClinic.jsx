@@ -78,7 +78,7 @@ function AddClinic({ setClinics }) {
         flexDirection: "column",
         width: "50%",
         margin: "auto",
-        marginBottom: "5vh",
+        marginTop: "10vh",
       }}
     >
       <Typography variant="h3" color="initial">
