@@ -74,7 +74,7 @@ function AddImageIntervention() {
           />
           <label
             htmlFor="file-input"
-            className="cursor-pointer border h-44 w-44 bg-yellow-300 rounded-2xl flex items-center justify-center"
+            className="cursor-pointer border h-44 w-44 bg-[#f3d03d] hover:scale-110 rounded-2xl flex items-center justify-center"
           >
             <span>Attribuer une photo</span>
           </label>
@@ -85,7 +85,7 @@ function AddImageIntervention() {
         id="surgeries"
         value={dataForm.surgery_id}
         onChange={handleChange}
-        className="h-10 w-80 rounded-md mt-5 ml-5 px-2 bg-yellow-300"
+        className="h-10 w-80 rounded-md mt-5 ml-5 px-2 bg-[#f3d03d]"
       >
         <option value="">Sélectionner une opération</option>
         {surgery.map((surgeryItem) => (
@@ -108,7 +108,7 @@ function AddImageIntervention() {
       <button
         onClick={handleUpload}
         type="button"
-        className="h-12 w-28 px-5 bg-[#f3d03d] text-white rounded-md mt-5 ml-10"
+        className="h-12 w-28 px-5 bg-[#f3d03d] hover:bg-[#d7ba46] text-white rounded-md mt-5 ml-10"
       >
         Créer
       </button>

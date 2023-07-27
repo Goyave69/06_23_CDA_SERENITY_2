@@ -61,14 +61,13 @@ function Interventions() {
   };
 
   return (
-    <div>
-      <h3>Bonjour Docteur {user.firstname}</h3>
-      <div className="flex  w-[80%]">
+    <div className="">
+      <div className="flex w-[80vw] mt-12">
         <ProtocolDashboard
           protocols={protocols}
           onTaskClick={handleTaskClick}
         />
-        <div className="mt-12 ml-20">
+        <div className="mt-12 ml-20 w-[38rem]">
           {selectedTask ? (
             <ProtocolAdd
               task={selectedTask}

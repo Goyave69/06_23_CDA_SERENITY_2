@@ -73,15 +73,15 @@ function ProtocolAdd({ task, selectedComponent, setSelectedComponent }) {
           task.component[selectedComponent]
         ) : (
           <div>
-            <div className=" mt-5 px-5">
+            <div className=" mt-5 px-5 mb-12">
               {buttons.map((_, index) => (
                 <button
                   key={_}
                   type="button"
-                  className={`${task.className} px-5  h-40 w-40  rounded-lg hover:scale-[1.15]`}
+                  className={`${task.className} px-5 h-14 w-40  rounded-lg hover:scale-[1.15]`}
                   onClick={() => handleClick(index)}
                 >
-                  Ajouter
+                  Ajouter<span className="text-2xl">+</span>
                 </button>
               ))}
             </div>

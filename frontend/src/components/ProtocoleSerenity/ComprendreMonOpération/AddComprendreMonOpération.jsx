@@ -19,7 +19,7 @@ function AddComprendreMonOpération({ underProtocols }) {
           <div className="flex justify-around">
             <button
               type="button"
-              className="h-44 w-44 bg-gray-300 rounded-lg"
+              className="h-44 w-44 bg-gray-300 rounded-lg hover:scale-110"
               onClick={handleImageClick}
             >
               Ajouter une image
@@ -27,7 +27,10 @@ function AddComprendreMonOpération({ underProtocols }) {
             <div className="flex items-center">
               <p className="">Ou</p>
             </div>
-            <button type="button" className="h-44 w-44 bg-gray-300 rounded-lg">
+            <button
+              type="button"
+              className="h-44 w-44 bg-gray-300 rounded-lg hover:scale-110"
+            >
               Ajouter une vidéo
             </button>
           </div>
