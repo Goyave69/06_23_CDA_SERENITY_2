@@ -48,7 +48,7 @@ export default function Agreement() {
 
   return (
     <Box>
-      <Typography variant="h6">Règles de l'hôpital</Typography>
+      <Typography variant="h6">Consentement</Typography>
       <Typography>
         Une opération est une intervention médicale sur un être humain. Il peut
         donc y avoir des complications. Lorem ipsum dolor sit amet, consectetur

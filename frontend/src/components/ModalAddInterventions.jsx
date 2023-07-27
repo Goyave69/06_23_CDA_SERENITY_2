@@ -11,7 +11,7 @@ function ModalAddInterventions({
   surgerys,
   setInterventions,
 }) {
-  const [interventionToAdd, setInterventionToAdd] = useState([]);
+  const [interventionToAdd, setInterventionToAdd] = useState({});
 
   const handleSubmit = () => {
     const { anaesthesia, clinic_id, date, user_id, surgery_id, duration } =
@@ -60,7 +60,9 @@ function ModalAddInterventions({
                 }))
               }
             >
-              <option value="">Patients</option>
+              <option value="" hidden>
+                -- Patients --
+              </option>
               {patients?.map((patient) => (
                 <option key={patient.id} value={patient.id}>
                   {`${patient.firstname} ${patient.lastname}`}
@@ -76,7 +78,9 @@ function ModalAddInterventions({
                 }))
               }
             >
-              <option value="">Chirurgie</option>
+              <option value="" hidden>
+                -- Chirurgie --
+              </option>
               {surgerys?.map((surgery) => (
                 <option key={surgery.id} value={surgery.id}>
                   {surgery.name}
@@ -92,7 +96,9 @@ function ModalAddInterventions({
                 }))
               }
             >
-              <option value="">Cabinet</option>
+              <option value="" hidden>
+                -- Cabinet --
+              </option>
               {clinics?.map((clinic) => (
                 <option key={clinic.id} value={clinic.id}>
                   {clinic.name}
@@ -108,6 +114,9 @@ function ModalAddInterventions({
                 }))
               }
             >
+              <option value="" hidden>
+                -- Anesthésie --
+              </option>
               <option value="1">Anesthésie locale</option>
               <option value="2">Anesthésie Genérale</option>
             </select>
