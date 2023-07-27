@@ -41,7 +41,6 @@ export default function ArrivalQuiz() {
       .catch((err) => {
         console.error(err);
       });
-    // steps <= 5 && setSteps(steps + 1)
   }
 
   const styles = {
@@ -72,6 +71,13 @@ export default function ArrivalQuiz() {
       <Box
         sx={{ display: "flex", justifyContent: "space-around", gap: 2, mb: 4 }}
       >
+        {steps === 0 && (
+          <Box sx={styles.text}>
+            <Typography variant="h4">
+              Voici des informations sur des éléments de l'hôpital
+            </Typography>
+          </Box>
+        )}
         {steps === 1 && (
           <>
             <img
