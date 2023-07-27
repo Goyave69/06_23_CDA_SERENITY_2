@@ -1,6 +1,7 @@
 import NoIntervention from "@pages/NoIntervention";
 import Agreement from "@components/Agreement";
 import GeneralConditions from "@components/GeneralConditions";
+import StepInfo from "@pages/StepInfo";
 import PatientSignUp from "./pages/PatientSignUp";
 import PatientNavigation from "./components/PatientNavigation";
 import InfoOp from "./pages/InfoOp";
@@ -40,6 +41,12 @@ const Routes = [
           {
             path: "info-op",
             element: <InfoOp />,
+            children: [
+              {
+                path: "step-info",
+                element: <StepInfo />,
+              },
+            ],
           },
           {
             path: "administrative",

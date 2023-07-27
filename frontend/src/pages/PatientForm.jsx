@@ -224,7 +224,14 @@ function PatientForm() {
           variant="contained"
           color="primary"
           fullWidth
-          sx={{ mt: 3, mb: 2 }}
+          sx={{
+            mt: 3,
+            mb: 2,
+            backgroundColor: "#6c5dd3",
+            "&:hover": {
+              backgroundColor: "#5e50b6",
+            },
+          }}
         >
           Envoyer
         </Button>
