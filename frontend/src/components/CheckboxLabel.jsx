@@ -2,7 +2,7 @@ import * as React from "react";
 import Checkbox from "@mui/material/Checkbox";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Paper, Box, Typography } from "@mui/material";
-import ApiHelper from "@services/ApiHelper";
+import ApiHelper from "../services/ApiHelper";
 import { useCurrentUserContext } from "../Context/UserContext";
 
 export default function CheckboxLabel({

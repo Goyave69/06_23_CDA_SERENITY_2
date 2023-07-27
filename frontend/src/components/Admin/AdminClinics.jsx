@@ -3,7 +3,7 @@ import { DataGrid, GridDeleteIcon } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import { IconButton, Tooltip } from "@mui/material";
 import axios from "axios";
-import ConfirmModal from "./ConfirmModal";
+import ConfirmModal from "../ConfirmModal";
 
 function AdminClinics({ clinics, setClinics }) {
   const [confirm, setConfirm] = useState(false);

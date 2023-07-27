@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-import ApiHelper from "@services/ApiHelper";
+import ApiHelper from "../services/ApiHelper";
 import HeaderPatient from "./HeaderPatient";
 import { useCurrentUserContext } from "../Context/UserContext";
 import HeaderPatientMobile from "./HeaderPatientMobile";

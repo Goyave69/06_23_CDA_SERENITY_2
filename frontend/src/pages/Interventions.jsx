@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Add } from "@mui/icons-material";
-import AdminCheckList from "@components/ProtocoleSerenity/CheckList/AdminCheckList";
+import AdminCheckList from "../components/ProtocoleSerenity/CheckList/AdminCheckList";
 import AddImageIntervention from "../components/ProtocoleSerenity/ComprendreMonOpération/AddImageIntervention";
 import ProtocolAdd from "../components/ProtocoleSerenity/ProtocolAdd";
 import ProtocolDashboard from "../components/ProtocoleSerenity/ProtocolDashboard";
