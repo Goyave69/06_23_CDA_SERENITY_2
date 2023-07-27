@@ -17,13 +17,11 @@ function AdminCheckList() {
       );
 
       if (response.status === 201) {
-        alert("Checklist créée avec succès !");
         setName("");
         setSubtext("");
       }
     } catch (error) {
       console.error(error);
-      alert("Une erreur s'est produite lors de la création de la checklist.");
     }
   };
 
