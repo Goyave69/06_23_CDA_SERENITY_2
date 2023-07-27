@@ -42,6 +42,32 @@ class AppointmentManager extends AbstractManager {
         return { status: 500, message: "Error" };
       });
   }
+
+  insertMultiple(data) {
+    let sqlQuery = `insert into ${this.table} (speciality_id, intervention_id) VALUES `;
+
+    const values = [];
+
+    data.forEach((appointment) => {
+      sqlQuery += "(?, ?), ";
+      values.push(appointment.speciality_id, appointment.intervention_id);
+    });
+
+    sqlQuery = sqlQuery.slice(0, sqlQuery.length - 2);
+
+    return this.connection
+      .query(sqlQuery, values)
+      .then(([res]) => {
+        return {
+          status: 201,
+          message: res,
+        };
+      })
+      .catch((err) => {
+        console.error(err);
+        return { status: 500, message: "Error" };
+      });
+  }
 }
 
 module.exports = AppointmentManager;
