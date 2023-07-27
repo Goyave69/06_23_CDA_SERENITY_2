@@ -49,7 +49,7 @@ function Praticiens() {
 
   return (
     <div className="shadow-[0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] relative flex flex-col justify-start w-full items-stretch">
-      <h3 className="font-semibold text-4xl">Praticien</h3>
+      <h3 className="font-semibold text-4xl">Chirurgiens</h3>
       <div className="w-[991px] h-[529px]  absolute top-10 left-8 rounded-[24px]" />
       <div className=" relative flex flex-col justify-start gap-6 h-[572px] shrink-0 items-stretch pt-8 pb-6 px-8 rounded-[24px]">
         <div className="flex flex-row justify-start mb-4 gap-6 relative items-center">

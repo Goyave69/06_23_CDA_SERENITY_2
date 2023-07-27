@@ -36,9 +36,13 @@ function Dashboard() {
   return (
     <Box>
       <Box>
-        <Typography variant="h3" color="initial" sx={{ m: 5, ml: 6 }}>
-          {user.firstname ? `Bonjour ${user.firstname}` : null}
-        </Typography>
+        {user.firstname ? (
+          <h3 className="text-5xl mt-5 mb-10">
+            Bonjour{" "}
+            <span className="text-[#6c5dd3] font-light ">{user.firstname}</span>
+          </h3>
+        ) : null}
+
         {user.roles && user.roles === 3 ? (
           <AdminDashboard
             specialists={specialists}
