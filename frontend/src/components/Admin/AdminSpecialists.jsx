@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ApiHelper from "../services/ApiHelper";
-import ConfirmModal from "./ConfirmModal";
+import ApiHelper from "../../services/ApiHelper";
+import ConfirmModal from "../ConfirmModal";
 
 function AdminSpecialists({
   specialists,

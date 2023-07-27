@@ -15,10 +15,10 @@ import PraticienForm from "./components/PraticienForm";
 import Dashboard from "./pages/Dashboard";
 import App from "./App";
 import LoginPage from "./pages/LoginPage";
-import AdminUsers from "./components/AdminUsers";
+import AdminUsers from "./components/Admin/AdminUsers";
 import PatientForm from "./pages/PatientForm";
 import Praticiens from "./pages/Praticiens";
-import AddClinic from "./components/AddClinic";
+import AddClinic from "./components/Admin/AddClinic";
 
 const Routes = [
   {

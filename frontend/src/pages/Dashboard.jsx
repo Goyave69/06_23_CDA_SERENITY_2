@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import AdminDashboard from "../components/AdminDashboard";
+import AdminDashboard from "../components/Admin/AdminDashboard";
 import CurrentUserContext, {
   useCurrentUserContext,
 } from "../Context/UserContext";

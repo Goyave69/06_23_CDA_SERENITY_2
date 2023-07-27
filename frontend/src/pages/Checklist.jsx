@@ -13,12 +13,7 @@ export default function Checklist() {
   const isMobile = useMediaQuery("(max-width:600px)");
 
   useEffect(() => {
-    ApiHelper(
-      `done-check-list/byInterventionId/${interventionId}`,
-      "GET",
-      null,
-      token
-    )
+    ApiHelper(`done-check-list`, "GET", null, token)
       .then((response) => {
         if (response.status !== 200) {
           throw new Error("Not found");

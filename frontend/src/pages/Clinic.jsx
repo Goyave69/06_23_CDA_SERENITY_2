@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import clinicImg from "../assets/img/image_clinique.svg";
 
 function Clinic() {
+  const [clinics, setClininc] = useState([]);
+  const fetchClinic = () => {
+    fetch("http://localhost:5000/clinics")
+      .then((res) => res.json())
+      .then((response) => setClininc(response))
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    fetchClinic();
+  }, []);
   const data = [
     {
       image1: "https://file.rendit.io/n/s9tgA372Fug9qnCZ2qBf.svg",
@@ -81,18 +93,14 @@ function Clinic() {
         </div>
         <div className="bg-[rgba(228,_228,_228,_0.1)] mb-2 relative h-px shrink-0" />
 
-        {data.map((item) => (
+        {clinics.map((item) => (
           <div className="shadow-[inset_0px_-1px_0px_0px_#e4e4e4] bg-black/0 flex flex-row justify-start gap-2 relative items-start">
             <img
               alt=""
-              src={item.image1}
+              src={clinicImg}
               className="min-h-0 min-w-0 relative w-5 shrink-0 mt-6 mr-2"
             />
-            <img
-              alt=""
-              src={item.image2}
-              className="min-h-0 min-w-0 relative w-24 shrink-0 mb-6 mr-4"
-            />
+
             <div className="font-['Inter'] font-semibold text-[#6c5dd3] relative w-40 shrink-0 mt-3 mr-48">
               {item.name}
             </div>
