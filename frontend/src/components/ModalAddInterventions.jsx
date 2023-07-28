@@ -3,6 +3,7 @@ import axios from "axios";
 import moment from "moment";
 import React, { useState } from "react";
 import DateTimePicker from "react-datetime-picker";
+import { useCurrentUserContext } from "../Context/UserContext";
 
 function ModalAddInterventions({
   setModalIntervention,
@@ -12,6 +13,7 @@ function ModalAddInterventions({
   setInterventions,
 }) {
   const [interventionToAdd, setInterventionToAdd] = useState({});
+  const { user } = useCurrentUserContext()
 
   const handleSubmit = () => {
     const { anaesthesia, clinic_id, date, user_id, surgery_id, duration } =
@@ -24,6 +26,7 @@ function ModalAddInterventions({
         user_id,
         surgery_id,
         duration,
+        specialist_user_id : user.id
       })
       .then((res) =>
         axios

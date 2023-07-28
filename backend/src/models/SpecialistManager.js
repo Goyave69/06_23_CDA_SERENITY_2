@@ -41,6 +41,34 @@ class SpecialistManager extends AbstractManager {
         return { status: 500, message: "Error" };
       });
   }
+  
+  findByUserId(user_id) {
+    return this.connection
+      .query(`select id from ${this.table} where user_id = ?`, [user_id])
+      .then(([rows]) => {
+        return rows.length === 0
+          ? { status: 404, message: {} }
+          : { status: 200, message: rows[0] };
+      })
+      .catch((err) => {
+        console.error(err);
+        return { status: 500, message: "Error" };
+      });
+  }
+
+  newIntervention(data) {
+    return this.connection
+      .query(`insert into specialist_has_intervention (specialist_id, intervention_id) VALUES (?, ?)`, [data.specialist_id, data.intervention_id])
+      .then(([rows]) => {
+        return rows.length === 0
+          ? { status: 404, message: {} }
+          : { status: 200, message: rows[0] };
+      })
+      .catch((err) => {
+        console.error(err);
+        return { status: 500, message: "Error" };
+      });
+  }
 }
 
 module.exports = SpecialistManager;
