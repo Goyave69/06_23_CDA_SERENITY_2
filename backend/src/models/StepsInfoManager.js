@@ -24,6 +24,20 @@ class StepsInfoManager extends AbstractManager {
         return { status: 500, message: "Error" };
       });
   }
+
+  getBySurgeryId(surgeryId) {
+    return this.connection
+      .query(`select * from  ${this.table} where surgery_id = ?`, [surgeryId])
+      .then(([rows]) => {
+        return rows.length === 0
+          ? { status: 404, message: {} }
+          : { status: 200, message: rows };
+      })
+      .catch((err) => {
+        console.error(err);
+        return { status: 500, message: "Error" };
+      });
+  }
 }
 
 module.exports = StepsInfoManager;

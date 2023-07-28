@@ -309,18 +309,15 @@ CREATE TABLE IF NOT EXISTS `serenity`.`appointment_for_intervention` (
   CONSTRAINT `fk_appointment_for_intervention_specialist1`
     FOREIGN KEY (`specialist_id`)
     REFERENCES `serenity`.`specialist` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE,
   CONSTRAINT `fk_appointment_for_intervention_speciality1`
     FOREIGN KEY (`speciality_id`)
     REFERENCES `serenity`.`speciality` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE,
   CONSTRAINT `fk_appointment_for_intervention_intervention1`
     FOREIGN KEY (`intervention_id`)
     REFERENCES `serenity`.`intervention` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 

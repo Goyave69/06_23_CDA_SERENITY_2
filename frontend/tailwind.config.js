@@ -4,7 +4,11 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        bgLogin: "url('./src/assets/img/medecin-welcome.webp')",
+        bgLogin: "url('./src/assets/img/baniere-medical.jpg')",
+      },
+      fontFamily: {
+        sans: ["Roboto", "sans-serif"],
+        rLight: ["Roboto", "sans-serif"],
       },
     },
   },

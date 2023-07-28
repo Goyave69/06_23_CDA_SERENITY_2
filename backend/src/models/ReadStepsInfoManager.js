@@ -43,6 +43,32 @@ class ReadStepsInfoManager extends AbstractManager {
         return { status: 500, message: "Error" };
       });
   }
+
+  insertMultiple(data) {
+    let sqlQuery = `insert into ${this.table} (steps_info_id, intervention_id) VALUES `;
+
+    const values = [];
+
+    data.forEach((rsi) => {
+      sqlQuery += "(?, ?), ";
+      values.push(rsi.steps_info_id, rsi.intervention_id);
+    });
+
+    sqlQuery = sqlQuery.slice(0, sqlQuery.length - 2);
+
+    return this.connection
+      .query(sqlQuery, values)
+      .then(([res]) => {
+        return {
+          status: 201,
+          message: res,
+        };
+      })
+      .catch((err) => {
+        console.error(err);
+        return { status: 500, message: "Error" };
+      });
+  }
 }
 
 module.exports = ReadStepsInfoManager;

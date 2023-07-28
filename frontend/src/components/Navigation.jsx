@@ -29,7 +29,7 @@ const drawerItems = [
 
 const drawerAdmin = [
   {
-    key: "Praticiens",
+    key: "Chirurgiens",
     link: "/gestion-praticiens",
     icon: DashboardCustomizeIcon,
   },
@@ -80,35 +80,24 @@ export default function Navigation() {
                 objectFit: "cover",
                 height: "50px",
                 borderRadius: 4,
-                m: 2,
               },
             })}
           />
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={(theme) => ({
-              [theme.breakpoints.down("md")]: {},
-              [theme.breakpoints.up("md")]: {
-                height: "42px",
-                ml: 1,
-              },
-            })}
-          >
-            Serenity
-          </Typography>
+          <h2 className="text-2xl">Serenity</h2>
         </Toolbar>
         <Divider />
         <List>
           {drawerItems.map((item) => (
-            <ListItem key={item.key}>
+            <ListItem key={item.key} sx={{ marginBottom: "30px" }}>
               <NavLink to={item.link}>
                 <ListItemButton
-                  sx={{ borderRadius: "12px", width: drawerWidth - 40 }}
+                  sx={{
+                    borderRadius: "12px",
+                    width: drawerWidth - 10,
+                  }}
                 >
-                  <Icon component={item.icon} />
-                  <ListItemText primary={item.key} sx={{ ml: 1 }} />
+                  <Icon component={item.icon} sx={{ marginRight: "20px" }} />
+                  <p className="text-xl">{item.key}</p>
                 </ListItemButton>
               </NavLink>
             </ListItem>
@@ -129,13 +118,23 @@ export default function Navigation() {
             : null}
           {user.roles && user.roles === 3
             ? drawerAdmin.map((item) => (
-                <ListItem key={item.key}>
+                <ListItem key={item.key} sx={{ marginBottom: "40px" }}>
                   <NavLink to={item.link}>
                     <ListItemButton
-                      sx={{ borderRadius: "12px", width: drawerWidth - 40 }}
+                      sx={{
+                        borderRadius: "12px",
+                        width: drawerWidth - 40,
+                        "&:hover": {
+                          backgroundColor: "#8d81da",
+                          color: "white",
+                        },
+                      }}
                     >
-                      <Icon component={item.icon} />
-                      <ListItemText primary={item.key} sx={{ ml: 1 }} />
+                      <Icon
+                        component={item.icon}
+                        sx={{ marginRight: "20px" }}
+                      />
+                      <p className="text-xl">{item.key}</p>
                     </ListItemButton>
                   </NavLink>
                 </ListItem>

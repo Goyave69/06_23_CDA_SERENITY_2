@@ -4,7 +4,6 @@ import { Container, Typography, TextField, Button, Box } from "@mui/material";
 import jwt_decode from "jwt-decode";
 import ApiHelper from "../services/ApiHelper";
 import { useCurrentUserContext } from "../Context/UserContext";
-import medecin from "../assets/img/medecin-welcome.webp";
 import logo from "../assets/img/logo3.svg";
 
 function LoginPage() {
@@ -55,9 +54,13 @@ function LoginPage() {
     <div className="h-[100vh]">
       <div className="flex">
         <div
-          className="flex flex-col h-[100vh] w-[50%] justify-center items-center bg-cyan-800
+          className="flex flex-col h-[100vh] w-[50vw]  items-center bg-cyan-800
       "
         >
+          <h3 className="text-5xl mt-10 mb-[12rem] text-white">
+            Bienvenue chez Serenity
+          </h3>
+
           <h2 className="text-4xl font-bold text-cyan-200 mb-10 ">
             Connectez-vous
           </h2>
@@ -101,7 +104,7 @@ function LoginPage() {
                 Se connecter
               </button>
             </div>
-            <p className="mt-6 text-white">
+            <p className="mt-6 text-white text-center">
               Vous n'avez pas de compte ?
               <NavLink to="/sign-up">
                 <span className="text-cyan-200 underline"> Inscrivez-vous</span>
@@ -109,10 +112,7 @@ function LoginPage() {
             </p>
           </form>
         </div>
-        <div className=" bg-bgLogin w-[50%] flex flex-col justify- items-center">
-          <h3 className="text-5xl  mt-20 mb-6">Bienvenue chez Serenity</h3>
-          <img src={logo} alt="" className="w-[200px] h-[200px]" />
-        </div>
+        <div className=" bg-bgLogin w-[50vw] h-[auto] bg-cover flex flex-col justify- items-center" />
       </div>
     </div>
   );
