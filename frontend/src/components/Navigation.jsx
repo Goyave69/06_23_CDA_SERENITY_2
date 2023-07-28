@@ -28,16 +28,16 @@ const drawerItems = [
 ];
 
 const drawerAdmin = [
-  {
-    key: "Chirurgiens",
-    link: "/gestion-praticiens",
-    icon: DashboardCustomizeIcon,
-  },
-  {
-    key: "Cabinets",
-    link: "/gestion-cabinets",
-    icon: DashboardCustomizeIcon,
-  },
+  // {
+  //   key: "Praticiens",
+  //   link: "/gestion-praticiens",
+  //   icon: DashboardCustomizeIcon,
+  // },
+  // {
+  //   key: "Cabinets",
+  //   link: "/gestion-cabinets",
+  //   icon: DashboardCustomizeIcon,
+  // },
   {
     key: "Interventions",
     link: "/gestion-interventions",
@@ -87,21 +87,23 @@ export default function Navigation() {
         </Toolbar>
         <Divider />
         <List>
-          {drawerItems.map((item) => (
-            <ListItem key={item.key} sx={{ marginBottom: "30px" }}>
-              <NavLink to={item.link}>
-                <ListItemButton
-                  sx={{
-                    borderRadius: "12px",
-                    width: drawerWidth - 10,
-                  }}
-                >
-                  <Icon component={item.icon} sx={{ marginRight: "20px" }} />
-                  <p className="text-xl">{item.key}</p>
-                </ListItemButton>
-              </NavLink>
-            </ListItem>
-          ))}
+          {user.roles &&
+            user.roles !== 1 &&
+            drawerItems.map((item) => (
+              <ListItem key={item.key} sx={{ marginBottom: "30px" }}>
+                <NavLink to={item.link}>
+                  <ListItemButton
+                    sx={{
+                      borderRadius: "12px",
+                      width: drawerWidth - 10,
+                    }}
+                  >
+                    <Icon component={item.icon} sx={{ marginRight: "20px" }} />
+                    <p className="text-xl">{item.key}</p>
+                  </ListItemButton>
+                </NavLink>
+              </ListItem>
+            ))}
           {user.roles && user.roles === 1
             ? drawerUser.map((item) => (
                 <ListItem key={item.key}>

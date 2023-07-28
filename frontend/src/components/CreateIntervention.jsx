@@ -19,11 +19,10 @@ function CreateIntervention({
     setModalSurgery(false);
     setModalInterventions(true);
   };
-  console.warn(interventions);
+
   return (
     <div>
-      <h3>Interventions</h3>
-      <div className="flex w-full m-5">
+      <div className="flex w-full p-5">
         <button
           onClick={handleModalSurgery}
           type="button"
