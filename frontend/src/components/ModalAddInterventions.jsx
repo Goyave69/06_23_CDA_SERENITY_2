@@ -13,7 +13,7 @@ function ModalAddInterventions({
   setInterventions,
 }) {
   const [interventionToAdd, setInterventionToAdd] = useState({});
-  const { user } = useCurrentUserContext()
+  const { user } = useCurrentUserContext();
 
   const handleSubmit = () => {
     const { anaesthesia, clinic_id, date, user_id, surgery_id, duration } =
@@ -26,7 +26,7 @@ function ModalAddInterventions({
         user_id,
         surgery_id,
         duration,
-        specialist_user_id : user.id
+        specialist_user_id: user.id,
       })
       .then((res) =>
         axios
