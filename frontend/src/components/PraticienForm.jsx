@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import { Button, Stack, Grid, TextField, Box } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import CurrentUserContext, {
   useCurrentUserContext,
 } from "../Context/UserContext";
@@ -27,30 +27,31 @@ const theme = createTheme({
 function PraticienForm() {
   const { user } = useCurrentUserContext(CurrentUserContext);
   const [currentForm, setCurrentForm] = useState("profil");
-  const [praticiens, setPraticiens] = useState([]);
+  const [clinics, setClinics] = useState([]);
+  const [specialities, setSpecialities] = useState([]);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/clinics")
+      .then((results) => setClinics(results.data));
+    axios
+      .get("http://localhost:5000/specialities")
+      .then((results) => setSpecialities(results.data));
+  }, []);
+
+  const [confPassword, setConfPassword] = useState("");
   const [formData, setFormData] = useState({
-    user: {
-      lastname: "",
-      firstname: "",
-      email: "",
-      password: "",
-      address: "",
-      city: "",
-      zipcode: "",
-      phone_number: "",
-    },
-    specialist: {
-      specialities: "",
-      languages: "",
-      bio: "",
-      diplomes: "",
-      formations: "",
-      experiences: "",
-      works: "",
-      distinctions: "",
-    },
+    lastname: "",
+    firstname: "",
+    email: "",
+    password: "",
+    address: "",
+    city: "",
+    zipcode: "",
+    phone_number: "",
+    speciality_id: "",
+    clinic_id: "",
   });
 
   const Style = {
@@ -81,24 +82,24 @@ function PraticienForm() {
   const handleClick = (form) => {
     setCurrentForm(form);
   };
-  const handleChange = (e) => {
-    const field = e.target.name.split(".");
-    if (field.length === 2) {
-      const [parent, child] = field;
-      setFormData((prevState) => ({
-        ...prevState,
-        [parent]: {
-          ...prevState[parent],
-          [child]: e.target.value,
-        },
-      }));
-    } else {
-      setFormData((prevState) => ({
-        ...prevState,
-        [field[0]]: e.target.value,
-      }));
-    }
-  };
+  // const handleChange = (e) => {
+  //   const field = e.target.name.split(".");
+  //   if (field.length === 2) {
+  //     const [parent, child] = field;
+  //     setFormData((prevState) => ({
+  //       ...prevState,
+  //       [parent]: {
+  //         ...prevState[parent],
+  //         [child]: e.target.value,
+  //       },
+  //     }));
+  //   } else {
+  //     setFormData((prevState) => ({
+  //       ...prevState,
+  //       [field[0]]: e.target.value,
+  //     }));
+  //   }
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -111,21 +112,37 @@ function PraticienForm() {
       body,
     };
     if (
-      formData.user.lastname &&
-      formData.user.firstname &&
-      formData.user.email &&
-      formData.user.password
+      formData.lastname &&
+      formData.firstname &&
+      formData.email &&
+      formData.password &&
+      formData.speciality_id &&
+      formData.clinic_id &&
+      formData.password === confPassword
     ) {
-      fetch("http://localhost:5000/users/specialist", requestOptions)
-        .then((response) => response.json())
-        .then((data) => {
-          setPraticiens(data);
+      fetch("http://localhost:5000/users/specialist", requestOptions).then(
+        () => {
           navigate("/dashboard");
-        });
+        }
+      );
     }
   };
 
-  console.warn(praticiens);
+  const handleAutoComplete = () => {
+    setFormData({
+      lastname: "René",
+      firstname: "Jean",
+      email: "jr@demo.fr",
+      password: "demoday",
+      address: "12 rue de la boulangerie",
+      city: "Lyon",
+      zipcode: "69002",
+      phone_number: "06 63 37 71 12",
+      speciality_id: 2,
+      clinic_id: 1,
+    });
+    setConfPassword("demoday");
+  };
 
   return (
     <div className="mb-5">
@@ -207,26 +224,43 @@ function PraticienForm() {
                     <TextField
                       label="Nom"
                       name="user.lastname"
-                      value={formData.user.lastname}
-                      onChange={handleChange}
+                      value={formData.lastname}
+                      onChange={(e) =>
+                        setFormData((curr) => ({
+                          ...curr,
+                          lastname: e.target.value,
+                        }))
+                      }
                       fullWidth
+                      required
                     />
                   </Grid>
                   <Grid item xs={5}>
                     <TextField
                       label="Prénom"
                       name="user.firstname"
-                      value={formData.user.firstname}
-                      onChange={handleChange}
+                      value={formData.firstname}
+                      onChange={(e) =>
+                        setFormData((curr) => ({
+                          ...curr,
+                          firstname: e.target.value,
+                        }))
+                      }
                       fullWidth
+                      required
                     />
                   </Grid>
                   <Grid item xs={5}>
                     <TextField
                       label="Adresse"
                       name="user.address"
-                      value={formData.specialist.address}
-                      onChange={handleChange}
+                      value={formData.address}
+                      onChange={(e) =>
+                        setFormData((curr) => ({
+                          ...curr,
+                          address: e.target.value,
+                        }))
+                      }
                       fullWidth
                     />
                   </Grid>
@@ -234,8 +268,13 @@ function PraticienForm() {
                     <TextField
                       label="Code Postale"
                       name="user.zipcode"
-                      value={formData.user.zipcode}
-                      onChange={handleChange}
+                      value={formData.zipcode}
+                      onChange={(e) =>
+                        setFormData((curr) => ({
+                          ...curr,
+                          zipcode: e.target.value,
+                        }))
+                      }
                       fullWidth
                     />
                   </Grid>
@@ -243,8 +282,13 @@ function PraticienForm() {
                     <TextField
                       label="Téléphone"
                       name="user.phone_number"
-                      value={formData.user.phone_number}
-                      onChange={handleChange}
+                      value={formData.phone_number}
+                      onChange={(e) =>
+                        setFormData((curr) => ({
+                          ...curr,
+                          phone_number: e.target.value,
+                        }))
+                      }
                       fullWidth
                     />
                   </Grid>
@@ -252,9 +296,15 @@ function PraticienForm() {
                     <TextField
                       label="Adresse Email"
                       name="user.email"
-                      value={formData.user.email}
-                      onChange={handleChange}
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData((curr) => ({
+                          ...curr,
+                          email: e.target.value,
+                        }))
+                      }
                       fullWidth
+                      required
                     />
                   </Grid>
                   <Grid item xs={5}>
@@ -262,17 +312,68 @@ function PraticienForm() {
                       label="Mot de passe"
                       name="user.password"
                       type="password"
-                      value={formData.user.password}
-                      onChange={handleChange}
+                      value={formData.password}
+                      onChange={(e) =>
+                        setFormData((curr) => ({
+                          ...curr,
+                          password: e.target.value,
+                        }))
+                      }
                       fullWidth
+                      required
                     />
                   </Grid>{" "}
                   <Grid item xs={5}>
                     <TextField
                       label="Confirmation Mot de passe"
                       type="password"
+                      value={confPassword}
+                      onChange={(e) => setConfPassword(e.target.value)}
                       fullWidth
+                      required
                     />
+                  </Grid>
+                  <Grid item xs={5}>
+                    <select
+                      className="px-2 py-1 w-full mt-2 border-2 whitespace-nowrap"
+                      onChange={(e) =>
+                        setFormData((curr) => ({
+                          ...curr,
+                          clinic_id: e.target.value,
+                        }))
+                      }
+                      value={formData.clinic_id}
+                    >
+                      <option value="" hidden>
+                        -- Cabinet --
+                      </option>
+                      {clinics?.map((clinic) => (
+                        <option key={clinic.id} value={clinic.id}>
+                          {clinic.name}
+                        </option>
+                      ))}
+                    </select>
+                  </Grid>
+                  <Grid item xs={5}>
+                    <select
+                      className="px-2 py-1 w-full mt-2 border-2 whitespace-nowrap"
+                      onChange={(e) =>
+                        setFormData((curr) => ({
+                          ...curr,
+                          speciality_id: e.target.value,
+                        }))
+                      }
+                      value={formData.speciality_id}
+                    >
+                      <option value="" hidden>
+                        -- Spécialité --
+                      </option>
+                      {specialities?.map((speciality) => (
+                        <option key={speciality.id} value={speciality.id}>
+                          {speciality.name}
+                        </option>
+                      ))}
+                    </select>
                   </Grid>
                 </Grid>
               </Box>
@@ -316,14 +417,22 @@ function PraticienForm() {
             </Box>
           )} */}
         </form>
-
-        <button
-          onClick={handleSubmit}
-          type="button"
-          className="text-center whitespace-nowrap text-sm font-['Inter'] font-bold leading-[20px] text-white ml-[8rem]  bg-[#6c5dd3] flex flex-col justify-center h-12 shrink-0 items-stretch px-5 rounded-lg "
-        >
-          Ajouter le Praticien
-        </button>
+        <div style={{ margin: 10 }} className="flex gap-10">
+          <button
+            onClick={handleSubmit}
+            type="button"
+            className="text-center whitespace-nowrap text-sm font-['Inter'] font-bold leading-[20px] text-white ml-[8rem]  bg-[#6c5dd3] flex flex-col justify-center h-12 shrink-0 items-stretch px-5 rounded-lg "
+          >
+            Ajouter le Praticien
+          </button>
+          <button
+            type="button"
+            onClick={handleAutoComplete}
+            className=" w-24 text-xl text-white bg-green-500 rounded-md text-center"
+          >
+            DEMO
+          </button>
+        </div>
       </div>
     </div>
   );

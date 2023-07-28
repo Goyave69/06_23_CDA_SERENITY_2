@@ -65,7 +65,7 @@ class SpecialistManager extends AbstractManager {
       .then(([rows]) => {
         return rows.length === 0
           ? { status: 404, message: {} }
-          : { status: 200, message: rows[0] };
+          : { status: 201, message: rows[0] };
       })
       .catch((err) => {
         console.error(err);

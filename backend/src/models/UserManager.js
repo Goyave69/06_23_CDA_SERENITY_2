@@ -59,7 +59,7 @@ class UserManager extends AbstractManager {
           user.roles || 1,
         ]
       )
-      .then((rows) => {
+      .then(([rows]) => {
         return {
           status: 201,
           message: {
@@ -80,56 +80,56 @@ class UserManager extends AbstractManager {
       });
   }
 
-  async insertSpecialist({ user }) {
-    return this.connection
-      .query(
-        `INSERT INTO ${this.table} (firstname, lastname, email, password, phone_number, address, city, zipcode, country, gender, birthdate, family_situation, child, roles) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [
-          user.firstname,
-          user.lastname,
-          user.email,
-          await passwordHasher(user.password),
-          user.phone_number,
-          user.address,
-          user.city,
-          user.zipcode,
-          user.country,
-          user.gender,
-          user.birthdate,
-          user.family_situation,
-          user.child,
-          user.roles || 2,
-        ]
-      )
-      .then(async ([rowsUser]) => {
-        const specialistInsert = async () =>
-          this.connection.query(`insert into specialist (user_id) VALUES (?)`, [
-            rowsUser.insertId,
-          ]);
+  // async insertSpecialist({ user }) {
+  //   return this.connection
+  //     .query(
+  //       `INSERT INTO ${this.table} (firstname, lastname, email, password, phone_number, address, city, zipcode, country, gender, birthdate, family_situation, child, roles) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+  //       [
+  //         user.firstname,
+  //         user.lastname,
+  //         user.email,
+  //         await passwordHasher(user.password),
+  //         user.phone_number,
+  //         user.address,
+  //         user.city,
+  //         user.zipcode,
+  //         user.country,
+  //         user.gender,
+  //         user.birthdate,
+  //         user.family_situation,
+  //         user.child,
+  //         user.roles || 2,
+  //       ]
+  //     )
+  //     .then(async ([rowsUser]) => {
+  //       const specialistInsert = async () =>
+  //         this.connection.query(`insert into specialist (user_id) VALUES (?)`, [
+  //           rowsUser.insertId,
+  //         ]);
 
-        const result = await specialistInsert();
-        return result;
-      })
-      .then((rows) => {
-        return {
-          status: 201,
-          message: {
-            id: rows.insertId,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.email,
-            roles: user.roles,
-          },
-        };
-      })
-      .catch((err) => {
-        console.error(err);
-        return {
-          status: 500,
-          message: err.errno === 1062 ? "Cet email existe déja" : "Error",
-        };
-      });
-  }
+  //       const result = await specialistInsert();
+  //       return result;
+  //     })
+  //     .then((rows) => {
+  //       return {
+  //         status: 201,
+  //         message: {
+  //           id: rows.insertId,
+  //           firstname: user.firstname,
+  //           lastname: user.lastname,
+  //           email: user.email,
+  //           roles: user.roles,
+  //         },
+  //       };
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       return {
+  //         status: 500,
+  //         message: err.errno === 1062 ? "Cet email existe déja" : "Error",
+  //       };
+  //     });
+  // }
 
   async update(body, id) {
     let sqlQuery = `UPDATE ${this.table} SET `;
