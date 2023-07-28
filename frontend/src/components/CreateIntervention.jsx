@@ -19,7 +19,7 @@ function CreateIntervention({
     setModalSurgery(false);
     setModalInterventions(true);
   };
-  console.warn(interventions);
+
   return (
     <div>
       <h2 className="text-3xl m-5">Interventions</h2>

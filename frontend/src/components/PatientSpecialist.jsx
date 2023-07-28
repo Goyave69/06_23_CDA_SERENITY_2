@@ -8,7 +8,6 @@ function PatientSpecialist({
   specialistId,
   interventions,
   setAppointement,
-  setInterventions,
 }) {
   const [modal, setModal] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState([]);
