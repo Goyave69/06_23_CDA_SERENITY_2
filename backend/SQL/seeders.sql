@@ -23,10 +23,10 @@ INSERT INTO `serenity`.`user` (`id`, `email`, `password`, `roles`, `phone_number
 (4,'j.doe@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$ZklWurDoLrvMGSM2IAeUWw$buc8JVRSYNY5zlS4OMfPgn3UovCs/xSy4cJj2boZom0', 1, '04 03 02 01 00', 'John', 'Doe', 'Male', '1990-01-01', '123 rue de la Paix', 'Paris', '75001', 'France', 'Célibataire', 0, '2023-07-09 10:00:00'),
 
 -- Patient 2 | Password : password2
-(5,'jane.smith@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$spb2Fq6XfjZRZAfNXn46gA$s5M+xMrmFFn52juW7G1Qi28mv5k6aKHtoC6qoaxee4I', 1, '06 06 06 06 06', 'Jane', 'Smith', null, null, null, null, null, null, null, null, '2023-07-09 11:00:00');
+(5,'jane.smith@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$spb2Fq6XfjZRZAfNXn46gA$s5M+xMrmFFn52juW7G1Qi28mv5k6aKHtoC6qoaxee4I', 1, '06 06 06 06 06', 'Jane', 'Smith', null, null, null, null, null, null, null, null, '2023-07-09 11:00:00'),
 
--- Patient 2 | Password : password2
-(6,'béni@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$spb2Fq6XfjZRZAfNXn46gA$s5M+xMrmFFn52juW7G1Qi28mv5k6aKHtoC6qoaxee4I', 1, '06 06 06 06 06', 'Jamais', 'Malade', '1980-04-09', '25 rue Duchamps', 'Paris', '75008', 'France', 'Mariée', 3, '2023-07-09 11:00:00');
+-- Patient 3 | Password : password2
+(6,'beni@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$spb2Fq6XfjZRZAfNXn46gA$s5M+xMrmFFn52juW7G1Qi28mv5k6aKHtoC6qoaxee4I', 1, '06 06 06 06 06', 'Jamais', 'Malade', 'Male', '1980-04-09', '25 rue Duchamps', 'Paris', '75008', 'France', 'Marié', 3, '2023-07-09 11:00:00');
 
 -- Insérer des données dans la table `specialist`
 INSERT INTO `serenity`.`specialist` (`id`, `user_id`) VALUES
