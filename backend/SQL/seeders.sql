@@ -58,7 +58,10 @@ INSERT INTO `serenity`.`steps_info` (`id`, `title`, `image`, `description`, `sur
 
 -- Insérer des données dans la table `read_steps_info`
 INSERT INTO `serenity`.`read_steps_info` (`id`, `is_checked`, `steps_info_id`, `intervention_id`) VALUES
-(1, 1, 1, 1);
+(1, 0, 1, 1),
+(2, 1, 1, 2),
+(3, 0, 2, 3),
+(4, 0, 1, 4);
 
 -- Insérer des données dans la table `speciality`
 INSERT INTO `serenity`.`speciality` (`id`, `name`) VALUES
