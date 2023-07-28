@@ -14,8 +14,8 @@ function ModalAddSurgery({ setModalSurgery }) {
       .catch((err) => console.warn(err));
   };
   return (
-    <div classNameName="absolute w-screen h-screen bg-black/25">
-      <div className="absolute left-1/2 transform -translate-x-1/2 container mx-auto py-8">
+    <div classNameName="absolute w-screen h-screen">
+      <div className="absolute bg-white/75 w-10/12 h-fit ">
         <div className="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
           <div className="flex justify-between">
             <h5 className="">Ajouter une chirurgie</h5>

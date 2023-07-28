@@ -77,18 +77,18 @@ function AddClinic({ setClinics }) {
         display: "flex",
         flexDirection: "column",
         width: "50%",
-        margin: "auto",
-        marginBottom: "5vh",
+        marginLeft: "13%",
+        marginTop: "10vh",
       }}
     >
-      <Typography variant="h3" color="initial">
+      <Typography sx={{ marginBottom: 8 }} variant="h3" color="initial">
         Ajouter un cabinet
       </Typography>
       <Box sx={{ display: "flex" }}>
         <Box>
           <TextField
             name="name"
-            label="Nom"
+            placeholder="Nom"
             value={clinicData.name}
             onChange={handleChange}
             required
@@ -98,7 +98,7 @@ function AddClinic({ setClinics }) {
           <TextField
             variant="outlined"
             name="address"
-            label="Adresse"
+            placeholder="Adresse"
             value={clinicData.address}
             onChange={handleChange}
             required
@@ -107,7 +107,7 @@ function AddClinic({ setClinics }) {
           />
           <TextField
             name="city"
-            label="Ville"
+            placeholder="Ville"
             value={clinicData.city}
             onChange={handleChange}
             required
@@ -116,7 +116,7 @@ function AddClinic({ setClinics }) {
           />
           <TextField
             name="email"
-            label="Email"
+            placeholder="Email"
             value={clinicData.email}
             onChange={handleChange}
             required
@@ -155,7 +155,7 @@ function AddClinic({ setClinics }) {
         <Box>
           <TextField
             name="phone_number"
-            label="Numéro de téléphone"
+            placeholder="Numéro de téléphone"
             value={clinicData.phone_number}
             onChange={handleChange}
             required
@@ -164,7 +164,7 @@ function AddClinic({ setClinics }) {
           <TextField
             sx={{ ml: 3 }}
             name="zipcode"
-            label="Code postal"
+            placeholder="Code postal"
             value={clinicData.zipcode}
             onChange={handleChange}
             required
@@ -187,7 +187,7 @@ function AddClinic({ setClinics }) {
         </Box>
       </Box>
       <Button
-        sx={{ width: 250, m: "auto" }}
+        sx={{ width: 250, mt: 5 }}
         type="submit"
         variant="contained"
         color="primary"

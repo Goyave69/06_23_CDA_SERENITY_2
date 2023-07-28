@@ -22,7 +22,8 @@ function CreateIntervention({
 
   return (
     <div>
-      <div className="flex w-full p-5">
+      <h2 className="text-3xl m-5">Interventions</h2>
+      <div className="flex w-full m-5">
         <button
           onClick={handleModalSurgery}
           type="button"

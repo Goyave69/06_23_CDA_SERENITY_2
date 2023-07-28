@@ -18,6 +18,17 @@ function PatientSpecialist({
   };
   return (
     <div>
+      {modal ? (
+        <ModalAppointment
+          patient={selectedPatient}
+          clinics={clinics}
+          specialistId={specialistId}
+          interventions={interventions}
+          setModal={setModal}
+          setAppointement={setAppointement}
+        />
+      ) : null}
+      <h2 className="text-3xl m-5">Liste des patients</h2>
       <div className="flex ">
         {patients?.map((patient) => (
           <div className="bg-white rounded overflow-hidden shadow-lg m-5">
@@ -61,16 +72,6 @@ function PatientSpecialist({
             </div>
           </div>
         ))}
-        {modal ? (
-          <ModalAppointment
-            patient={selectedPatient}
-            clinics={clinics}
-            specialistId={specialistId}
-            interventions={interventions}
-            setModal={setModal}
-            setAppointement={setAppointement}
-          />
-        ) : null}
       </div>
     </div>
   );

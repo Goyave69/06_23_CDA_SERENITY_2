@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Box, Typography } from "@mui/material/";
-import PatientButton from "@components/PatientButton";
 import {
   Outlet,
   useLocation,
@@ -9,6 +8,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import PatientButton from "./PatientButton";
 
 import ApiHelper from "../services/ApiHelper";
 import HeaderPatient from "./HeaderPatient";

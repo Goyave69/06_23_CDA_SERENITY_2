@@ -35,8 +35,8 @@ function ModalAppointment({
   };
 
   return (
-    <div classNameName="absolute w-screen h-screen bg-black/25 bg-white ">
-      <div className="absolute left-1/2 transform -translate-x-1/2 container mx-auto py-8 bg-white p-8 rounded-md ">
+    <div classNameName="absolute absolute w-screen h-screen   ">
+      <div className="absolute bg-white/75 w-10/12 h-full">
         <form className="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md ">
           <div className="flex justify-around text-2xl font-bold mb-6 text-center">
             <h1>Ajouter un rendez-vous</h1>
@@ -124,9 +124,9 @@ function ModalAppointment({
             </option>
             {interventions?.map((intervention) => (
               <option key={intervention.id} value={intervention.id}>
-                {`${intervention.surgery_name} / ${moment(
-                  intervention.date
-                ).format("LLL")}`}
+                {`${intervention.surgery_name} / ${
+                  intervention.firstname + intervention.lastname
+                }`}
               </option>
             ))}
           </select>
