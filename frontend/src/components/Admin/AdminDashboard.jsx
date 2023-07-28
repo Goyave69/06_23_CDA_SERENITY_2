@@ -54,7 +54,7 @@ function AdminDashboard({
           onClick={handleMangeSpecialists}
         >
           <Typography variant="h4" color="black">
-            Practicien
+            Chirurgiens
           </Typography>
           <Typography variant="p">
             {specialists ? specialists.length : 0}
@@ -65,8 +65,8 @@ function AdminDashboard({
           onClick={handleMangeUsers}
           border={manageUsers ? "2px solid #00B8AB" : null}
         >
-          <Typography variant="h4" className="text-red-600">
-            Users
+          <Typography variant="h4" color="black">
+            Utilisateurs
           </Typography>
           <Typography variant="p">{users ? users.length : 0}</Typography>
         </Box>
