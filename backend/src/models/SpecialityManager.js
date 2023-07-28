@@ -16,6 +16,23 @@ class SpecialityManager extends AbstractManager {
         return { status: 500, message: "Error" };
       });
   }
+
+  newSpecialist(data) {
+    return this.connection
+      .query(
+        `insert into specialist_has_speciality (specialist_id, speciality_id) VALUES (?, ?)`,
+        [data.specialist_id, data.speciality_id]
+      )
+      .then(([rows]) => {
+        return rows.length === 0
+          ? { status: 404, message: {} }
+          : { status: 201, message: rows[0] };
+      })
+      .catch((err) => {
+        console.error(err);
+        return { status: 500, message: "Error" };
+      });
+  }
 }
 
 module.exports = SpecialityManager;
