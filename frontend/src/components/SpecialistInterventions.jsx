@@ -16,7 +16,7 @@ function SpecialistInterventions({
   const handleDelete = (id) => {
     axios
       .delete(`http://localhost:5000/interventions/${id}`)
-      .then(() => axios.get("http://localhost:5000/interventions"))
+      .then(() => axios.get("http://localhost:5000/interventions")) // modofoer
       .then((res) => setInterventions(res.data));
   };
   return (

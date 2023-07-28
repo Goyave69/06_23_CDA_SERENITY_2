@@ -8,7 +8,6 @@ function PatientSpecialist({
   specialistId,
   interventions,
   setAppointement,
-  setInterventions,
 }) {
   const [modal, setModal] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState([]);
@@ -19,7 +18,6 @@ function PatientSpecialist({
   };
   return (
     <div>
-      <h2>Liste des patients</h2>
       <div className="flex ">
         {patients?.map((patient) => (
           <div className="bg-white rounded overflow-hidden shadow-lg m-5">

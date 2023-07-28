@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 import ApiHelper from "../../services/ApiHelper";
 import ConfirmModal from "../ConfirmModal";
 
@@ -72,6 +73,23 @@ function AdminSpecialists({
 
   return (
     <>
+      <div className="flex w-full p-5">
+        <button
+          type="button"
+          className="self-center flex flex-col justify-start relative items-stretch"
+        >
+          <div className="bg-[#6c5dd3] flex flex-col justify-center relative h-12 shrink-0 items-stretch px-5 rounded-lg">
+            <NavLink to="/add-praticien">
+              <button
+                type="button"
+                className="text-center whitespace-nowrap text-sm font-['Inter'] font-bold leading-[20px] text-white ml-px relative"
+              >
+                Nouveau praticien
+              </button>
+            </NavLink>
+          </div>
+        </button>
+      </div>
       {confirm && (
         <ConfirmModal
           setConfirm={setConfirm}

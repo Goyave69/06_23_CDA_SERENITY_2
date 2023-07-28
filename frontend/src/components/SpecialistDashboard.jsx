@@ -31,13 +31,13 @@ function SpecialistDashboard({
       .then((res) => setSpecialists(res.data));
   }, []);
 
-  const Specialistappointements = appointements.filter(
-    (appoint) => appoint.specialist_id === 2
-  );
   const praticien = specialists?.filter(
     (specialist) => specialist.id === user.id
   );
   const specialist_id = praticien[0]?.specialist_id;
+  const Specialistappointements = appointements.filter(
+    (appoint) => appoint.specialist_id === specialist_id
+  );
 
   const patients = users.filter((patient) => patient.roles === 1);
 
@@ -93,7 +93,7 @@ function SpecialistDashboard({
           onClick={handleMangePatient}
         >
           <Typography variant="h4" color="black">
-            Patient
+            Patients
           </Typography>
           <Typography variant="p">{patients ? patients.length : 0}</Typography>
         </Box>

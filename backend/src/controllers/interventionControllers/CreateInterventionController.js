@@ -10,6 +10,22 @@ async function createInterventionController(req, res) {
   const intervention_id = iMessage.id;
   const { surgery_id } = req.body;
 
+  const { status: sStatus, message: sMessage } = await models.specialist.find(
+    req.body.specialist_user_id
+  );
+  if (sStatus !== 200) {
+    return res.status(sStatus).json(sMessage);
+  }
+  const shiData = {
+    specialist_id: sMessage.id,
+    intervention_id,
+  };
+  const { status: shiStatus, message: shiMessage } =
+    await models.specialist.newIntervention(shiData);
+  if (shiStatus !== 201) {
+    return res.status(shiStatus).json(shiMessage);
+  }
+
   const daData = [
     { category: 1, intervention_id },
     { category: 2, intervention_id },

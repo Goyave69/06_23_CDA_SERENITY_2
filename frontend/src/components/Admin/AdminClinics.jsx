@@ -3,6 +3,7 @@ import { DataGrid, GridDeleteIcon } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import { IconButton, Tooltip } from "@mui/material";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 import ConfirmModal from "../ConfirmModal";
 
 function AdminClinics({ clinics, setClinics }) {
@@ -108,12 +109,14 @@ function AdminClinics({ clinics, setClinics }) {
     {
       field: "phone_number",
       headerName: "Télephone",
+      editable: true,
       sortable: false,
       width: 160,
     },
     {
       field: "zipcode",
       headerName: "Code postal",
+      editable: true,
       sortable: false,
       width: 160,
     },
@@ -137,7 +140,7 @@ function AdminClinics({ clinics, setClinics }) {
     },
   ];
 
-  const rows = clinics.map((clinic, index) => ({
+  const rows = clinics.map((clinic) => ({
     id: clinic.id,
     name: clinic.name,
     address: clinic.address,
@@ -150,6 +153,23 @@ function AdminClinics({ clinics, setClinics }) {
 
   return (
     <>
+      <div className="flex w-full p-5">
+        <button
+          type="button"
+          className="self-center flex flex-col justify-start relative items-stretch"
+        >
+          <div className="bg-[#6c5dd3] flex flex-col justify-center relative h-12 shrink-0 items-stretch px-5 rounded-lg">
+            <NavLink to="/add-clinic">
+              <button
+                type="button"
+                className="text-center whitespace-nowrap text-sm font-['Inter'] font-bold leading-[20px] text-white ml-px relative"
+              >
+                Nouveau Cabinet
+              </button>
+            </NavLink>
+          </div>
+        </button>
+      </div>
       {confirm && (
         <ConfirmModal
           setConfirm={setConfirm}

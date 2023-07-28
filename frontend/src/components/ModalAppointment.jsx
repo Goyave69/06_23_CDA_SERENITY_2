@@ -85,7 +85,7 @@ function ModalAppointment({
             }
           />
           <babel className="block text-gray-700 text-sm font-bold mb-2">
-            Clinic
+            Cabinet
           </babel>
           <select
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
@@ -97,6 +97,9 @@ function ModalAppointment({
               }))
             }
           >
+            <option value="" hidden>
+              -- Cabinet --
+            </option>
             {clinics?.map((clinic) => (
               <option key={clinic.id} value={clinic.id}>
                 {clinic.name}
@@ -116,6 +119,9 @@ function ModalAppointment({
               }))
             }
           >
+            <option value="" hidden>
+              -- Intervention --
+            </option>
             {interventions?.map((intervention) => (
               <option key={intervention.id} value={intervention.id}>
                 {`${intervention.surgery_name} / ${moment(
