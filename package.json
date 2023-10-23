@@ -6,6 +6,7 @@
   "scripts": {
     "setup": "npm i && husky install && npm --prefix ./frontend i && npm --prefix ./backend i",
     "migrate": "cd backend/ && node migrate.js && cd ..",
+    "seeding": "cd backend/ && node seeding.js && cd ..",
     "dev": "concurrently -n front,back -c green,yellow -t \"HH:mm:ss\" -p \"{name} {time}\" \"npm --prefix ./frontend run dev\" \"npm --prefix ./backend run dev\"",
     "dev-front": "npm --prefix ./frontend run dev",
     "dev-back": "npm --prefix ./backend run dev",
@@ -18,5 +19,15 @@
   "devDependencies": {
     "concurrently": "^7.0.0",
     "husky": "^7.0.0"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.4",
+    "@mui/styled-engine-sc": "^5.12.0",
+    "@mui/x-date-pickers": "^6.9.1",
+    "argon2": "^0.30.3",
+    "moment": "^2.29.4",
+    "styled-components": "^5.3.11"
   }
 }
